@@ -17,7 +17,7 @@
 <body>
 <header class="text-gray-600">
     <div class="container mx-auto flex justify-between items-center p-5 items-center">
-        <a class="flex title-font font-medium items-center text-gray-900">
+        <a href="{{ route('products.index') }}" class="flex title-font font-medium items-center text-gray-900">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
             </svg>
@@ -30,12 +30,34 @@
                     <circle cx="12" cy="7" r="4"></circle>
                 </svg>
             </div>
-            <p class="ml-3">Bem vindo, Rafael</p>
-            <button class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base md:mt-0 ml-7">Logout
-                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
-                    <path d="M5 12h14M12 5l7 7-7 7"></path>
-                </svg>
-            </button>
+            
+            <p class="ml-3">
+                <b>Bem vindo</b>, {{ auth()->user()->name }}
+            </p>
+
+            <form action="{{route('logout')}}" method="POST">
+                @csrf
+                <a href="{{route('logout')}}" 
+                    class="ml-4 text-gray-900 bg-white border border-gray-300 focus:outline-none 
+                        hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm 
+                        px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 
+                        dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 
+                        dark:hover:border-gray-600 dark:focus:ring-gray-700" 
+                    onclick="event.preventDefault(); this.closest('form').submit();">
+                    Sair
+                </a>
+            </form>
+
+            <a href="{{ route('products.index') }}" 
+                class="mt-2 py-2.5 px-5 mr-2 mb-2 text-sm font-medium 
+                text-gray-900 focus:outline-none bg-white rounded-lg 
+                border border-gray-200 hover:bg-gray-100 hover:text-blue-700 
+                focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 
+                dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 
+                dark:hover:text-white dark:hover:bg-gray-700">
+                Home
+            </a>
+
         </div>
     </div>
       
@@ -48,39 +70,28 @@
     </section>
     <footer class="text-gray-600">
         <div class="border-t border-gray-200">
-            <div class="container px-5 py-8 flex flex-wrap mx-auto items-center">
-                <div class="flex md:flex-nowrap flex-wrap justify-center items-end md:justify-start">
-                    <div class="relative sm:w-64 w-40 sm:mr-4 mr-2">
-                        <label for="footer-field" class="leading-7 text-sm text-gray-600">Placeholder</label>
-                        <input type="text" id="footer-field" name="footer-field" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:ring-2 focus:bg-transparent focus:ring-indigo-200 focus:border-indigo-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                    </div>
-                    <button class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Button</button>
-                    <p class="text-gray-500 text-sm md:ml-6 md:mt-0 mt-2 sm:text-left text-center">Bitters chicharrones fanny pack
-                        <br class="lg:block hidden">waistcoat green juice
-                    </p>
-                </div>
-                <span class="inline-flex lg:ml-auto lg:mt-0 mt-6 w-full justify-center md:justify-start md:w-auto">
-            <a class="ml-3 text-gray-500" target="_blank" href="https://www.instagram.com/rafaelbelchiorsilva/">
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
-            </svg>
-            </a>
-            <a class="ml-3 text-gray-500" target="_blank" href="https://www.linkedin.com/in/rafael-belchior-9b03261a7/">
-            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
-                <path stroke="none" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
-                <circle cx="4" cy="4" r="2" stroke="none"></circle>
-            </svg>
-            </a>
-        </span>
-            </div>
         </div>
-        <div class="bg-gray-100">
+        <div class="bg-gray-100 h-64">
             <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
                 <p class="text-gray-500 text-sm text-center sm:text-left">© 2020 Tailblocks —
                     <a href="https://twitter.com/knyttneve" class="text-gray-600 ml-1" target="_blank" rel="noopener noreferrer">@knyttneve</a>
                 </p>
-                <span class="sm:ml-auto sm:mt-0 mt-2 sm:w-auto w-full sm:text-left text-center text-gray-500 text-sm">Rafael Belchior da Silva</span>
+
+                <span class="inline-flex lg:ml-auto lg:mt-0 mt-6 w-full justify-center md:justify-start md:w-auto">
+                    <span >Rafael Belchior da Silva</span>
+                    <a class="ml-3 text-gray-500 mt-1" target="_blank" href="https://www.instagram.com/rafaelbelchiorsilva/">
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+                        </svg>
+                    </a>
+                    <a class="ml-1 text-gray-500 mt-1" target="_blank" href="https://www.linkedin.com/in/rafael-belchior-9b03261a7/">
+                        <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+                            <path stroke="none" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
+                            <circle cx="4" cy="4" r="2" stroke="none"></circle>
+                        </svg>
+                    </a>
+                </span>
             </div>
         </div>
     </footer>
