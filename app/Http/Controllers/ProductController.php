@@ -20,16 +20,21 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $products = $this->product
-                    ->getProducts(
-                        $request->get('filter') ?? '',
-                        $request->get('status') ?? ''
-                    );
+                        ->getProducts(
+                            $request->get('filter') ?? '',
+                            $request->get('status') ?? ''
+                        );
+
+        if ($request->get('status') !== null) {
+            return response()->json([
+                'data' => $products
+            ]);
+        }
 
         return view('products.index', [
             'products' => $products
         ]);
     }
-
 
     public function create()
     {
@@ -38,7 +43,6 @@ class ProductController extends Controller
 
     public function store(StoreAndUpdateProduct $request)
     {
-
         $product = auth()->user()
                 ->products()
                 ->create($request->validated());
