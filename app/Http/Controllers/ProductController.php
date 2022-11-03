@@ -16,16 +16,20 @@ class ProductController extends Controller
         protected Product $product)
     { }
 
-    public function index()
+    
+    public function index(Request $request)
     {
         $products = $this->product
-                    ->with('user')
-                    ->paginate(5);
+                    ->getProducts(
+                        $request->get('filter') ?? '',
+                        $request->get('status') ?? ''
+                    );
 
         return view('products.index', [
             'products' => $products
         ]);
     }
+
 
     public function create()
     {
@@ -34,7 +38,7 @@ class ProductController extends Controller
 
     public function store(StoreAndUpdateProduct $request)
     {
-        
+
         $product = auth()->user()
                 ->products()
                 ->create($request->validated());
@@ -59,6 +63,18 @@ class ProductController extends Controller
 
         return view('products.show', compact('product'));
 
+    }
+
+    public function myProducts()
+    {
+        $user = auth()->user();
+        
+        $myProducts = $this->product
+                    ->where('user_id', $user->id)
+                    ->with('user')
+                    ->paginate(5);
+
+        return view('products.myProducts', compact('myProducts'));
     }
 
     public function update(Request $request, $id)
