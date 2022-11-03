@@ -48,9 +48,9 @@
                         text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full
                         p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
                         dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option value="cheap">Produtos mais baratos</option>
-                        <option value="expensive">Produtos mais caros</option>
-                        <option value="last_registered">Últimos cadastrados</option>
+                        <option @if(request('status') == 'cheap') selected @endif value="cheap">Produtos mais baratos</option>
+                        <option @if(request('status') == 'expensive') selected @endif value="expensive">Produtos mais caros</option>
+                        <option @if(request('status') == 'last_registered') selected @endif value="last_registered">Últimos cadastrados</option>
                 </select>
 
                 <button type="submit" 
