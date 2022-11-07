@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Carbon\Carbon;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class Product extends Model
 {
@@ -16,7 +17,7 @@ class Product extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(User::class);
     }
 
     protected function createdAt(): Attribute
@@ -26,21 +27,8 @@ class Product extends Model
         );
     }
     
-    public function getProducts(string|null $filter = '', string|null $status = '')
+    public function getProducts(string|null $filter = ''): LengthAwarePaginator
     {
-
-        if ($status === 'last_registered') {
-            return $this->orderBy('created_at', 'DESC')->paginate(5);
-        }
-
-        if ($status === 'cheap') {
-            return $this->orderBy('price', 'ASC')->paginate(5);
-        }
-
-        if ($status === 'expensive') {
-            return $this->orderBy('price', 'DESC')->paginate(5);
-        }
-
         $products = $this
                     ->when(function ($query) use ($filter) {
                         $query->where('name', 'LIKE', "%{$filter}%");     
@@ -48,8 +36,33 @@ class Product extends Model
                     ->with('user')
                     ->paginate(5);
 
-
         return $products;
+    }
+
+    public function getLastFiveProductsForStatus(string|null $status = ''): object
+    {
+
+        if ($status === 'last_registered') {
+            return $this->orderBy('created_at', 'DESC')
+                        ->take(3)
+                        ->with('user')
+                        ->get();
+        }
+
+        if ($status === 'cheap') {
+            return $this->orderBy('price', 'ASC')
+                        ->take(3)
+                        ->with('user')
+                        ->get();
+        }
+
+        if ($status === 'expensive') {
+            return $this->orderBy('price', 'DESC')
+                        ->take(3)
+                        ->with('user')
+                        ->get();
+        }
+
     }
 
     
