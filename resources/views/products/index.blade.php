@@ -31,7 +31,7 @@
                     </div>
                     <input type="text" name="filter"
                             class="bg-gray-50 border border-gray-300 
-                            text-gray-900 text-sm focus:ring-blue-500 
+                            text-gray-900 text-sm rounded-lg focus:ring-blue-500 
                             focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 
                             dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
                             dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -64,9 +64,10 @@
                         text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full
                         p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
                         dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option @if(request('status') == 'cheap') selected @endif value="cheap">Produtos mais baratos</option>
-                        <option @if(request('status') == 'expensive') selected @endif value="expensive">Produtos mais caros</option>
-                        <option @if(request('status') == 'last_registered') selected @endif value="last_registered">Últimos cadastrados</option>
+                        <option @if(request('status') == 'all') selected @endif value="all">Todos</option>
+                        <option @if(request('status') == 'cheap') selected @endif value="cheap">Trazer os 3 produtos mais baratos</option>
+                        <option @if(request('status') == 'expensive') selected @endif value="expensive">Trazer os 3 produtos mais caros</option>
+                        <option @if(request('status') == 'last_registered') selected @endif value="last_registered">Trazer os 3 últimos produtos cadastrados</option>
                 </select>
             </div>
         </form>
@@ -107,98 +108,54 @@
 
     <div id="posts" class="flex items-stretch drop-shadow-xl"></div>
 
-    @if ($products->total() > 4)
-        <nav class="flex justify-between items-center pt-4" aria-label="Table navigation">
-            <ul class="inline-flex items-center -space-x-px py-2.5 px-2.5">
-                @if ($products->currentPage() > 1)
+    <div id="paginate">
+        @if ($products->total() > 4)
+            <nav class="flex justify-between items-center pt-4" aria-label="Table navigation">
+                <ul class="inline-flex items-center -space-x-px py-2.5 px-2.5">
+                    @if ($products->currentPage() > 1)
+                        <li>
+                            <a href="?page={{ $products->currentPage() - 1 }}" class="block py-2 px-3 ml-0 leading-tight text-gray-500 bg-white 
+                                rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 
+                                dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                <span class="sr-only">Previous</span>
+                                <svg class="w-5 h-5" aria-hidden="true" 
+                                    fill="currentColor" viewBox="0 0 20 20" 
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" 
+                                        d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 
+                                        1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd">
+                                    </path>
+                                </svg>
+                            </a>
+                        </li>
+                    @endif
                     <li>
-                        <a href="?page={{ $products->currentPage() - 1 }}" class="block py-2 px-3 ml-0 leading-tight text-gray-500 bg-white 
-                            rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 
-                            dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                            <span class="sr-only">Previous</span>
-                            <svg class="w-5 h-5" aria-hidden="true" 
-                                fill="currentColor" viewBox="0 0 20 20" 
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" 
-                                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 
-                                    1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd">
-                                </path>
-                            </svg>
+                        <a href="#" aria-current="page" 
+                            class="py-2 px-3 text-blue-600 bg-blue-50 border 
+                            border-gray-300 hover:bg-blue-100 hover:text-blue-700 
+                            dark:border-gray-700 dark:bg-gray-700 dark:text-white">
+                            {{ $products->currentPage() }}
                         </a>
                     </li>
-                @endif
-                <li>
-                    <a href="#" aria-current="page" 
-                        class="py-2 px-3 text-blue-600 bg-blue-50 border 
-                        border-gray-300 hover:bg-blue-100 hover:text-blue-700 
-                        dark:border-gray-700 dark:bg-gray-700 dark:text-white">
-                        {{ $products->currentPage() }}
-                    </a>
-                </li>
-                @if ($products->currentPage() < $products->lastPage())
-                    <li>
-                        <a href="?page={{ $products->currentPage() + 1 }}" class="block py-2 px-3 leading-tight text-gray-500 bg-white 
-                            rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 
-                            dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 
-                            dark:hover:text-white">
-                            <span class="sr-only">Next</span>
-                                <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" 
-                                    xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" 
-                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 
-                                    1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd">
-                                </path>
-                            </svg>
-                        </a>
-                    </li>
-                @endif
-            </ul>
-        </nav>
-    @endif
+                    @if ($products->currentPage() < $products->lastPage())
+                        <li>
+                            <a href="?page={{ $products->currentPage() + 1 }}" class="block py-2 px-3 leading-tight text-gray-500 bg-white 
+                                rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 
+                                dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 
+                                dark:hover:text-white">
+                                <span class="sr-only">Next</span>
+                                    <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" 
+                                        xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" 
+                                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 
+                                        1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd">
+                                    </path>
+                                </svg>
+                            </a>
+                        </li>
+                    @endif
+                </ul>
+            </nav>
+        @endif
+    </div>
 @endsection
 
-<script>
-    async function statusFilter(element)
-    {
-        let url = 'http://localhost:8989/products?status=' + element.value; 
-        let url_show_product = 'http://localhost:8989/products/';
-
-        let res = await fetch(url);
-        let result = await res.json();
-
-        let data = result.data.data
-        let html = '';
-
-        for (let i = 0; i < data.length; i++) {
-            let element = data[i];
-
-            html += '<div class="flex items-stretch drop-shadow-xl">';
-            html +=      '<div class="w-96 bg-white rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700 ml-4 mt-5">' ;
-            html +=         '<div class="p-5">';
-            html +=             '<p class="mb-3 font-normal text-gray-700 dark:text-gray-400">';
-            html +=                 '<b>' + element.name + '</b>';
-            html +=             '</p>';
-            html +=              '<p class="mb-3 font-normal text-gray-700 dark:text-gray-400">'
-            html +=                  element.description
-            html +=             '</p>';
-            html +=             '<p class="mb-3 font-normal text-gray-700 dark:text-gray-400">';
-            html +=                 element.price
-            html +=            '</p>';
-            html +=             '<p class="mb-3 font-normal text-gray-700 dark:text-gray-400">';
-            html +=                 element.created_at
-            html +=            '</p>';
-            html +=             '<a href=" ' + url_show_product + element.id + ' " class="mt-3 text-indigo-500 inline-flex items-center">Ver mais'
-            html +=                 '<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"'
-            html +=                       'class="w-4 h-4 ml-2" viewBox="0 0 24 24">'
-            html +=                  '<path d="M5 12h14M12 5l7 7-7 7"></path>'
-            html +=                 '</svg>'
-            html +=             '</a>'
-            html +=         '</div>';
-            html +=       '</div>';
-            html += '</div>';
-        }
-
-        document.getElementById("p").innerHTML = '';
-        document.getElementById("posts").innerHTML = html;
-
-    }
-</script>
