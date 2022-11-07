@@ -21,13 +21,18 @@ class ProductController extends Controller
     {
         $products = $this->product
                         ->getProducts(
-                            $request->get('filter') ?? '',
-                            $request->get('status') ?? ''
+                            filter: $request->get('filter') ?? ''
                         );
 
         if ($request->get('status') !== null) {
+
+            $productsForStatus = $this->product
+                                        ->getLastFiveProductsForStatus(
+                                            status: $request->get('status') ?? ''
+                                        );
+     
             return response()->json([
-                'data' => $products
+                'data' => $productsForStatus
             ]);
         }
 
@@ -44,8 +49,8 @@ class ProductController extends Controller
     public function store(StoreAndUpdateProduct $request)
     {
         $product = auth()->user()
-                ->products()
-                ->create($request->validated());
+                        ->products()
+                        ->create($request->validated());
 
         return redirect()->route('products.index')
                         ->with('success', "Produto {$product->name} criado!");
@@ -57,16 +62,16 @@ class ProductController extends Controller
         return view('products.show', compact('product'));
     }
 
-    public function edit($id)
+    public function edit(Request $request, $product)
     {
-        $product = $this->product->find($id);
 
-        if (!Gate::authorize('update-product', $product)) {
+        $productUpdate = $this->product->find($product);
+
+        if (!Gate::authorize('update-product', $productUpdate)) {
             return false;
         }
 
         return view('products.show', compact('product'));
-
     }
 
     public function myProducts()
@@ -83,11 +88,16 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+
     }
 
-    public function destroy($id)
+    public function destroy($product)
     {
-        //
+        $myProductDelete = $this->product->findOrFail($product);
+        $myProductDelete->delete();
+
+        return redirect()
+            ->route('products.myProducts')
+            ->with('success', "Produto deletado com sucesso!");
     }
 }
