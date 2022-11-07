@@ -3,7 +3,6 @@
 @section('title', 'Adicionar um produto novo')
 
 @section('content')
-    @include('components-alerts/alerts')
 
     <div class="lg:w-2/4 w-full mx-auto overflow-auto shadow-2xl rounded-md">
         <div class="flex items-center justify-between mb-2 px-5 py-5">
@@ -24,6 +23,11 @@
                                 outline-none text-gray-700 py-1 px-3 leading-8 
                                 transition-colors duration-200 ease-in-out">
                     </div>
+                    @error('name')
+                        @foreach ($errors->messages()['name'] as $error)
+                            <span class="text-red-500">{{ $error }}</span>
+                        @endforeach
+                    @enderror
                 </div>
 
                 <div class="p-2 w-1/2">
@@ -37,6 +41,11 @@
                             text-gray-700 py-1 px-3 leading-8 transition-colors 
                             duration-200 ease-in-out" />
                     </div>
+                    @error('price')
+                        @foreach ($errors->messages()['price'] as $error)
+                            <span class="text-red-500">{{ $error }}</span>
+                        @endforeach
+                    @enderror
                 </div>
 
                 <div class="p-2 w-1/2">
@@ -50,6 +59,11 @@
                             text-base outline-none text-gray-700 py-1 px-3 
                             leading-8 transition-colors duration-200 ease-in-out">
                     </div>
+                    @error('quantity_inventory')
+                        @foreach ($errors->messages()['quantity_inventory'] as $error)
+                            <span class="text-red-500">{{ $error }}</span>
+                        @endforeach
+                    @enderror
                 </div>
 
                 <div class="p-2 w-1/2">
@@ -64,6 +78,11 @@
                             outline-none text-gray-700 py-1 px-3 leading-8 
                             transition-colors duration-200 ease-in-out" />
                     </div>
+                    @error('image')
+                        @foreach ($errors->messages()['image'] as $error)
+                            <span class="text-red-500">{{ $error }}</span>
+                        @endforeach
+                    @enderror
                 </div>
 
                 <div class="p-2 w-full">
@@ -82,6 +101,11 @@
                             {{ old('description') }}
                         </textarea>
                     </div>
+                    @error('description')
+                        @foreach ($errors->messages()['description'] as $error)
+                            <span class="text-red-500">{{ $error }}</span>
+                        @endforeach
+                    @enderror
                 </div>
 
                 <div class="p-2 w-full">
@@ -93,7 +117,6 @@
                             Adicionar
                     </button>
                 </div>
-
             </div>
         </form>
     </div>
