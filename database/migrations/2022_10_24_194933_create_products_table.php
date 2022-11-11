@@ -17,9 +17,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->string('name')->unique();
-            $table->string('image')->nullable();
+            $table->string('image');
             $table->integer('quantity_inventory')->require();
             $table->text('description')->nullable();
+            $table->enum('quality', ['novo', 'semi_novo', 'bom', 'medio'])->default('bom');
             $table->float('price');
             $table->timestamps();
         });
