@@ -15,6 +15,9 @@ async function statusFilter(element)
         html += '<div class="flex items-stretch drop-shadow-xl">';
         html +=      '<div class="w-96 bg-white rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700 ml-4 mt-5">' ;
         html +=         '<div class="p-5">';
+        html +=             '<a href="#">';
+        html +=                 '<img id="img" src="storage/ ' + element.image + ' " />';
+        html +=             '</a>';
         html +=             '<p class="mb-3 font-normal text-gray-700 dark:text-gray-400">';
         html +=                 '<b>' + element.name + '</b>';
         html +=             '</p>';
@@ -23,9 +26,6 @@ async function statusFilter(element)
         html +=             '</p>';
         html +=             '<p class="mb-3 font-normal text-gray-700 dark:text-gray-400">';
         html +=                '$ ' + element.price.toFixed(2);
-        html +=            '</p>';
-        html +=             '<p class="mb-3 font-normal text-gray-700 dark:text-gray-400">';
-        html +=                 element.created_at
         html +=            '</p>';
         html +=             '<p class="mb-3 font-normal text-gray-700 dark:text-gray-400">';
         html +=                 element.created_at
