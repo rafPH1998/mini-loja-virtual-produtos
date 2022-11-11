@@ -39,7 +39,7 @@ class Product extends Model
         return $products;
     }
 
-    public function getLastFiveProductsForStatus(string|null $status = ''): object
+    public function getLastThreeProductsForStatus(string|null $status = ''): object
     {
 
         if ($status === 'last_registered') {
