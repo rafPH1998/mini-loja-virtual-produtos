@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -23,7 +24,7 @@ class ProductFactory extends Factory
             'description'        => $this->faker->sentence(50),
             'image'              => 'https://source.unsplash.com/random',
             'price'              => $this->faker->numberBetween(0, 20),
-            'quantity_inventory' => $this->faker->numberBetween(0, 30)
+            'quantity_inventory' => $this->faker->numberBetween(0, 30),
         ];
     }
 }
