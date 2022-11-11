@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\UploadFile;
+use App\Enums\ProductQualityEnum;
 use App\Http\Requests\Products\StoreAndUpdateProduct;
 use App\Models\Product;
 use App\Models\User;
@@ -19,15 +21,18 @@ class ProductController extends Controller
     
     public function index(Request $request)
     {
+
         $products = $this->product
                         ->getProducts(
                             filter: $request->get('filter') ?? ''
                         );
 
+        $qualityStatus = ProductQualityEnum::cases();
+
         if ($request->get('status') !== null) {
 
             $productsForStatus = $this->product
-                                        ->getLastFiveProductsForStatus(
+                                        ->getLastThreeProductsForStatus(
                                             status: $request->get('status') ?? ''
                                         );
      
@@ -37,20 +42,30 @@ class ProductController extends Controller
         }
 
         return view('products.index', [
-            'products' => $products
+            'products'      => $products,
+            'qualityStatus' => $qualityStatus
         ]);
     }
 
     public function create()
     {
-        return view('products.add');
+        $qualityStatus = ProductQualityEnum::cases();
+        return view('products.add', [
+            'qualityStatus' => $qualityStatus
+        ]);
     }
 
-    public function store(StoreAndUpdateProduct $request)
+    public function store(StoreAndUpdateProduct $request, UploadFile $uploadFile)
     {
+        $data = $request->validated();
+
+        if ($request->image) {
+            $data['image'] = $uploadFile->store($request->image, 'products');
+        }
+
         $product = auth()->user()
                         ->products()
-                        ->create($request->validated());
+                        ->create($data);
 
         return redirect()->route('products.index')
                         ->with('success', "Produto {$product->name} criado!");
@@ -58,8 +73,13 @@ class ProductController extends Controller
 
     public function show($id)
     {
+        $qualityStatus = ProductQualityEnum::cases();
         $product = $this->product->findOrFail($id);
-        return view('products.show', compact('product'));
+
+        return view('products.show', [
+            'product'       => $product,
+            'qualityStatus' => $qualityStatus
+        ]);
     }
 
     public function edit(Request $request, $product)
@@ -71,7 +91,9 @@ class ProductController extends Controller
             return false;
         }
 
-        return view('products.show', compact('product'));
+        return view('products.show', [
+            'product' => $product
+        ]);
     }
 
     public function myProducts()
@@ -83,7 +105,9 @@ class ProductController extends Controller
                     ->with('user')
                     ->paginate(5);
 
-        return view('products.myProducts', compact('myProducts'));
+        return view('products.myProducts', [
+            $myProducts => 'myProducts'
+        ]);
     }
 
     public function update(Request $request, $id)
