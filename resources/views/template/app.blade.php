@@ -17,12 +17,24 @@
 <body>
 <header class="text-gray-600">
     <div class="container mx-auto flex justify-between items-center p-5 items-center">
-        <a href="{{ route('products.index') }}" class="flex title-font font-medium items-center text-gray-900">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-            </svg>
-            <span class="ml-3 text-xl">Minha loja</span>
-        </a>
+        <div class="flex items-center">
+            <a href="{{ route('products.index') }}" class="flex title-font font-medium items-center text-gray-900">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" 
+                    stroke-linejoin="round" stroke-width="2" 
+                    class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                </svg>
+                <span class="ml-3 text-xl">Minha loja</span>
+            </a>
+
+            <div class="flex items-center">
+                <a href="{{ route('products.notify') }}" class="ml-6">
+                    <img style="width:30px;" src="{{ url('images/notify.svg') }}" title="Notificações"/>
+                </a>
+                (10)
+            </div>
+        </div>
+ 
         <div class="flex items-center">
             <div class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500">
                 <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-6 h-6" viewBox="0 0 24 24">
@@ -50,7 +62,6 @@
             <a href="{{ route('products.myProducts') }}" class="ml-2">
                 <img style="width:25px;" src="{{ url('images/cart.svg') }}" title="Meus produtos"/>
             </a>
-
         </div>
     </div>
       
