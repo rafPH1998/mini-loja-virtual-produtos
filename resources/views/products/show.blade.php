@@ -15,6 +15,7 @@
 
         <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 ml-10">
             <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">{{ $product->name }}</h1>
+            <hr/>
             <p class="leading-relaxed mt-5">
                 <b>Descrição do produto: </b>
                 <p>{{ $product->description }}</p>
@@ -54,6 +55,24 @@
                 ${{ number_format($product->price , 2, ',', '.') }}
             </span>
         </div>
+
+        @can('product-users', $product)
+            <form action="" method="POST" class="mt-10">
+                <textarea class="w-full px-5 
+                    py-2 text-gray-700 bg-gray-200 focus:outline-none rounded" 
+                    name="O que achou do produto?" cols="30" rows="4" 
+                    placeholder="O que achou do produto?"
+                ></textarea>
+
+                <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 
+                        focus:ring-blue-300 font-medium rounded-lg 
+                        text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 
+                        dark:hover:bg-blue-700 focus:outline-none 
+                        dark:focus:ring-blue-800">
+                        Criar comentário
+                </button>
+            </form> 
+        @endcan
     </div>
 @endsection
 
