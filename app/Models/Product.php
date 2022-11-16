@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Notifications\Notifiable;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
 
     protected $guarded = [];
 
@@ -20,13 +22,18 @@ class Product extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function comments(): HasMany
+    {
+        return $this->hasMany(CommentProduct::class);
+    }
+
     protected function createdAt(): Attribute
     {
         return Attribute::make(
             get: fn ($value) => Carbon::make($value)->format('d/m/Y')
         );
     }
-    
+
     public function getProducts(string|null $filter = ''): LengthAwarePaginator
     {
         $products = $this
