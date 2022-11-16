@@ -26,13 +26,6 @@
                 </svg>
                 <span class="ml-3 text-xl">Minha loja</span>
             </a>
-
-            <div class="flex items-center">
-                <a href="{{ route('products.notify') }}" class="ml-6">
-                    <img style="width:30px;" src="{{ url('images/notify.svg') }}" title="Notificações"/>
-                </a>
-                (10)
-            </div>
         </div>
  
         <div class="flex items-center">
