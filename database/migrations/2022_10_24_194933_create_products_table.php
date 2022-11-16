@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')->constrained('users')->onDelete('CASCADE');
             $table->string('name')->unique();
             $table->string('image');
             $table->integer('quantity_inventory')->require();
