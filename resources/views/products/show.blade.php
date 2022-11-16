@@ -3,9 +3,10 @@
 @section('title', 'Visualizar produto')
 
 @section('content')
-        
+
     <div class="lg:w-4/5 mx-auto flex flex-wrap shadow-lg">
-        <div class="w-96 p-10">
+   
+        <div class="w-96 p-10 mt-2">
             <img
             class="" 
             src="{{ url("storage/{$product->image}") }}" 
@@ -55,12 +56,16 @@
                 ${{ number_format($product->price , 2, ',', '.') }}
             </span>
         </div>
-
+        
         @can('product-users', $product)
-            <form action="" method="POST" class="mt-10">
+            <form action="{{route('products.create_comment') }}" method="POST" class="mt-10">
+                @csrf
+                @include('components-alerts.alerts')
+
+                <input type="hidden" name="id" value="{{ $product->id }}">
                 <textarea class="w-full px-5 
                     py-2 text-gray-700 bg-gray-200 focus:outline-none rounded" 
-                    name="O que achou do produto?" cols="30" rows="4" 
+                    name="description" cols="30" rows="4" 
                     placeholder="O que achou do produto?"
                 ></textarea>
 
