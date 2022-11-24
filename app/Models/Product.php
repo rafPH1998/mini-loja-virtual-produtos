@@ -10,6 +10,8 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Notifications\Notifiable;
+use App\Mail\ProductCommented;
+use Illuminate\Support\Facades\Mail;
 
 class Product extends Model
 {
@@ -71,6 +73,5 @@ class Product extends Model
         }
 
     }
-
     
 }

@@ -24,7 +24,6 @@ class ProductController extends Controller
     
     public function index(Request $request)
     {
-
         $products = $this->product
                         ->getProducts(
                             filter: $request->get('filter') ?? ''
