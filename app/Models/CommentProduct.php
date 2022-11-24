@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
+use function PHPSTORM_META\type;
+
 class CommentProduct extends Model
 {
     use HasFactory, Notifiable;
@@ -25,6 +27,16 @@ class CommentProduct extends Model
         return Attribute::make(
             get: fn ($value) => Carbon::make($value)->format('d/m/Y')
         );
+    }
+    
+    public function getComments($comment): object
+    {
+        $comments =  $this->with('user')
+                        ->where('product_id', '=', $comment)
+                        ->paginate(6);
+              
+        return $comments;
+
     }
 
 }
