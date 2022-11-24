@@ -5,27 +5,31 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Products\CommentProductRequest;
 use App\Models\CommentProduct;
 use App\Models\Product;
-use App\Notifications\ProductCommented;
+use App\Mail\ProductCommented;
+use Illuminate\Support\Facades\Mail;
 
 class CommentController extends Controller
 {
-    
+    public function __construct(
+        protected Product $product,
+        protected CommentProduct $comments
+    ) { }
+
     public function __invoke(CommentProductRequest $request)
     {
         $data = $request->validated();
         $idProduct = $request->get('id');
 
-        $product = Product::find($idProduct);
+        $product = $this->product
+                        ->find($idProduct);
 
         $loggedUser = auth()->user();
 
         $data['user_id'] = $loggedUser->id;
-        $comment = $product->comments()->create($data);
+        $product->comments()->create($data);
 
-        $product->user
-                ->notify(
-                    new ProductCommented($product, $comment)
-                );
+        Mail::to($product->user)
+            ->queue(new ProductCommented($product));
 
         return redirect()->route('products.show', [$idProduct])
                         ->with(
@@ -35,13 +39,19 @@ class CommentController extends Controller
 
     public function comments($comment)
     {
+        $product = $this->product
+                        ->find($comment);
+
+        if (!$product) {
+            return redirect()->back();
+        }
          
-        $listComments = CommentProduct::with('user')
-                                    ->where('product_id', '=', $comment)
-                                    ->get();
+        $listComments = $this->comments
+                            ->getComments($comment);
                                     
         return view('products.comments', [
-            'listComments' => $listComments
+            'listComments' => $listComments,
+            'product'      => $product
         ]);
     }
 
