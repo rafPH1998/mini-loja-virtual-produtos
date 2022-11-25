@@ -4,7 +4,26 @@
 
 @section('content')
 
-    <div class="mb-5 ml-5">
+    <h1 class="ml-5">Escolha uma categoria</h1>
+    <hr/>
+
+    <div class="ml-5 mt-10 grid grid-cols-4 gap-4">
+        {{-- @foreach ($categories as $categorie)
+            <a class="font-medium text-blue-600 text-blue-500 hover:underline" href="#">
+                {{ $categorie}}
+            </a>
+        @endforeach    --}}
+        <a class="font-medium text-blue-600 text-blue-500 hover:underline" href="#">Eletrónicos</a>
+        <a class="font-medium text-blue-600 text-blue-500 hover:underline" href="#">Livros</a>
+        <a class="font-medium text-blue-600 text-blue-500 hover:underline" href="#">Jogos</a>
+        <a class="font-medium text-blue-600 text-blue-500 hover:underline" href="#">Acessórios</a>
+        <a class="font-medium text-blue-600 text-blue-500 hover:underline" href="#">Brinquedos</a>
+        <a class="font-medium text-blue-600 text-blue-500 hover:underline" href="#">Games</a>
+        <a class="font-medium text-blue-600 text-blue-500 hover:underline" href="#">Roupas</a>
+        <a class="font-medium text-blue-600 text-blue-500 hover:underline" href="#">Perfumaria</a>
+    </div>
+
+    <div class="mb-5 ml-5 mt-20">
         <a href="{{ route('products.create') }}" 
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 
             focus:ring-blue-300 font-medium rounded-lg 
@@ -30,7 +49,7 @@
                     </div>
                     <input type="text" name="filter"
                             class="bg-gray-50 border border-gray-300 
-                            text-gray-900 text-sm rounded-lg focus:ring-blue-500 
+                            text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 
                             focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 
                             dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
                             dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -74,6 +93,7 @@
     </div>
     
     <div id="p" class="flex items-stretch drop-shadow-xl">
+
         @forelse ($products as $product)
             <div class="w-96 bg-white rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700 ml-4 mt-5">
                 <a href="#">
