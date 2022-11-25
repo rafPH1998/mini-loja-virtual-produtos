@@ -40,3 +40,4 @@ class CommentProduct extends Model
     }
 
 }
+
