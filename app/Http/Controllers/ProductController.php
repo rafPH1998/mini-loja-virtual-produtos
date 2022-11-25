@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Actions\UploadFile;
 use App\Enums\ProductQualityEnum;
+use App\Enums\CategoriesEnum;
 use App\Http\Requests\Products\StoreAndUpdateProduct;
 use App\Models\CommentProduct;
 use App\Models\Product;
 use App\Models\User;
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -24,12 +24,14 @@ class ProductController extends Controller
     
     public function index(Request $request)
     {
+
         $products = $this->product
                         ->getProducts(
                             filter: $request->get('filter') ?? ''
                         );
 
         $qualityStatus = ProductQualityEnum::cases();
+        $categoryType = CategoriesEnum::cases();
 
         if ($request->get('status') !== null) {
 
@@ -45,15 +47,19 @@ class ProductController extends Controller
 
         return view('products.index', [
             'products'      => $products,
-            'qualityStatus' => $qualityStatus
+            'qualityStatus' => $qualityStatus,
+            'categoryType'  => $categoryType,
         ]);
     }
 
     public function create()
     {
         $qualityStatus = ProductQualityEnum::cases();
+        $categoryType = CategoriesEnum::cases();
+
         return view('products.add', [
-            'qualityStatus' => $qualityStatus
+            'qualityStatus' => $qualityStatus,
+            'categoryType'  => $categoryType,
         ]);
     }
 
