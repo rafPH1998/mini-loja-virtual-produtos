@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Notifications\Notifiable;
 use App\Mail\ProductCommented;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Mail;
 
 class Product extends Model
@@ -29,8 +30,15 @@ class Product extends Model
         return $this->hasMany(CommentProduct::class);
     }
 
+    public function categorie(): HasOne
+    {
+        return $this->hasOne(Category::class);
+    }
+
     protected function createdAt(): Attribute
     {
+        Carbon::setLocale('pt_BR');
+
         return Attribute::make(
             get: fn ($value) => Carbon::make($value)->format('d/m/Y') . ' (' . Carbon::make($value)->diffForHumans() . ') '       
         );
