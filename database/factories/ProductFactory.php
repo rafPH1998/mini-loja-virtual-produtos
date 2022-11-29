@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -11,20 +10,29 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class ProductFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition()
     {
+        $optionsType = [
+            'eletronicos', 
+            'livros', 
+            'jogos', 
+            'acessorios', 
+            'brinquedos', 
+            'games', 
+            'roupas', 
+            'perfumaria'
+        ];
+    
+        shuffle($optionsType);
+
         return [
-            'user_id'            => User::factory(),
-            'name'               => $this->faker->name(),
-            'description'        => $this->faker->sentence(50),
-            'image'              => 'https://source.unsplash.com/random',
-            'price'              => $this->faker->numberBetween(0, 20),
-            'quantity_inventory' => $this->faker->numberBetween(0, 30),
+            'user_id'                => User::factory(),
+            'name'                   => $this->faker->name(),
+            'description'            => $this->faker->sentence(50),
+            'type'                   => $optionsType[0],
+            'image'                  => 'https://source.unsplash.com/random',
+            'price'                  => $this->faker->numberBetween(0, 20),
+            'quantity_inventory'     => $this->faker->numberBetween(0, 30),
         ];
     }
 }

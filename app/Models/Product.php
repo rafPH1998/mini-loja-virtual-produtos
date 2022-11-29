@@ -10,9 +10,6 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Notifications\Notifiable;
-use App\Mail\ProductCommented;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Support\Facades\Mail;
 
 class Product extends Model
 {
@@ -28,11 +25,6 @@ class Product extends Model
     public function comments(): HasMany
     {
         return $this->hasMany(CommentProduct::class);
-    }
-
-    public function categorie(): HasOne
-    {
-        return $this->hasOne(Category::class);
     }
 
     protected function createdAt(): Attribute

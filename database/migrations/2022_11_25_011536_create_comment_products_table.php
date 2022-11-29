@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('comment_products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('product_id')->constrained('products');
+            $table->foreignId('product_id')->constrained('products')->onDelete('CASCADE');
             $table->text('description')->nullable();
             $table->timestamps();
         });

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\UploadFile;
 use App\Enums\ProductQualityEnum;
-use App\Enums\CategoriesEnum;
+use App\Enums\ProductTypeEnum;
 use App\Http\Requests\Products\StoreAndUpdateProduct;
 use App\Models\CommentProduct;
 use App\Models\Product;
@@ -17,11 +17,10 @@ class ProductController extends Controller
 
     public function __construct(
         protected User $user, 
-        protected Product $product,
-        protected CommentProduct $commentsProduct
+        protected Product $product, 
+        protected CommentProduct $commentsProduct,
     ) { }
 
-    
     public function index(Request $request)
     {
 
@@ -31,7 +30,7 @@ class ProductController extends Controller
                         );
 
         $qualityStatus = ProductQualityEnum::cases();
-        $categoryType = CategoriesEnum::cases();
+        $type = ProductTypeEnum::cases();
 
         if ($request->get('status') !== null) {
 
@@ -48,18 +47,18 @@ class ProductController extends Controller
         return view('products.index', [
             'products'      => $products,
             'qualityStatus' => $qualityStatus,
-            'categoryType'  => $categoryType,
+            'type'  => $type,
         ]);
     }
 
     public function create()
     {
         $qualityStatus = ProductQualityEnum::cases();
-        $categoryType = CategoriesEnum::cases();
+        $type = ProductTypeEnum::cases();
 
         return view('products.add', [
             'qualityStatus' => $qualityStatus,
-            'categoryType'  => $categoryType,
+            'type'  => $type,
         ]);
     }
 
@@ -71,10 +70,9 @@ class ProductController extends Controller
             $data['image'] = $uploadFile->store($request->image, 'products');
         }
 
-        $product = auth()->user()
-                        ->products()
-                        ->create($data);
-
+        $data['user_id'] = auth()->user()->id;
+        $product = $this->product->create($data);
+        
         return redirect()->route('products.index')
                         ->with('success', "Produto {$product->name} criado!");
     }
