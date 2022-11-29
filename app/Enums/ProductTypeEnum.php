@@ -2,11 +2,10 @@
 
 namespace App\Enums;
 
-enum CategoriesEnum: string
+enum ProductTypeEnum: string
 {
     case livros       = 'Livros';
     case jogos        = 'Jogos';
-    case games        = 'Games';
     case roupas       = 'Roupas';
     case eletronicos  = 'Eletrónicos';
     case brinquedos   = 'Brinquedos';
