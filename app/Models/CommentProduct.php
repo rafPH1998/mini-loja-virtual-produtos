@@ -22,10 +22,16 @@ class CommentProduct extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class);
+    }
+
     protected function createdAt(): Attribute
     {
+        Carbon::setLocale('pt_BR');
         return Attribute::make(
-            get: fn ($value) => Carbon::make($value)->format('d/m/Y')
+            get: fn ($value) => Carbon::make($value)->format('d/m/Y') . ' (' . Carbon::make($value)->diffForHumans() . ') '       
         );
     }
     
