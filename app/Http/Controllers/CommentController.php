@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ProductCommentedEvents;
 use App\Http\Requests\Products\CommentProductRequest;
 use App\Models\CommentProduct;
 use App\Models\Product;
@@ -23,13 +24,10 @@ class CommentController extends Controller
         $product = $this->product
                         ->find($idProduct);
 
-        $loggedUser = auth()->user();
-
-        $data['user_id'] = $loggedUser->id;
+        $data['user_id'] = auth()->user()->id;
         $product->comments()->create($data);
-
-        Mail::to($product->user)
-            ->queue(new ProductCommented($product));
+        
+        event(new ProductCommentedEvents($product));
 
         return redirect()->route('products.show', [$idProduct])
                         ->with(
