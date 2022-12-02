@@ -3,7 +3,8 @@
 @section('title', 'Listagem de produtos')
 
 @section('content')
-
+    @include('components-alerts.alerts')
+    
     <h1 class="ml-5">Escolha uma categoria</h1>
     <hr/>
 

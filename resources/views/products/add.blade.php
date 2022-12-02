@@ -8,7 +8,7 @@
         <div class="flex items-center justify-between mb-2 px-5 py-5">
             <h1 class="text-2xl font-medium title-font mb-2 text-gray-900">Adicionar produto</h1>
         </div>
-    
+
         <form method="POST" class="px-10 py-10" action="{{ route('products.store') }}" enctype="multipart/form-data">
             <div class="flex flex-wrap">
                 @csrf
@@ -17,11 +17,10 @@
                         <label for="name" class="leading-7 text-sm text-gray-600">Nome do produto</label>
                         <input type="text" id="name" name="name" 
                                 value="{{ old('name') }}" 
-                                class="w-full bg-gray-100 bg-opacity-50 
-                                rounded border border-gray-300 focus:border-indigo-500 
-                                focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base 
-                                outline-none text-gray-700 py-1 px-3 leading-8 
-                                transition-colors duration-200 ease-in-out">
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 
+                                leading-tight focus:outline-none focus:shadow-outline 
+                                @error('name') border-red-500 @enderror"
+                        >
                     </div>
                     @error('name')
                         @foreach ($errors->messages()['name'] as $error)
@@ -35,11 +34,9 @@
                         <label for="name" class="leading-7 text-sm text-gray-600">Preço</label>
                         <input type="text" id="price" name="price"
                             value="{{ old('price') }}"
-                            class="w-full bg-gray-100 bg-opacity-50 rounded border 
-                            border-gray-300 focus:border-indigo-500 focus:bg-white 
-                            focus:ring-2 focus:ring-indigo-200 text-base outline-none 
-                            text-gray-700 py-1 px-3 leading-8 transition-colors 
-                            duration-200 ease-in-out" />
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 
+                            leading-tight focus:outline-none focus:shadow-outline
+                            @error('price') border-red-500 @enderror"/>
                             
                     </div>
                     @error('price')
@@ -54,11 +51,9 @@
                         <label for="name" class="leading-7 text-sm text-gray-600">Estoque</label>
                         <input type="text" id="quantity_inventory" name="quantity_inventory"
                             value="{{ old('quantity_inventory') }}"
-                            class="w-full bg-gray-100 bg-opacity-50 rounded 
-                            border border-gray-300 focus:border-indigo-500 
-                            focus:bg-white focus:ring-2 focus:ring-indigo-200 
-                            text-base outline-none text-gray-700 py-1 px-3 
-                            leading-8 transition-colors duration-200 ease-in-out">
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 
+                            leading-tight focus:outline-none focus:shadow-outline 
+                            @error('quantity_inventory') border-red-500 @enderror">
                     </div>
                     @error('quantity_inventory')
                         @foreach ($errors->messages()['quantity_inventory'] as $error)
@@ -72,12 +67,10 @@
                         <label for="image" class="leading-7 text-sm text-gray-600">Imagem do produto</label>
                         <input type="file" id="image" name="image"
                             {{-- value="{{ old('image') }}" --}}
-                            class="w-full bg-gray-100 bg-opacity-50 
-                            rounded border border-gray-300 
-                            focus:border-indigo-500 focus:bg-white 
-                            focus:ring-2 focus:ring-indigo-200 text-base 
-                            outline-none text-gray-700 py-1 px-3 leading-8 
-                            transition-colors duration-200 ease-in-out" >
+                            class="shadow appearance-none border rounded w-full 
+                            py-2 px-3 text-gray-700 
+                            leading-tight focus:outline-none focus:shadow-outline 
+                            @error('image') border-red-500 @enderror">
                     </div>
                     @error('image')
                         @foreach ($errors->messages()['image'] as $error)
@@ -90,10 +83,11 @@
                     <div class="relative">
                         <label for="quality" class="leading-7 text-sm text-gray-600">Estado do produto</label>
                         <select id="quality" name="quality" 
-                                class="bg-gray-50 border border-gray-300 text-gray-900
-                                text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full
-                                p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
-                                dark:focus:ring-blue-500 dark:focus:border-blue-500"> 
+                                class="shadow appearance-none border rounded w-full 
+                                py-2 px-3 text-gray-700 
+                                leading-tight focus:outline-none focus:shadow-outline bg-gray-50
+                                @error('quality') border-red-500 @enderror"> 
+
                                 <option value="">Selecione um estado do produto</option>
                                 @foreach ($qualityStatus as $status)
                                     <option value="{{$status->name}}">
@@ -111,22 +105,23 @@
 
                 <div class="p-2 w-1/2">
                     <div class="relative">
-                        <label for="category_id" class="leading-7 text-sm text-gray-600">Categoria do produto</label>
-                        <select id="category_id" name="category_id" 
-                                class="bg-gray-50 border border-gray-300 text-gray-900
-                                text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full
-                                p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
-                                dark:focus:ring-blue-500 dark:focus:border-blue-500"> 
+                        <label for="type" class="leading-7 text-sm text-gray-600">Categoria do produto</label>
+                        <select id="type" name="type" 
+                                class="shadow appearance-none border rounded w-full 
+                                py-2 px-3 text-gray-700 
+                                leading-tight focus:outline-none focus:shadow-outline bg-gray-50
+                                @error('type') border-red-500 @enderror"> 
+                                
                                 <option value="">Selecione a categoria do produto</option>
-                                @foreach ($categoryType as $categorie)
+                                @foreach ($type as $categorie)
                                     <option value="{{$categorie->name}}">
                                         {{ $categorie->value }}
                                     </option>
-                                @endforeach                      
+                                @endforeach                 
                         </select>
                     </div>
-                    @error('category_id')
-                        @foreach ($errors->messages()['category_id'] as $error)
+                    @error('type')
+                        @foreach ($errors->messages()['type'] as $error)
                             <span class="text-red-500">{{ $error }}</span>
                         @endforeach
                     @enderror
@@ -138,13 +133,9 @@
                         class="leading-7 text-sm text-gray-600">Descrição</label>
                         <textarea
                             id="description" name="description"
-                            class="w-full bg-gray-100 bg-opacity-50 
-                            rounded border border-gray-300 
-                            focus:border-indigo-500 focus:bg-white 
-                            focus:ring-2 focus:ring-indigo-200 
-                            text-base outline-none text-gray-700 
-                            py-1 px-3 leading-8 transition-colors 
-                            duration-200 ease-in-out">
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 
+                            leading-tight focus:outline-none focus:shadow-outline 
+                            @error('description') border-red-500 @enderror">
                             {{ old('description') }}
                         </textarea>
                     </div>
