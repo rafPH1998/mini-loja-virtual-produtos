@@ -51,26 +51,12 @@ class Product extends Model
     public function getLastThreeProductsForStatus(string|null $status = ''): object
     {
 
-        if ($status === 'last_registered') {
-            return $this->orderBy('created_at', 'DESC')
-                        ->take(3)
-                        ->with('user')
-                        ->get();
-        }
-
-        if ($status === 'cheap') {
-            return $this->orderBy('price', 'ASC')
-                        ->take(3)
-                        ->with('user')
-                        ->get();
-        }
-
-        if ($status === 'expensive') {
-            return $this->orderBy('price', 'DESC')
-                        ->take(3)
-                        ->with('user')
-                        ->get();
-        }
+        return Product::query()
+                    ->when($status == 'last_registered', fn($query) => $query->orderBy('created_at', 'DESC'))
+                    ->when($status == 'cheap', fn($query) => $query->orderBy('price', 'ASC'))
+                    ->when($status == 'expensive', fn($query) => $query->orderBy('price', 'DESC'))
+                    ->get()
+                    ->take(3);
 
     }
     
