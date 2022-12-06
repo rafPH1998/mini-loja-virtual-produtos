@@ -4,9 +4,9 @@
 
 @section('content')
 
-    <div class="lg:w-2/4 w-full mx-auto overflow-auto shadow-2xl rounded-md">
+    <div class="mx-auto overflow-hidden mt-10 shadow-lg mb-2 bg-gray-900 border-4 rounded-lg md:w-3/6 sm:w-4/6 border-gray-400">
         <div class="flex items-center justify-between mb-2 px-5 py-5">
-            <h1 class="text-2xl font-medium title-font mb-2 text-gray-900">Adicionar produto</h1>
+            <h1 class="text-2xl font-medium title-font mb-2 text-white">Adicionar produto</h1>
         </div>
 
         <form method="POST" class="px-10 py-10" action="{{ route('products.store') }}" enctype="multipart/form-data">
@@ -14,7 +14,7 @@
                 @csrf
                 <div class="p-2 w-1/2">
                     <div class="relative">
-                        <label for="name" class="leading-7 text-sm text-gray-600">Nome do produto</label>
+                        <label for="name" class="leading-7 text-sm text-white">Nome do produto</label>
                         <input type="text" id="name" name="name" 
                                 value="{{ old('name') }}" 
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 
@@ -31,7 +31,7 @@
 
                 <div class="p-2 w-1/2">
                     <div class="relative">
-                        <label for="name" class="leading-7 text-sm text-gray-600">Preço</label>
+                        <label for="name" class="leading-7 text-sm text-white">Preço</label>
                         <input type="text" id="price" name="price"
                             value="{{ old('price') }}"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 
@@ -48,7 +48,7 @@
 
                 <div class="p-2 w-1/2">
                     <div class="relative">
-                        <label for="name" class="leading-7 text-sm text-gray-600">Estoque</label>
+                        <label for="name" class="leading-7 text-sm text-white">Estoque</label>
                         <input type="text" id="quantity_inventory" name="quantity_inventory"
                             value="{{ old('quantity_inventory') }}"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 
@@ -64,7 +64,7 @@
 
                 <div class="p-2 w-1/2">
                     <div class="relative">
-                        <label for="image" class="leading-7 text-sm text-gray-600">Imagem do produto</label>
+                        <label for="image" class="leading-7 text-sm text-white">Imagem do produto</label>
                         <input type="file" id="image" name="image"
                             {{-- value="{{ old('image') }}" --}}
                             class="shadow appearance-none border rounded w-full 
@@ -81,7 +81,7 @@
 
                 <div class="p-2 w-1/2">
                     <div class="relative">
-                        <label for="quality" class="leading-7 text-sm text-gray-600">Estado do produto</label>
+                        <label for="quality" class="leading-7 text-sm text-white">Estado do produto</label>
                         <select id="quality" name="quality" 
                                 class="shadow appearance-none border rounded w-full 
                                 py-2 px-3 text-gray-700 
@@ -105,7 +105,7 @@
 
                 <div class="p-2 w-1/2">
                     <div class="relative">
-                        <label for="type" class="leading-7 text-sm text-gray-600">Categoria do produto</label>
+                        <label for="type" class="leading-7 text-sm text-white">Categoria do produto</label>
                         <select id="type" name="type" 
                                 class="shadow appearance-none border rounded w-full 
                                 py-2 px-3 text-gray-700 
@@ -130,7 +130,7 @@
                 <div class="p-2 w-full">
                     <div class="relative">
                         <label for="name" 
-                        class="leading-7 text-sm text-gray-600">Descrição</label>
+                        class="leading-7 text-sm text-white">Descrição</label>
                         <textarea
                             id="description" name="description"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 

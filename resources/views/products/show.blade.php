@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div class="lg:w-4/5 mx-auto flex flex-wrap shadow-lg">
+    <div class="lg:w-4/5 mx-auto flex flex-wrap shadow-2xl">
    
         <div class="w-96 p-10 mt-2">
             <img
@@ -15,13 +15,13 @@
         </div>
 
         <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 ml-10">
-            <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">{{ $product->name }}</h1>
+            <h1 class="text-3xl title-font font-medium mb-1 text-white">{{ $product->name }}</h1>
             <hr/>
-            <p class="leading-relaxed mt-5">
+            <p class="leading-relaxed mt-5 text-white">
                 <b>Descrição do produto: </b>
-                <p>{{ $product->description }}</p>
+                <p class="text-gray-500">{{ $product->description }}</p>
             </p>
-            <div class="my-3 mt-5">
+            <div class="my-3 mt-5 text-white">
                 <b>Quantidade:</b>
                <p>
                     <p class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
@@ -30,14 +30,14 @@
                </p>
             </div>
             <div class="my-3 mt-5">
-                <b>Estado do produto:</b>
+                <b class="text-white">Estado do produto:</b>
                 @foreach ($qualityStatus as $status)
-                    <p>
+                    <p class="text-gray-500">
                         {{ $product->quality === $status->name ? $status->value : '' }}
                     </p>
                 @endforeach    
             </div>
-            <p class="mt-7 mt-5"><b>Autor do produto postado:</b></p>
+            <p class="mt-7 mt-5 text-white"><b>Autor do produto postado:</b></p>
             <div class="flex mt-3">
                 <p class="mb-1 text-sm mt-7 dark:text-gray-700">
                     <div class="w-12 h-12 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500">
@@ -47,12 +47,12 @@
                         </svg>
                     </div>
                 </p>
-                <p class="mt-3 ml-2">
+                <p class="mt-3 ml-2 text-gray-500">
                     {{ $product->user->name }}
                 </p>
         </div>
         <div class="flex border-t-2 border-gray-100 mt-6 pt-6">
-            <span class="title-font font-medium text-2xl text-gray-900">
+            <span class="title-font font-medium text-2xl text-white">
                 ${{ number_format($product->price , 2, ',', '.') }}
             </span>
         </div>

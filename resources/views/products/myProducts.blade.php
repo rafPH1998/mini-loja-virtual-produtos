@@ -6,14 +6,15 @@
 
     @include('components-alerts.alerts')
 
-    <div class="overflow-x-auto relative shadow-md sm:rounded-lg mt-3">
         @if (count($myProducts) == 0)
             <p class="px-8 py-8">
                 Nenhum produto seu cadastrado em nosso sistema!
             </p>
         @else
-            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <table class="sm:rounded-lg w-5/6 text-sm text-left 
+                    text-gray-500 dark:text-gray-400 shadow-2xl 
+                    bg-gray-900">
+                <thead class="text-xs text-white uppercase dark:text-gray-400">
                     <tr>
                         <th scope="col" class="py-3 px-6">
                             #
@@ -46,13 +47,13 @@
                 </thead>
                 <tbody>
                     @foreach ($myProducts as $product )    
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <tr class="hover:bg-gray-700">
                             <td class="py-4 px-6">
                                 {{ $product->id }}
                             </td>
-                            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <td scope="row" class="py-4 px-6">
                                 Sem imagem
-                            </th>
+                            </td>
                             <td class="py-4 px-6">
                                 {{ $product->name }}
                             </td>
@@ -117,11 +118,17 @@
             <ul class="inline-flex items-center -space-x-px py-2.5 px-2.5">
                 @if ($myProducts->currentPage() > 1)
                     <li>
-                        <a href="?page={{ $myProducts->currentPage() - 1 }}" class="block py-2 px-3 ml-0 leading-tight text-gray-500 bg-white 
+                        <a href="?page={{ $myProducts->currentPage() - 1 }}" 
+                            class="block py-2 px-3 ml-0 leading-tight text-gray-500 bg-white 
                             rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 
                             dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                             <span class="sr-only">Previous</span>
-                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" 
+                                    xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" 
+                                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" 
+                                    clip-rule="evenodd">
+                                </path>
+                            </svg>
                         </a>
                     </li>
                 @endif
@@ -135,7 +142,8 @@
                 </li>
                 @if ($myProducts->currentPage() < $myProducts->lastPage())
                     <li>
-                        <a href="?page={{ $myProducts->currentPage() + 1 }}" class="block py-2 px-3 leading-tight text-gray-500 bg-white 
+                        <a href="?page={{ $myProducts->currentPage() + 1 }}" 
+                            class="block py-2 px-3 leading-tight text-gray-500 bg-white 
                             rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 
                             dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 
                             dark:hover:text-white">

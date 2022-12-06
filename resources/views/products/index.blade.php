@@ -97,9 +97,6 @@
 
         @forelse ($products as $product)
             <div class="w-96 bg-white rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700 ml-4 mt-5">
-                <a href="#">
-                    <img class="rounded-t-lg w-full h-80" src="{{ url("storage/{$product->image}") }}" alt="{{ $product->name }}" />
-                </a>
                 <div class="p-5" >
                     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
                         <b>{{ $product->name }}</b>
@@ -132,7 +129,7 @@
                 </div>
             </div>
         @empty
-            <p class="ml-5 mt-5 mt-5">
+            <p class="ml-5 mt-5 mt-5 text-white">
                 Nenhum produto encontrado.
             </p>
         @endforelse

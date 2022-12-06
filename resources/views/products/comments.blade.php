@@ -6,7 +6,7 @@
 
     <div class="text-gray-600 body-font">
 
-        <h1 class="ml-3" style="font-size: 35px;">
+        <h1 class="ml-3 text-white" style="font-size: 35px;">
             Comentarios e avaliações do produto: <b>{{ $product->name }}</b>
         </h1>
         <hr class="mt-5">
@@ -45,7 +45,7 @@
                         </div> 
                     </div>
                 @empty
-                    <div class="w-full shadow-md sm:rounded-lg mt-3">
+                    <div class="w-full shadow-2xl sm:rounded-lg mt-3 bg-gray-900">
                         <p class="px-8 py-8">
                             Nenhuma avaliação ou comentário para esse produto!
                         </p>
