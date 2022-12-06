@@ -51,8 +51,13 @@
                             <td class="py-4 px-6">
                                 {{ $product->id }}
                             </td>
-                            <td scope="row" class="py-4 px-6">
-                                Sem imagem
+                            <td class="py-4 px-6">
+                                <img
+                                    class="w-full h-full rounded-full"
+                                    style="width: 45px;" 
+                                    src="{{ url("storage/{$product->image}") }}" 
+                                    alt="{{ $product->name }}"
+                                >
                             </td>
                             <td class="py-4 px-6">
                                 {{ $product->name }}
