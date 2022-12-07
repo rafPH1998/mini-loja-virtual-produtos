@@ -42,21 +42,26 @@ class Product extends Model
                     ->when(function ($query) use ($filter) {
                         $query->where('name', 'LIKE', "%{$filter}%");     
                     })
-                    ->with('user')
+                    ->with('comments')
                     ->paginate(5);
 
         return $products;
     }
 
-    public function getLastThreeProductsForStatus(string|null $status = ''): object
+    public function getLastFiveProductsForStatus(string|null $status = ''): object
     {
 
         return Product::query()
                     ->when($status == 'last_registered', fn($query) => $query->orderBy('created_at', 'DESC'))
                     ->when($status == 'cheap', fn($query) => $query->orderBy('price', 'ASC'))
                     ->when($status == 'expensive', fn($query) => $query->orderBy('price', 'DESC'))
+                    ->when($status == 'news', fn($query) => $query->where('quality', 'novo'))
+                    ->when($status == 'semi_news', fn($query) => $query->where('quality', 'semi_novo'))
+                    ->when($status == 'god', fn($query) => $query->where('quality', 'bom'))
+                    ->when($status == 'medium', fn($query) => $query->where('quality', 'medio'))
+                    ->with('comments')
                     ->get()
-                    ->take(3);
+                    ->take(5);
 
     }
     
