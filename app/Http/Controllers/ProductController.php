@@ -23,25 +23,25 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
-
+        $qualityStatus = ProductQualityEnum::cases();
+        $type = ProductTypeEnum::cases();
+        
         $products = $this->product
                         ->getProducts(
                             filter: $request->get('filter') ?? ''
                         );
 
-        $qualityStatus = ProductQualityEnum::cases();
-        $type = ProductTypeEnum::cases();
-
         if ($request->get('status') !== null) {
 
             $productsForStatus = $this->product
-                                        ->getLastThreeProductsForStatus(
+                                        ->getLastFiveProductsForStatus(
                                             status: $request->get('status') ?? ''
                                         );
-     
+
             return response()->json([
-                'data' => $productsForStatus
-            ]);
+                'data'  => $productsForStatus,
+                'error' => count($productsForStatus) == 0 ? 'Nenhum produto encontrado para esse filtro' : ''
+            ], 200);
         }
 
         return view('products.index', [
