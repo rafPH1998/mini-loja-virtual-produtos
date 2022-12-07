@@ -6,10 +6,13 @@
 
     @include('components-alerts.alerts')
 
+
         @if (count($myProducts) == 0)
-            <p class="px-8 py-8">
-                Nenhum produto seu cadastrado em nosso sistema!
-            </p>
+            <div class="w-full shadow-2xl sm:rounded-lg mt-3 bg-gray-900">
+                <p class="px-8 py-8">
+                    Nenhum produto seu cadastrado em nosso sistema!
+                </p>
+            </div>        
         @else
             <table class="sm:rounded-lg w-5/6 text-sm text-left 
                     text-gray-500 dark:text-gray-400 shadow-2xl 

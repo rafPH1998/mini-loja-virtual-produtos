@@ -84,9 +84,13 @@
                             p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
                             dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option @if(request('status') == 'all') selected @endif value="all">Todos</option>
-                            <option @if(request('status') == 'cheap') selected @endif value="cheap">Trazer os 3 produtos mais baratos</option>
-                            <option @if(request('status') == 'expensive') selected @endif value="expensive">Trazer os 3 produtos mais caros</option>
-                            <option @if(request('status') == 'last_registered') selected @endif value="last_registered">Trazer os 3 últimos produtos cadastrados</option>
+                            <option @if(request('status') == 'cheap') selected @endif value="cheap">Trazer os 5 produtos mais baratos</option>
+                            <option @if(request('status') == 'expensive') selected @endif value="expensive">Trazer os 5 produtos mais caros</option>
+                            <option @if(request('status') == 'last_registered') selected @endif value="last_registered">Trazer os 5 últimos produtos cadastrados</option>
+                            <option @if(request('status') == 'news') selected @endif value="news">Trazer os 5 últimos produtos novos</option>
+                            <option @if(request('status') == 'semi_news') selected @endif value="semi_news">Trazer os 5 últimos produtos semi novos</option>
+                            <option @if(request('status') == 'god') selected @endif value="god">Trazer os 5 últimos produtos bons</option>
+                            <option @if(request('status') == 'medium') selected @endif value="medium">Trazer os 5 últimos produtos médios</option>
                     </select>
                 </div>
             </form>
