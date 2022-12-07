@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div class="mx-auto overflow-hidden mt-10 shadow-lg mb-2 bg-gray-900 border-4 rounded-lg md:w-3/6 sm:w-4/6 border-gray-400">
+    <div class="mx-auto overflow-hidden shadow-lg mb-2 bg-gray-900 border-4 rounded-lg md:w-3/6 sm:w-4/6 border-gray-400">
         <div class="flex items-center justify-between mb-2 px-5 py-5">
             <h1 class="text-2xl font-medium title-font mb-2 text-white">Adicionar produto</h1>
         </div>

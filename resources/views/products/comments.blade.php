@@ -30,7 +30,7 @@
                                 </h2>
                                 @if (auth()->user()->id == $comments->user->id)
                                     <p class="ml-2">
-                                        (meu post)
+                                        (meu comentário)
                                     </p>
                                 @endif
                             </div>
