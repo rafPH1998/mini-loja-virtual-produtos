@@ -97,7 +97,7 @@
         @endif
     </div>
     
-    <div id="p" class="flex items-stretch drop-shadow-xl">
+    <div id="p" class="flex items-stretch shadow-2xl">
 
         @forelse ($products as $product)
             <div class="w-96 bg-white rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700 ml-4 mt-5">

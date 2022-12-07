@@ -47,7 +47,7 @@ class ProductController extends Controller
         return view('products.index', [
             'products'      => $products,
             'qualityStatus' => $qualityStatus,
-            'type'  => $type,
+            'type'          => $type,
         ]);
     }
 

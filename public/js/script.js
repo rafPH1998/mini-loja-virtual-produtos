@@ -1,26 +1,32 @@
 async function statusFilter(element)
 {
     document.getElementById("posts").innerHTML = '<div class="h-64 mt-3 ml-5"><img src="images/spinner.svg" style="width:45px;"></div>';
+    
+    fetch(`http://localhost:8989/products?status=${element.value}`)
+    .then(response => {
+        return response.json()
+    })
+    .then(result => {
+        
+        if (result.error !== '') {
+            swal("Erro!", `${result.error}`, "error");
+            document.getElementById("posts").innerHTML = '';
+        } else {
+            showResults(result)
+        }
+    })
 
-    let url = `http://localhost:8989/products?status=${element.value}`; 
+    document.getElementById("p").innerHTML = '';
+    document.getElementById("paginate").innerHTML = '';
+}
+
+const showResults = (json) => {
     let url_product = 'http://localhost:8989/';
-    let res = await fetch(url);
-    let result = await res.json();
-    let data = result.data;
 
-    let html = '';
-
-    if (result.error !== '') {
-        html += 
-        `<p class="ml-5 mt-5 mt-5 text-white">
-            Nenhum produto encontrado.
-        </p>`
-    }
-
-    html += 
-        `<div class="flex items-stretch drop-shadow-xl">`;
-            for (let i = 0; i < data.length; i++) {
-                let element = data[i];
+    let html = 
+    `<div class="flex items-stretch drop-shadow-xl">`;
+            for (let i = 0; i < json.data.length; i++) {
+                let element = json.data[i];               
 
                 html += `
 
@@ -50,9 +56,7 @@ async function statusFilter(element)
                     </div>
                 </div>
         </div>`
-    }
+        }
 
-    document.getElementById("p").innerHTML = '';
-    document.getElementById("paginate").innerHTML = '';
     document.getElementById("posts").innerHTML = html;
 }

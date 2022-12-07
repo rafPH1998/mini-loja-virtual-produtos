@@ -29,13 +29,10 @@
         </div>
  
         <div class="flex items-center">
-            <div class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500">
-                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-6 h-6" viewBox="0 0 24 24">
-                    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
-                    <circle cx="12" cy="7" r="4"></circle>
-                </svg>
-            </div>
-            
+            <a href="">
+                <img style="width:25px;" src="{{ url('images/user.png') }}" title="Perfil" />
+            </a>
+        
             <p class="ml-3 text-white">
                 <b>Bem vindo</b>, {{ auth()->user()->name }}
             </p>
@@ -44,16 +41,16 @@
                 @csrf
                 <a href="{{route('logout')}}"
                     onclick="event.preventDefault(); this.closest('form').submit();">
-                    <img style="width:25px;" src="{{ url('images/logout.svg') }}" title="Sair" />
+                    <img style="width:25px;" src="{{ url('images/exit.png') }}" title="Sair" />
                 </a>
             </form>
 
             <a href="{{ route('products.index') }}" class="ml-2">
-                <img style="width:25px;" src="{{ url('images/home.svg') }}" title="Home"/>
+                <img style="width:25px;" src="{{ url('images/house.png') }}" title="Home"/>
             </a>
 
             <a href="{{ route('products.myProducts') }}" class="ml-2">
-                <img style="width:25px;" src="{{ url('images/cart.svg') }}" title="Meus produtos"/>
+                <img style="width:25px;" src="{{ url('images/cart.png') }}" title="Meus produtos"/>
             </a>
         </div>
     </div>
@@ -93,6 +90,7 @@
         </div>
     </footer>
 
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="{{ url('js/script.js') }}"></script>
 </body>
 </html>
