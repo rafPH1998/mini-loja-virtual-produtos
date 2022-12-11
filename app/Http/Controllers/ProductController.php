@@ -66,15 +66,16 @@ class ProductController extends Controller
     {
         $data = $request->validated();
 
-        if ($request->image) {
-            $data['image'] = $uploadFile->store($request->image, 'products');
-        }
+        // if ($request->image) {
+        //     $data['image'] = $uploadFile->store($request->image, 'products');
+        // }
 
         $data['user_id'] = auth()->user()->id;
         $product = $this->product->create($data);
         
-        return redirect()->route('products.index')
-                        ->with('success', "Produto {$product->name} criado!");
+        return response()->json([
+            'data' => $product
+        ]);
     }
 
     public function show($id)

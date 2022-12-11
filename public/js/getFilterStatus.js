@@ -1,5 +1,4 @@
-async function statusFilter(element)
-{
+const statusFilter = (element) => {
     document.getElementById("posts").innerHTML = '<div class="h-64 mt-3 ml-5"><img src="images/spinner.svg" style="width:45px;"></div>';
     
     fetch(`http://localhost:8989/products?status=${element.value}`)
