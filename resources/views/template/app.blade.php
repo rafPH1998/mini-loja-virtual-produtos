@@ -29,7 +29,7 @@
         </div>
  
         <div class="flex items-center">
-            <a href="">
+            <a href="{{ route('profile.index') }}">
                 <img style="width:25px;" src="{{ url('images/user.png') }}" title="Perfil" />
             </a>
         
@@ -91,7 +91,8 @@
     </footer>
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="{{ url('js/script.js') }}"></script>
+    <script src="{{ url('js/addProduct.js') }}"></script>
+    <script src="{{ url('js/getFilterStatus.js') }}"></script>
 </body>
 </html>
 

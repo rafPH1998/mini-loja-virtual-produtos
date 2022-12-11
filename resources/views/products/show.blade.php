@@ -6,12 +6,8 @@
 
     <div class="lg:w-4/5 mx-auto flex flex-wrap shadow-2xl">
    
-        <div class="w-96 p-10 mt-2">
-            <img
-            class="" 
-            src="{{ url("storage/{$product->image}") }}" 
-            alt="{{ $product->name }}"
-            >
+        <div class="xl:w-1/4 md:w-1/2 p-4">
+            sem imagem
         </div>
 
         <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 ml-10">
@@ -60,7 +56,7 @@
         @can('product-users', $product)
             <form action="{{route('products.create_comment') }}" method="POST" class="mt-10">
                 @csrf
-                @include('components-alerts.alerts')
+                <x-alerts/>
 
                 <input type="hidden" name="id" value="{{ $product->id }}">
                 <textarea class="w-full px-5 

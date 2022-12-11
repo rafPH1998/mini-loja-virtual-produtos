@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('CASCADE');
             $table->string('name')->unique();
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->integer('quantity_inventory')->require();
             $table->text('description')->nullable();
             $table->enum('type', [
