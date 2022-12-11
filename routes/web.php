@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\NotifyProductController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
  
 Route::middleware('auth')->group(function() {
@@ -17,6 +17,9 @@ Route::middleware('auth')->group(function() {
     */
     Route::post('/comment', CommentController::class)->name('products.create_comment');
     Route::get('comments/{comment}', [CommentController::class, 'comments'])->name('products.comments');
+
+    Route::get('profile/', [ProfileController::class, 'index'])->name('profile.index');
+    Route::post('profile/', [ProfileController::class, 'edit'])->name('profile.edit');
 });
 
 
