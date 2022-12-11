@@ -31,7 +31,7 @@ class ProductFactory extends Factory
             'description'            => $this->faker->sentence(50),
             'type'                   => $optionsType[0],
             'image'                  => 'https://source.unsplash.com/random',
-            'price'                  => $this->faker->numberBetween(0, 20),
+            'price'                  => $this->faker->numberBetween(0, 500),
             'quantity_inventory'     => $this->faker->numberBetween(0, 30),
         ];
     }
