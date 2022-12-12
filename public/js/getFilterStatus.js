@@ -29,15 +29,15 @@ const showResults = (json) => {
 
                 html += `
 
-                <div class="w-96 bg-white rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700 ml-4 mt-5">
+                <div class="w-96 bg-gray-900 shadow-lg rounded-lg dark:bg-gray-800 dark:border-gray-700 ml-4 mt-5">
                     <div class="p-5">
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                        <p class="mb-3 font-normal text-white">
                             <b> ${element.name} </b>
                         </p>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                        <p class="mb-3 font-normal text-white">
                             $  ${element.price.toFixed(2)}
                         </p>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                        <p class="mb-3 font-normal text-white">
                             ${element.created_at} 
                         </p>
                         <div class="mt-5">
