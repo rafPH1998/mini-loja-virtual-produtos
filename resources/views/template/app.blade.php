@@ -30,7 +30,18 @@
  
         <div class="flex items-center">
             <a href="{{ route('profile.index') }}">
-                <img style="width:25px;" src="{{ url('images/user.png') }}" title="Perfil" />
+                @php
+                    $avatar = auth()->user()->avatar;
+                @endphp
+                @if ($avatar)
+                    <img
+                        style="width:35px;"
+                        class="rounded-full"
+                        src="{{ url("storage/{$avatar}") }}" 
+                    >
+                @else
+                    <img style="width:25px;" src="{{ url('images/user.png') }}" title="Perfil" />
+                @endif
             </a>
         
             <p class="ml-3 text-white">
