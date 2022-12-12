@@ -65,11 +65,7 @@ class ProductController extends Controller
     public function store(StoreAndUpdateProduct $request, UploadFile $uploadFile)
     {
         $data = $request->validated();
-
-        // if ($request->image) {
-        //     $data['image'] = $uploadFile->store($request->image, 'products');
-        // }
-
+        
         $data['user_id'] = auth()->user()->id;
         $product = $this->product->create($data);
         
