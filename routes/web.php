@@ -19,7 +19,7 @@ Route::middleware('auth')->group(function() {
     Route::get('comments/{comment}', [CommentController::class, 'comments'])->name('products.comments');
 
     Route::get('profile/', [ProfileController::class, 'index'])->name('profile.index');
-    Route::post('profile/', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('profile/', [ProfileController::class, 'edit'])->name('profile.edit');
 });
 
 
