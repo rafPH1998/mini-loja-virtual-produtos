@@ -123,11 +123,10 @@ class ProductController extends Controller
 
     public function destroy($product)
     {
+ 
         $myProductDelete = $this->product->findOrFail($product);
         $myProductDelete->delete();
 
-        return redirect()
-            ->route('products.myProducts')
-            ->with('success', "Produto deletado com sucesso!");
+        return response()->json([], 204);
     }
 }
