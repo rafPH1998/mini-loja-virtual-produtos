@@ -18,12 +18,14 @@ document.getElementById("addForm").addEventListener("submit", async function(eve
     /*
     Dados do span para exibir o erro
     */
-    let nameErro = document.getElementById('nameErro')
-    let priceErro = document.getElementById('priceErro')
-    let inventoryErro = document.getElementById('inventoryErro')
-    let qualityErro = document.getElementById('qualityErro')
-    let typeErro = document.getElementById('typeErro')
-    let descErro = document.getElementById('descErro')
+    let camposInputs = [
+        document.getElementById('nameErro'),
+        document.getElementById('priceErro'),
+        document.getElementById('inventoryErro'),
+        document.getElementById('qualityErro'),
+        document.getElementById('typeErro'),
+        document.getElementById('descErro'),
+    ];
 
     let url = 'http://localhost:8989/products';
 
@@ -54,12 +56,7 @@ document.getElementById("addForm").addEventListener("submit", async function(eve
                 "success"
             );
             
-            nameErro.innerHTML = ''
-            priceErro.innerHTML = ''
-            inventoryErro.innerHTML = ''
-            qualityErro.innerHTML = ''
-            typeErro.innerHTML = ''
-            descErro.innerHTML = ''
+            clearErrorsSpan(camposInputs);
     
             document.getElementById('name').value = ''
             document.getElementById('price').value = ''
@@ -70,43 +67,50 @@ document.getElementById("addForm").addEventListener("submit", async function(eve
         }
 
         document.getElementById("button").innerHTML = 'Adicionar';
-        document.getElementById("button").disabled = false;
+        document.getElementById("button").disabled = false;    
 
         if (result.errors.name) {
-            nameErro.innerHTML = result.errors.name;
+            camposInputs[0].innerHTML = result.errors.name;
         } else {
-            nameErro.innerHTML = ''
+            camposInputs[0].innerHTML = ''
         }
 
         if (result.errors.price) {
-            priceErro.innerHTML = result.errors.price; 
+            camposInputs[1].innerHTML = result.errors.price; 
         } else {
-            priceErro.innerHTML = ''
+            camposInputs[1].innerHTML = ''
         }
 
         if (result.errors.quantity_inventory) {
-            inventoryErro.innerHTML = result.errors.quantity_inventory;
+            camposInputs[2].innerHTML = result.errors.quantity_inventory;
         } else {
-            inventoryErro.innerHTML = ''
+            camposInputs[2].innerHTML = ''
         }
 
         if (result.errors.quality) {
-            qualityErro.innerHTML = result.errors.quality;
+            camposInputs[3].innerHTML = result.errors.quality;
         } else {
-            qualityErro.innerHTML = ''
+            camposInputs[3].innerHTML = ''
         }
 
         if (result.errors.type) {
-            typeErro.innerHTML = result.errors.type; 
+            camposInputs[4].innerHTML = result.errors.type; 
         } else {
-            typeErro.innerHTML = ''
+            camposInputs[4].innerHTML = ''
         }
 
         if (result.errors.description) {
-            descErro.innerHTML = result.errors.description;
+            camposInputs[5].innerHTML = result.errors.description;
         } else {
-            descErro.innerHTML = ''
+            camposInputs[5].innerHTML = ''
         }
     })
 
 }); 
+
+const clearErrorsSpan = (param) => {
+    for(let i = 0; i < param.length; i++) {
+        let htmlError = param[i];    
+        htmlError.innerHTML = ''
+    }
+}

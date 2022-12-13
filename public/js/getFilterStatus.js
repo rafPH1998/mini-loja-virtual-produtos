@@ -59,3 +59,4 @@ const showResults = (json) => {
 
     document.getElementById("posts").innerHTML = html;
 }
+
