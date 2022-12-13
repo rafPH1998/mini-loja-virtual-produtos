@@ -35,7 +35,7 @@ class StoreAndUpdateProduct extends FormRequest
             ],
             'price'              => 'required|integer',
             'description'        => 'required|min:3|max:100',
-            'quantity_inventory' => 'required|integer',
+            'quantity_inventory' => 'required|integer|min:1',
             'quality'      => [
                 'required',
                 Rule::in(['novo', 'semi_novo', 'bom', 'medio']),
