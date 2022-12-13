@@ -18,7 +18,7 @@
                     <div class="relative">
                         <label for="name" class="leading-7 text-sm text-white">Nome do produto</label>
                         <input type="text" id="name" name="name" 
-                                class="bg-gray-800 appearance-none rounded w-full py-2 px-3 text-gray-700 
+                                class="bg-gray-800 appearance-none rounded w-full py-2 px-3 text-white 
                                 leading-tight focus:outline-none focus:shadow-outline"
                         >
                     </div>
@@ -29,7 +29,7 @@
                     <div class="relative">
                         <label for="name" class="leading-7 text-sm text-white">Preço</label>
                         <input type="text" id="price" name="price"
-                            class="bg-gray-800 appearance-none rounded w-full py-2 px-3 text-gray-700 
+                            class="bg-gray-800 appearance-none rounded w-full py-2 px-3 text-white 
                             leading-tight focus:outline-none focus:shadow-outline" >
                             
                     </div>
@@ -40,22 +40,11 @@
                     <div class="relative">
                         <label for="name" class="leading-7 text-sm text-white">Estoque</label>
                         <input type="text" id="quantity_inventory" name="quantity_inventory"
-                            class="bg-gray-800 appearance-none rounded w-full py-2 px-3 text-gray-700 
+                            class="bg-gray-800 appearance-none rounded w-full py-2 px-3 text-white 
                             leading-tight focus:outline-none focus:shadow-outline" >
                     </div>
                     <span id="inventoryErro" class="text-red-500"></span>
                 </div>
-
-                {{-- <div class="p-2 w-1/2">
-                    <div class="relative">
-                        <label for="image" class="leading-7 text-sm text-white">Imagem do produto</label>
-                        <input type="file" id="image" name="image"
-                            class="shadow appearance-none border rounded w-full 
-                            py-2 px-3 text-gray-700 
-                            leading-tight focus:outline-none focus:shadow-outline">
-                    </div>
-                    <span id="imageErro" class="text-red-500"></span>
-                </div> --}}
 
                 <div class="p-2 w-1/2">
                     <div class="relative">
@@ -101,7 +90,7 @@
                         class="leading-7 text-sm text-white">Descrição</label>
                         <textarea
                             id="description" name="description"
-                            class="bg-gray-800 appearance-none rounded w-full py-2 px-3 text-gray-700 
+                            class="bg-gray-800 appearance-none rounded w-full py-2 px-3 text-white 
                             leading-tight focus:outline-none focus:shadow-outline" >
                     
                         </textarea>

@@ -3,8 +3,7 @@
 @section('title', 'Listagem de produtos')
 
 @section('content')
-    <x-alerts/>
-    
+
     <div class="mb-5 ml-5">
         <a href="{{ route('products.create') }}" 
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 
@@ -76,7 +75,7 @@
         @if (count($products) > 0)
             <form action="#" method="GET" name="formSelect" class="ml-5">
                 <div class="relative">
-                    <label for="quality" class="leading-7 text-sm text-white">Busque por qualidade</label>
+                    <label for="quality" class="leading-7 text-sm text-white">Busque por avaliação</label>
                     <select id="quality" name="status" 
                             onchange="statusFilter(this)"
                             class="bg-gray-50 border border-gray-300 text-gray-900
@@ -93,25 +92,27 @@
             </form>
         @endif
     </div>
-
     
-    <div id="p" class="flex items-stretch">
-
+    <div id="p" class="grid grid-cols-4 gap-4">
         @forelse ($products as $product)
-            <div class="w-96 bg-white rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700 ml-4 mt-5">
+            <div class="bg-gray-900 shadow-lg rounded-lg dark:bg-gray-800 dark:border-gray-700 ml-4 mt-5">
                 <div class="p-5" >
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                        <b>{{ $product->name }}</b>
-                    </p>
-                    @foreach ($qualityStatus as $status)
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                            {{ $product->quality === $status->name ? $status->value : '' }}
-                         </p>
-                    @endforeach    
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                    <div class="flex">
+                        @foreach ($qualityStatus as $status)
+                            <p class="mb-3 font-normal text-white">
+                                {{ $product->quality === $status->name ? $status->value : '' }}
+                            </p>
+                        @endforeach 
+                        @if ($product->user->id == auth()->user()->id)
+                            <p class="ml-2">
+                                ( meu produto ) 
+                            </p>
+                        @endif
+                    </div> 
+                    <p class="mb-3 font-normal text-white">
                         $ {{ number_format($product->price , 2, ',', '.') }}
                     </p>
-                    <p style="font-size: 12px;" class="mb-1 text-sm mt-2 dark:text-gray-400">
+                    <p style="font-size: 12px;" class="mb-1 text-sm mt-2 text-white">
                         Criado em: {{ $product->created_at }}
                     </p>
 
@@ -140,7 +141,7 @@
     <div id="posts" class="flex items-stretch drop-shadow-xl"></div>
 
     <div id="paginate">
-        @if ($products->total() > 4)
+        @if ($products->total() > 8)
             <nav class="flex justify-between items-center pt-4" aria-label="Table navigation">
                 <ul class="inline-flex items-center -space-x-px py-2.5 px-2.5">
                     @if ($products->currentPage() > 1)

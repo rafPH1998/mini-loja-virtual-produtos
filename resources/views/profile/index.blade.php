@@ -4,18 +4,27 @@
 
 @section('content')
     
-    <div id="form-container" class="mx-auto overflow-hidden shadow-lg mb-2 shadow-2xl bg-gray-900 rounded-lg  sm:w-4/6">
+    <div id="form-container" class="mx-auto overflow-hidden shadow-lg mb-2 shadow-2xl bg-gray-900 rounded-lg  sm:w-4/6">        
         <div class="flex items-center justify-between mb-2 px-5 py-5">
             <h1 class="text-2xl font-medium title-font mb-2 text-white">Editar dados do meu perfil</h1>
         </div>
 
         <form method="POST" class="px-10 py-10" action="{{ route('profile.edit') }}" enctype="multipart/form-data">
+            <x-alerts-success />
+
             <div class="flex flex-wrap">
                 @csrf
+                @method("PUT")
+                
+                @if (isset($authUser->avatar))
+                    <div class="w-40 h-40">
+                        <img class="w-full h-full rounded-full" src="{{ url("storage/{$authUser->avatar}") }}">
+                    </div>
+                @endif
                 <div class="p-2 w-full">
                     <div class="relative">
-                        <label for="image" class="leading-7 text-sm text-white">Imagem</label>
-                        <input type="file" id="image" name="image"
+                        <label for="avatar" class="leading-7 text-sm text-white">Foto</label>
+                        <input type="file" id="avatar" name="avatar"
                             class="appearance-none border rounded w-full 
                             py-2 px-3 text-gray-700 
                             leading-tight focus:outline-none focus:shadow-outline">
@@ -31,7 +40,11 @@
                             leading-tight focus:outline-none focus:shadow-outline"
                         >
                     </div>
-                    <span id="nameErro" class="text-red-500"></span>
+                    @error('name')
+                        @foreach ($errors->messages()['name'] as $error)
+                            <span class="text-red-500 ml-3">{{ $error }}</span>
+                        @endforeach
+                    @enderror
                 </div>
 
                 <div class="p-2 w-full">
@@ -42,6 +55,11 @@
                             class="bg-gray-800 appearance-none rounded w-full py-2 px-3 text-white
                             leading-tight focus:outline-none focus:shadow-outline" >
                     </div>
+                    @error('email')
+                        @foreach ($errors->messages()['email'] as $error)
+                            <span class="text-red-500 ml-3">{{ $error }}</span>
+                        @endforeach
+                    @enderror
                 </div>
 
                 <div class="p-2 w-full">
@@ -53,15 +71,23 @@
                             leading-tight focus:outline-none focus:shadow-outline">
                     </div>
                 </div>
+                @error('password')
+                    @foreach ($errors->messages()['password'] as $error)
+                        <span class="text-red-500 ml-3">{{ $error }}</span>
+                    @endforeach
+                @enderror
 
                 <div class="p-2 w-full">
                     <div class="relative">
                         <label for="password_confirm" class="leading-7 text-sm text-white">Confirmar senha</label>
-                        <input type="password_confirm" id="password_confirm" name="password_confirm"
+                        <input type="password" id="password_confirm" name="password_confirm"
                             class="bg-gray-800 appearance-none rounded w-full 
                             py-2 px-3 text-white
                             leading-tight focus:outline-none focus:shadow-outline">
                     </div>
+                    @if (Session::has('error_password'))
+                        <span class="text-red-500">{{Session::get('error_password')}}</span>
+                    @endif
                 </div>
 
                 <div class="p-2 w-full">

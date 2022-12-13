@@ -43,7 +43,7 @@ class Product extends Model
                         $query->where('name', 'LIKE', "%{$filter}%");     
                     })
                     ->with('comments')
-                    ->paginate(5);
+                    ->paginate(8);
 
         return $products;
     }

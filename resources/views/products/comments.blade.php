@@ -11,27 +11,48 @@
         </h1>
         <hr class="mt-5">
 
-        <div class="container px-5 py-24 mx-auto">
+       <form action="">
+            <div class="flex items-center mt-5 ml-3">
+                <input id="checked-checkbox" type="checkbox" value="" 
+                    class="w-7 h-7 rounded-full text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 
+                    dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="checked-checkbox" class="ml-2 text-sm font-medium text-white">Todos os comentários</label>
+
+                <input id="checked-checkbox" type="checkbox" value="" 
+                    class="w-7 h-7 ml-3 rounded-full text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 
+                    dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="checked-checkbox" class="ml-2 text-sm font-medium text-white">Meus comentários</label>
+            </div>
+       </form>
+    
+
+
+        <div class="container px-5 py-24 mx-auto">    
             <div class="flex flex-wrap -m-4">
                 @forelse ($listComments as $comments)
-
                     <div class="p-4 md:w-1/3">
                         <div class="flex rounded-lg h-full bg-gray-100 p-8 flex-col shadow-xl">
                             <div class="flex items-center mb-3">
-                                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500">
-                                    <svg fill="none" stroke="currentColor" stroke-linecap="round" 
-                                        stroke-linejoin="round" stroke-width="2" class="w-6 h-6" viewBox="0 0 24 24">
-                                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
-                                        <circle cx="12" cy="7" r="4"></circle>
-                                    </svg>
-                                </div>
-                                <h2 class="ml-3 text-gray-900 text-lg title-font font-medium">
-                                    {{ $comments->user->name }} 
-                                </h2>
+                                @if ($comments->user->avatar)
+                                    <img
+                                        style="width:35px;"
+                                        class="rounded-full"
+                                        src="{{ url("storage/{$comments->user->avatar}") }}" 
+                                    >
+                                @else
+                                    <img style="width:35px;" 
+                                        src="{{ url('images/user.png') }}" 
+                                        title="Perfil" />
+                                @endif
+    
                                 @if (auth()->user()->id == $comments->user->id)
                                     <p class="ml-2">
-                                        (meu comentário)
+                                        Meu usuário
                                     </p>
+                                @else
+                                    <h2 class="ml-3 text-gray-900 text-lg title-font font-medium">
+                                        {{ $comments->user->name }} 
+                                    </h2>
                                 @endif
                             </div>
                             <div class="flex-grow">

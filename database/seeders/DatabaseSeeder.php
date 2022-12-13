@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
     {
         $user = User::factory()->create(['name' => 'Fulano de tal']);
         
-        Product::factory()->count(5)->create([
+        Product::factory()->count(20)->create([
             'user_id' => $user->id
         ]);
     }

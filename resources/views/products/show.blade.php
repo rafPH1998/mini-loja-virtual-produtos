@@ -35,15 +35,17 @@
             </div>
             <p class="mt-7 mt-5 text-white"><b>Autor do produto postado:</b></p>
             <div class="flex mt-3">
-                <p class="mb-1 text-sm mt-7 dark:text-gray-700">
-                    <div class="w-12 h-12 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500">
-                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-6 h-6" viewBox="0 0 24 24">
-                            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
-                            <circle cx="12" cy="7" r="4"></circle>
-                        </svg>
-                    </div>
+                <p class="mb-1 text-sm dark:text-gray-800">
+                    @if ($product->user->avatar)
+                        <img
+                            class="rounded-full w-12 h-12"
+                            src="{{ url("storage/{$product->user->avatar}") }}" 
+                        >
+                    @else
+                        <img class="rounded-full w-12 h-12" src="{{ url('images/user.png') }}" title="Perfil" />
+                    @endif
                 </p>
-                <p class="mt-3 ml-2 text-gray-500">
+                <p class="mt-3 ml-2 mt-5 text-gray-500">
                     {{ $product->user->name }}
                 </p>
         </div>
@@ -56,22 +58,31 @@
         @can('product-users', $product)
             <form action="{{route('products.create_comment') }}" method="POST" class="mt-10">
                 @csrf
-                <x-alerts/>
+                <x-alerts-success/>
 
                 <input type="hidden" name="id" value="{{ $product->id }}">
-                <textarea class="w-full px-5 
-                    py-2 text-gray-700 bg-gray-200 focus:outline-none rounded" 
+                <textarea 
                     name="description" cols="30" rows="4" 
+                    class="w-full px-5 border-4
+                    py-2 text-gray-700 bg-gray-200 
+                    focus:outline-none rounded @error('description') border-red-500 @enderror" 
                     placeholder="O que achou do produto?"
                 ></textarea>
+                @error('description')
+                    @foreach ($errors->messages()['description'] as $error)
+                        <span class="text-red-500">{{ $error }}</span>
+                    @endforeach
+                @enderror
 
-                <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 
+                <div>
+                    <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 
                         focus:ring-blue-300 font-medium rounded-lg 
                         text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 
                         dark:hover:bg-blue-700 focus:outline-none 
-                        dark:focus:ring-blue-800">
+                        dark:focus:ring-blue-800 mt-5">
                         Criar comentário
-                </button>
+                    </button>
+                </div>
             </form> 
         @endcan
     </div>

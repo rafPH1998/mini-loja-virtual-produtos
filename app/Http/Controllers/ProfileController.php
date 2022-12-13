@@ -44,7 +44,6 @@ class ProfileController extends Controller
         $user = User::where('id', $user->id)->first();
         $user->update($data);
 
-        
         return redirect()->route('profile.index')
             ->with('success', 'Dados alterados com sucesso!');
     }
