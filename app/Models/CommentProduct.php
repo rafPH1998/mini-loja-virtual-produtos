@@ -35,13 +35,12 @@ class CommentProduct extends Model
         );
     }
     
-    public function getComments($comment): object
+    public function getComments(string|null $filter = 'allComments', $comment)
     {
-        $comments =  $this->with('user')
+        return $this->with('user')
+                        ->when($filter == 'myComments', fn($query) => $query->where('user_id', '=', auth()->user()->id))   
                         ->where('product_id', '=', $comment)
                         ->paginate(6);
-              
-        return $comments;
 
     }
 

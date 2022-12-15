@@ -62,12 +62,14 @@ class ProductController extends Controller
         ]);
     }
 
-    public function store(StoreAndUpdateProduct $request, UploadFile $uploadFile)
+    public function store(StoreAndUpdateProduct $request)
     {
         $data = $request->validated();
+        $user = auth()->user();
         
-        $data['user_id'] = auth()->user()->id;
-        $product = $this->product->create($data);
+        $data['user_id'] = $user->id;
+
+        $product = $user->products()->create($data);
         
         return response()->json([
             'data' => $product

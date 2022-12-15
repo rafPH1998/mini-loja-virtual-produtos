@@ -7,6 +7,7 @@ use App\Http\Requests\Products\CommentProductRequest;
 use App\Models\CommentProduct;
 use App\Models\Product;
 use App\Mail\ProductCommented;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class CommentController extends Controller
@@ -35,22 +36,32 @@ class CommentController extends Controller
                         );
     }
 
-    public function comments($comment)
-    {
-        $product = $this->product
-                        ->find($comment);
+    public function comments(Request $request, $comment)
+    {   
 
+        $product = $this->product->find($comment);
         if (!$product) {
             return redirect()->back();
         }
-         
+
         $listComments = $this->comments
-                            ->getComments($comment);
+                    ->getComments(
+                        filter: $request->get('filter') ?? '',
+                        comment: $comment
+                    );
+
+        if ($request->get('filter') !== null) {
+            return response()->json([
+                'data'     => $listComments,
+                'userAuth' => auth()->user()->id
+            ], 200);
+        }
                                     
         return view('products.comments', [
             'listComments' => $listComments,
-            'product'      => $product
+            'product'      => $product,
         ]);
     }
 
 }
+

@@ -1,9 +1,4 @@
-@extends('template.app')
-
-@section('title', 'Meus produtos')
-
-@section('content')
-    
+<x-app>
     <x-modal />
 
     <x-alerts-success />
@@ -169,6 +164,6 @@
     @endif
     <div class="h-64">
     </div>
-@endsection
+</x-app>
 
 

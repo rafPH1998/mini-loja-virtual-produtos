@@ -1,9 +1,4 @@
-@extends('template.app')
-
-@section('title', 'Editar dados do meu perfil')
-
-@section('content')
-    
+<x-app>
     <div id="form-container" class="mx-auto overflow-hidden shadow-lg mb-2 shadow-2xl bg-gray-900 rounded-lg  sm:w-4/6">        
         <div class="flex items-center justify-between mb-2 px-5 py-5">
             <h1 class="text-2xl font-medium title-font mb-2 text-white">Editar dados do meu perfil</h1>
@@ -19,6 +14,11 @@
                 @if (isset($authUser->avatar))
                     <div class="w-40 h-40">
                         <img class="w-full h-full rounded-full" src="{{ url("storage/{$authUser->avatar}") }}">
+                    </div>
+                @else
+                    <div class="w-40 h-40 flex items-center text-center">
+                        <img  class="w-full h-full rounded-full" src="{{ url('images/user.png') }}" title="Perfil" />
+                        <p class="text-white ml-2">Foto</p>
                     </div>
                 @endif
                 <div class="p-2 w-full">
@@ -102,7 +102,7 @@
             </div>
         </form>
     </div>
-@endsection
+</x-app>
 
 
 

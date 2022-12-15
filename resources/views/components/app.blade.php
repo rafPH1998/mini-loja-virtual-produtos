@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt_br">
 <head>
     <meta charset="UTF-8">
     <meta
@@ -11,7 +11,7 @@
         content="ie=edge"
     >
 
-    <title>@yield('title') - Mini loja virtual</title>
+    <title>Mini loja virtual</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
@@ -70,7 +70,7 @@
 <body class="bg-gray-800">
     <section class="text-gray-600 overflow-hidden">
         <div class="container px-5 py-10 mx-auto">
-            @yield('content')
+            {{ $slot }}
         </div>
     </section>
     <footer class="text-gray-600">
@@ -103,7 +103,7 @@
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="{{ url('js/addProduct.js') }}"></script>
-    <script src="{{ url('js/getFilterStatus.js') }}"></script>
+    <script src="{{ url('js/getFilters.js') }}"></script>
     <script src="{{ url('js/modalDelete.js') }}"></script>
 </body>
 </html>

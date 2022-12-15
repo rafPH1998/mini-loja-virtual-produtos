@@ -1,9 +1,4 @@
-@extends('template.app')
-
-@section('title', 'Visualizar produto')
-
-@section('content')
-
+<x-app>
     <div class="lg:w-4/5 mx-auto flex flex-wrap shadow-2xl">
    
         <div class="xl:w-1/4 md:w-1/2 p-4">
@@ -86,7 +81,7 @@
             </form> 
         @endcan
     </div>
-@endsection
+</x-app>
 
 
 

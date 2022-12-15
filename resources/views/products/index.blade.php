@@ -1,9 +1,4 @@
-@extends('template.app')
-
-@section('title', 'Listagem de produtos')
-
-@section('content')
-
+<x-app>
     <div class="mb-5 ml-5">
         <a href="{{ route('products.create') }}" 
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 
@@ -98,11 +93,9 @@
             <div class="bg-gray-900 shadow-lg rounded-lg dark:bg-gray-800 dark:border-gray-700 ml-4 mt-5">
                 <div class="p-5" >
                     <div class="flex">
-                        @foreach ($qualityStatus as $status)
-                            <p class="mb-3 font-normal text-white">
-                                {{ $product->quality === $status->name ? $status->value : '' }}
-                            </p>
-                        @endforeach 
+                        <p class="mb-3 font-normal text-white">
+                            {{ $product->name }}
+                        </p>
                         @if ($product->user->id == auth()->user()->id)
                             <p class="ml-2">
                                 ( meu produto ) 
@@ -115,7 +108,11 @@
                     <p style="font-size: 12px;" class="mb-1 text-sm mt-2 text-white">
                         Criado em: {{ $product->created_at }}
                     </p>
-
+                    @foreach ($qualityStatus as $status)
+                        <p class="text-sm text-white">
+                            {{ $product->quality === $status->name ? $status->value : '' }}
+                        </p>
+                    @endforeach 
                     <div class="mt-5">
                         <a href="{{ route('products.comments', $product->id) }}" 
                             class="font-medium text-blue-600 text-blue-500 hover:underline">
@@ -141,6 +138,8 @@
     <div id="posts" class="flex items-stretch drop-shadow-xl"></div>
 
     <div id="paginate">
+
+
         @if ($products->total() > 8)
             <nav class="flex justify-between items-center pt-4" aria-label="Table navigation">
                 <ul class="inline-flex items-center -space-x-px py-2.5 px-2.5">
@@ -193,5 +192,4 @@
             </nav>
         @endif
     </div>
-@endsection
-
+</x-app>

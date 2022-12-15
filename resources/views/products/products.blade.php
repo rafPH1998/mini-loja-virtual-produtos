@@ -1,8 +1,4 @@
-@extends('template.app')
-
-@section('title', 'Todos os produtos')
-
-@section('content')
+<x-app>
     <div class="flex flex-wrap -m-4">
         <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
             <a class="block relative h-48 rounded overflow-hidden">
@@ -33,7 +29,7 @@
             </a>
         </div>
     </div>
-@endsection
+</x-app>
 
 
 

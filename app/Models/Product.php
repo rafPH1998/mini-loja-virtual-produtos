@@ -26,7 +26,7 @@ class Product extends Model
     {
         return $this->hasMany(CommentProduct::class);
     }
-
+    
     protected function createdAt(): Attribute
     {
         Carbon::setLocale('pt_BR');
@@ -39,6 +39,7 @@ class Product extends Model
     public function getProducts(string|null $filter = ''): LengthAwarePaginator
     {
         $products = $this
+                    ->orderBy('created_at', 'DESC')
                     ->when(function ($query) use ($filter) {
                         $query->where('name', 'LIKE', "%{$filter}%");     
                     })

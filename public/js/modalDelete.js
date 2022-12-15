@@ -28,16 +28,7 @@ const showModal = (id) => {
         .then(result => {
             if (result.status === 204) {
                 document.getElementById("container").innerHTML = ''
-
-                swal(
-                    "Success!", 
-                    'Produto deletado com sucesso!', 
-                    "success"
-                );
-
-                setTimeout(() => {
-                    window.location.reload(true);
-                }, 1000);
+                window.location.reload(true);
             }
 
             modal.classList.add('hidden')
