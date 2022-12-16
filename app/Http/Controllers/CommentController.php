@@ -53,7 +53,8 @@ class CommentController extends Controller
         if ($request->get('filter') !== null) {
             return response()->json([
                 'data'     => $listComments,
-                'userAuth' => auth()->user()->id
+                'userAuth' => auth()->user()->id,
+                'error'    => count($listComments) == 0 ? 'Você não tem nenhum comentário inserido!' : ''
             ], 200);
         }
                                     
