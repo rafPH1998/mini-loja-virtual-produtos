@@ -6,7 +6,7 @@
     'msgError' => null,
 ])
 
-<div class="p-2 w-full">
+<div class="p-2 @if($name == 'name') w-full @else w-1/2 @endif">
     <div class="relative">
         <label for="{{ $name }}" class="leading-7 text-sm text-white">
             {{ $label }}

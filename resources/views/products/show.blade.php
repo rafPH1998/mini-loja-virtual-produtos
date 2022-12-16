@@ -53,7 +53,11 @@
         @can('product-users', $product)
             <form action="{{route('products.create_comment') }}" method="POST" class="mt-10">
                 @csrf
-                <x-alerts-success/>
+                @if (Session::has('comment_success'))
+                    <x-alerts.success>
+                        {{ Session::get('comment_success') }}
+                    </x-alerts.success>
+                @endif
 
                 <input type="hidden" name="id" value="{{ $product->id }}">
                 <textarea 

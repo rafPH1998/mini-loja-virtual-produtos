@@ -1,7 +1,6 @@
 <x-app>
     <x-modal />
 
-    <x-alerts-success />
 
     @if (count($myProducts) == 0)
         <div class="w-full shadow-2xl sm:rounded-lg mt-3 bg-gray-900">
@@ -69,30 +68,26 @@
                             {{ $product->quantity_inventory > 0 ? $product->quantity_inventory : 'Sem estoque'}}
                         </td>
                         <td>
-                            <a href="{{ route('products.comments', $product->id) }}" 
-                                class="focus:outline-none text-white bg-green-400 
-                                hover:bg-green-500 focus:ring-4 
-                                focus:ring-green-300 font-medium rounded-lg 
-                                text-xs px-5 py-2.5 mr-2 mb-2 dark:focus:ring-green-900">
+                             
+                            <x-links 
+                                green
+                                href="{{ route('products.comments', $product->id) }}">
                                 Comentários ({{ $product->comments->count() }})
-                            </a> 
-                            <a href="{{ route('products.show', $product->id) }}" 
-                                class="focus:outline-none text-white bg-yellow-400 
-                                hover:bg-yellow-500 focus:ring-4 
-                                focus:ring-yellow-300 font-medium rounded-lg 
-                                text-xs px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900">
+                            </x-links>
+
+                            <x-links 
+                                yellow
+                                href="{{ route('products.show', $product->id) }}" >
                                 Ver
-                            </a>  
+                            </x-links>
+
                             @can('update-product', $product)
-                                <a href="{{ route('products.edit', $product->id) }}" 
-                                    class="focus:outline-none text-white bg-purple-700 
-                                    hover:bg-purple-800 focus:ring-4 focus:ring-purple-300
-                                    font-medium rounded-lg text-xs px-5 py-2.5 mb-2 
-                                    dark:bg-purple-600 dark:hover:bg-purple-700 
-                                    dark:focus:ring-purple-900">
+                                <x-links 
+                                    purple
+                                    href="{{ route('products.comments', $product->id) }}" >
                                     Editar
-                                </a>
-                            @endcan   
+                                </x-links>
+                            @endcan  
                         </td>
                         <td>
                             <form action="#" method="POST">

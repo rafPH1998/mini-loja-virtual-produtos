@@ -5,8 +5,13 @@
         </div>
 
         <form method="POST" class="px-10 py-10" action="{{ route('profile.edit') }}" enctype="multipart/form-data">
-            <x-alerts-success />
 
+            @if (Session::has('success'))
+                <x-alerts.success>
+                    {{ Session::get('success') }}
+                </x-alerts.success>
+            @endif
+            
             <div class="flex flex-wrap">
                 @csrf
                 @method("PUT")

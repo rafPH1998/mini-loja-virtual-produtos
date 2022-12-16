@@ -9,44 +9,42 @@
                 @csrf
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" id="_token">
 
-                <x-input-text 
+                <x-inputs.text 
                     type="text" id="name" 
                     name="name" label="Nome do produto" 
-                    msgError="nameErro"
-                />
+                    msgError="nameErro" />
 
-                <x-input-text
+                <x-inputs.text
                     type="text" id="price" 
                     name="price" label="Preço" 
-                    msgError="priceErro"
-                />
+                    msgError="priceErro" />
 
-                <x-input-text 
+                <x-inputs.text 
                     type="text" id="quantity_inventory" 
                     name="quantity_inventory" label="Estoque" 
-                    msgError="inventoryErro"
-                />
+                    msgError="inventoryErro" />
 
-                <x-input-select-quality 
+                <x-inputs.select-quality 
                     id="quality" name="quality" 
                     label="Estado do produto" :qualityStatus="$qualityStatus" 
-                    msgError="qualityErro"
-                /> 
+                    msgError="qualityErro" /> 
 
-                <x-input-select-type id="type" name="type" 
+                <x-inputs.select-type id="type" name="type" 
                     label="Tipo do produto" :type="$type" 
-                    msgError="typeErro"
-                /> 
+                    msgError="typeErro" /> 
 
-                <x-input-textarea id="description" name="description" 
+                <x-inputs.textarea id="description" name="description" 
                     label="Descrição"
-                    msgError="descErro"
-                /> 
+                    msgError="descErro" /> 
 
                 <div class="p-2 w-full">
-                    <x-buttons name="Adicionar">
-                    </x-buttons>
+                    <x-button 
+                        id="button" 
+                        blue>
+                        Adicionar
+                    </x-button>
                 </div>
+                
             </div>
         </form>
     </div>
