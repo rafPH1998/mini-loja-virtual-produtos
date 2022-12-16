@@ -86,9 +86,10 @@ const allComments = (id) => {
     })
     .then(result => {
         document.getElementById("result").innerHTML = ''
-        showMyCommentsResults(result)
+        showComments(result)
     })
     .finally(() => {
+        document.getElementById("resultError").innerHTML = ''
         document.getElementById("preloader").style.display = 'none'
         document.getElementById("formCheck").style.display = 'block'
     })
@@ -105,7 +106,11 @@ const myComments = (id) => {
         return response.json()
     })
     .then(result => {
-        showMyCommentsResults(result)
+        if (result.error !== '') {
+            showErrorCommentsEmpty(result.error);
+        }
+        document.getElementById("result").innerHTML = ''
+        showComments(result)
     })
     .finally(() => {
         document.getElementById("preloader").style.display = 'none'
@@ -113,65 +118,73 @@ const myComments = (id) => {
     })
 }
 
-const showMyCommentsResults = (res) => {
+const showComments = (res) => {
     let resultHtml = ''
 
+    for (let i = 0; i < res.data.data.length; i++) {
+        let json = res.data.data[i];   
+        
         resultHtml += 
         `
-        <div class="container px-5 mx-auto">    
-            <div class="flex flex-wrap">`;
-                for (let i = 0; i < res.data.data.length; i++) {
-                    let json = res.data.data[i];    
-
+        <div class="w-2/3 flex bg-gray-900 shadow-md rounded p-4 mt-10 shadow-2xl">
+            <div class="pl-3 text-center">
+                <div class="pl-3 text-center flex">`;
+                    if (json.user.avatar) {
+                        resultHtml += 
+                        `<img
+                            style="width:35px;"
+                            class="rounded-full"
+                            src="/storage/${json.user.avatar}"
+                        >`;
+                    } else {
+                        resultHtml += 
+                        `<img style="width:35px;" 
+                            src="/images/user.png"
+                            title="Perfil" 
+                        />`;
+                    }
                     resultHtml += 
                     `
-                    <div class="p-4 md:w-1/3">
-                        <div class="flex rounded-lg h-full bg-gray-100 p-8 flex-col shadow-xl">
-                            <div class="flex-grow">
-                                <div class="flex items-center mb-3">`;
-                                    if (json.user.avatar) {
-                                        resultHtml += 
-                                        `<img
-                                            style="width:35px;"
-                                            class="rounded-full"
-                                            src="{{ url("storage/{$comments->user->avatar}") }}" 
-                                        >`
-                                    } else {
-                                        resultHtml += 
-                                        `<img style="width:35px;" 
-                                            src="images/user.png" 
-                                            title="Perfil" 
-                                        />`;
-                                    }
-                                    if (json.id == json.user.id)
-                                        resultHtml += 
-                                        `<p class="ml-2">
-                                            Meu usuário
-                                        </p>`;
-                                    else {
-                                        resultHtml += `
-                                        <h2 class="ml-3 text-gray-900 text-lg title-font font-medium">
-                                            ${json.user.name}
-                                        </h2>`;
-                                    }
-                                    resultHtml += 
-                                `</div>
-                                <div class="flex-grow">
-                                    <P style="font-size: 14px;">
-                                        Data postada: ${json.created_at}
-                                    </P>
-                                    <p class="leading-relaxed text-base mt-10">
-                                        ${json.description}
-                                    </p>
-                                </div>
-                            </div>
-                        </div> 
-                    </div>`;
-                }
-                resultHtml += `
+                    <div class="flex">`;
+                        if (res.userAuth == json.user.id)
+                            resultHtml += `
+                            <p class="ml-2 mt-2 text-white">
+                                Meu usuário
+                            </p>`;
+                        else {
+                            resultHtml += `
+                            <h2 id="name" class="ml-3 mt-2 text-white text-sm">
+                                ${json.user.name}
+                            </h2>`;
+                        }
+                    
+                        resultHtml += `
+                        <p class="ml-8 mt-2">
+                            Data postada: ${json.created_at}
+                        </p>
+                    </div>
+                </div>
+                <div class="ml-4 flex flex-row text-white mt-6">
+                    <p> – ${json.description}</p>
+                </div>
             </div>
         </div>`;
+    }
 
     document.getElementById("result").innerHTML = resultHtml;
 }
 
+
+const showErrorCommentsEmpty = (response) => {
+    let html = ''
+
+    html += `
+    <div class="w-full shadow-2xl sm:rounded-lg mt-3 bg-gray-900">
+        <p class="px-8 py-8">
+            ${response}
+        </p>
+    </div>`
+
+    document.getElementById("resultError").innerHTML = html;
+
+}

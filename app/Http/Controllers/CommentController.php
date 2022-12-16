@@ -51,6 +51,7 @@ class CommentController extends Controller
                     );
 
         if ($request->get('filter') !== null) {
+
             return response()->json([
                 'data'     => $listComments,
                 'userAuth' => auth()->user()->id,

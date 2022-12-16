@@ -80,6 +80,8 @@
             @endforelse
         </div>
         <div id="resultError" class="mt-5"></div>
+        <div class="pb-40"></div>
+        <div class="pb-20"></div>
     </div>
 </x-app>
 
