@@ -34,50 +34,52 @@
             @endif
        </div>
 
-       @forelse ($listComments as $comments)
-            <div id="result" class="w-2/3 flex bg-gray-900 shadow-md rounded p-4 mt-10 shadow-2xl">
-                <div class="pl-3 text-center">
-                    <div class="pl-3 text-center flex">
-                        @if ($comments->user->avatar)
-                            <img
-                                style="width:35px;"
-                                class="rounded-full"
-                                src="{{ url("storage/{$comments->user->avatar}") }}" 
-                            >
-                        @else
-                            <img style="width:35px;" 
-                                src="{{ url('images/user.png') }}" 
-                                title="Perfil" 
-                            />
-                        @endif
-                        <div class="flex">
-                            @if (auth()->user()->id == $comments->user->id)
-                            <p class="ml-2 mt-2 text-white">
-                                Meu usuário
-                            </p>
+       <div id="result">
+            @forelse ($listComments as $comments)
+                <div class="w-2/3 flex bg-gray-900 shadow-md rounded p-4 mt-10 shadow-2xl">
+                    <div class="pl-3 text-center">
+                        <div class="pl-3 text-center flex">
+                            @if ($comments->user->avatar)
+                                <img
+                                    style="width:35px;"
+                                    class="rounded-full"
+                                    src="{{ url("storage/{$comments->user->avatar}") }}" 
+                                >
                             @else
-                                <h2 id="name" class="ml-3 mt-2 text-white text-sm">
-                                    {{ $comments->user->name }} 
-                                </h2>
+                                <img style="width:35px;" 
+                                    src="{{ url('images/user.png') }}" 
+                                    title="Perfil" 
+                                />
                             @endif
-                            <p class="ml-8 mt-2">
-                                Data postada: {{ $comments->created_at }} 
-                            </p>
+                            <div class="flex">
+                                @if (auth()->user()->id == $comments->user->id)
+                                    <p class="ml-2 mt-2 text-white">
+                                        Meu usuário
+                                    </p>
+                                @else
+                                    <h2 id="name" class="ml-3 mt-2 text-white text-sm">
+                                        {{ $comments->user->name }} 
+                                    </h2>
+                                @endif
+                                <p class="ml-8 mt-2">
+                                    Data postada: {{ $comments->created_at }} 
+                                </p>
+                            </div>
+                        </div>
+                        <div class="ml-4 flex flex-row text-white mt-6">
+                            <p> – {{ $comments->description }}</p>
                         </div>
                     </div>
-                    <div class="ml-4 flex flex-row text-white mt-6">
-                        <p> – {{ $comments->description }}</p>
-                    </div>
                 </div>
-            </div>
-        @empty
-            <div class="w-full shadow-2xl sm:rounded-lg mt-3 bg-gray-900">
-                <p class="px-8 py-8">
-                    Nenhuma avaliação ou comentário para esse produto!
-                </p>
-            </div>
-        @endforelse
-        <div class="pb-40"></div>
+            @empty
+                <div class="w-full shadow-2xl sm:rounded-lg mt-3 bg-gray-900">
+                    <p class="px-8 py-8">
+                        Nenhuma avaliação ou comentário para esse produto!
+                    </p>
+                </div>
+            @endforelse
+        </div>
+        <div id="resultError" class="mt-5"></div>
     </div>
 </x-app>
 
