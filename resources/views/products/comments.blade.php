@@ -10,7 +10,7 @@
             <img src="{{ url('images/spinner.svg') }}" style="width: 40px;">
         </div>
 
-       <div id="formCheck" style="display: block;">
+        <div id="formCheck" style="display: block;">
             @if (count($product->comments) > 0)
                 <form action="#" method="GET">
                     <div class="flex items-center mt-5">
@@ -36,7 +36,7 @@
 
        <div id="result">
             @forelse ($listComments as $comments)
-                <div class="w-2/3 flex bg-gray-900 shadow-md rounded p-4 mt-10 shadow-2xl">
+                <div class="w-2/3 flex bg-gray-900 rounded-lg inline-block rounded-bl-none p-4 mt-10 shadow-2xl">
                     <div class="pl-3 text-center">
                         <div class="pl-3 text-center flex">
                             @if ($comments->user->avatar)
@@ -47,13 +47,13 @@
                                 >
                             @else
                                 <img style="width:35px;" 
-                                    src="{{ url('images/user.png') }}" 
+                                    src="{{ url('images/user01.svg') }}" 
                                     title="Perfil" 
                                 />
                             @endif
                             <div class="flex">
                                 @if (auth()->user()->id == $comments->user->id)
-                                    <p class="ml-2 mt-2 text-white">
+                                    <p class="ml-2 mt-2 text-green-500">
                                         Meu usuário
                                     </p>
                                 @else

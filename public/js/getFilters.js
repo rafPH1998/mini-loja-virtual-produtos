@@ -126,7 +126,7 @@ const showComments = (res) => {
         
         resultHtml += 
         `
-        <div class="w-2/3 flex bg-gray-900 shadow-md rounded p-4 mt-10 shadow-2xl">
+        <div class="w-2/3 flex bg-gray-900 rounded-lg inline-block rounded-bl-none p-4 mt-10 shadow-2xl">
             <div class="pl-3 text-center">
                 <div class="pl-3 text-center flex">`;
                     if (json.user.avatar) {
@@ -139,7 +139,7 @@ const showComments = (res) => {
                     } else {
                         resultHtml += 
                         `<img style="width:35px;" 
-                            src="/images/user.png"
+                            src="/images/user01.svg"
                             title="Perfil" 
                         />`;
                     }

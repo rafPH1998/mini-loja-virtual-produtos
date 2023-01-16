@@ -40,7 +40,7 @@
                         src="{{ url("storage/{$avatar}") }}" 
                     >
                 @else
-                    <img style="width:25px;" src="{{ url('images/user.png') }}" title="Perfil" />
+                    <img style="width:25px;" src="{{ url('images/user01.svg') }}" title="Perfil" />
                 @endif
             </a>
         

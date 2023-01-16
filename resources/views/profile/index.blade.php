@@ -22,7 +22,7 @@
                     </div>
                 @else
                     <div class="w-40 h-40 flex items-center text-center">
-                        <img  class="w-full h-full rounded-full" src="{{ url('images/user.png') }}" title="Perfil" />
+                        <img  class="w-full h-full rounded-full" src="{{ url('images/user01.svg') }}" title="Perfil" />
                         <p class="text-white ml-2">Foto</p>
                     </div>
                 @endif

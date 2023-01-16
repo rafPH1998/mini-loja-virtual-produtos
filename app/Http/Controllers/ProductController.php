@@ -69,11 +69,12 @@ class ProductController extends Controller
         
         $data['user_id'] = $user->id;
 
+        /** @var User $user */
         $product = $user->products()->create($data);
         
         return response()->json([
             'data' => $product
-        ]);
+        ], 201);
     }
 
     public function show($id)

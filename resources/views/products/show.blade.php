@@ -1,10 +1,8 @@
 <x-app>
     <div class="lg:w-4/5 mx-auto flex flex-wrap shadow-2xl">
-   
         <div class="xl:w-1/4 md:w-1/2 p-4">
             sem imagem
         </div>
-
         <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 ml-10">
             <h1 class="text-3xl title-font font-medium mb-1 text-white">{{ $product->name }}</h1>
             <hr/>
@@ -37,7 +35,7 @@
                             src="{{ url("storage/{$product->user->avatar}") }}" 
                         >
                     @else
-                        <img class="rounded-full w-12 h-12" src="{{ url('images/user.png') }}" title="Perfil" />
+                        <img class="rounded-full w-12 h-12" src="{{ url('images/user01.svg') }}" title="Perfil" />
                     @endif
                 </p>
                 <p class="mt-3 ml-2 mt-5 text-gray-500">

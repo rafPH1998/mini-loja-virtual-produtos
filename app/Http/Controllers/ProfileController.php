@@ -24,6 +24,7 @@ class ProfileController extends Controller
             'password', 
             'password_confirm'
         ]);
+        
         $user = auth()->user();
 
         if ($request->avatar) {
@@ -33,7 +34,7 @@ class ProfileController extends Controller
         if ($request->password !== null) {
             if ($request->password !== $request->password_confirm) {
                 return redirect()->route('profile.index')
-                        ->with('error_password', 'As senhas não são iguais!');
+                                 ->with('error_password', 'As senhas não são iguais!');
             }
             $data['password'] = bcrypt($request->password);
         } 
@@ -44,7 +45,7 @@ class ProfileController extends Controller
         $user->update($data);
 
         return redirect()->route('profile.index')
-            ->with('success', 'Dados alterados com sucesso!');
+                         ->with('success', 'Dados alterados com sucesso!');
     }
     
 }
