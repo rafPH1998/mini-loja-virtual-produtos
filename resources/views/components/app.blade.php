@@ -29,6 +29,12 @@
         </div>
  
         <div class="flex items-center">
+          
+            <div class="flex items-center mr-2">
+                <img class="rounded-full w-3 h-3" src="{{ url('images/online.png') }}" />
+                <p class="text-green-500">Online</p>
+            </div>
+
             <a href="{{ route('profile.index') }}">
                 @php
                     $avatar = auth()->user()->avatar;
@@ -52,16 +58,16 @@
                 @csrf
                 <a href="{{route('logout')}}"
                     onclick="event.preventDefault(); this.closest('form').submit();">
-                    <img style="width:25px;" src="{{ url('images/exit.png') }}" title="Sair" />
+                    <p class="text-blue-600">Sair</p>
                 </a>
             </form>
 
             <a href="{{ route('products.index') }}" class="ml-2">
-                <img style="width:25px;" src="{{ url('images/house.png') }}" title="Home"/>
+                <p class="text-blue-600 ml-3">Home</p>
             </a>
 
             <a href="{{ route('products.myProducts') }}" class="ml-2">
-                <img style="width:25px;" src="{{ url('images/cart.png') }}" title="Meus produtos"/>
+                <p class="text-blue-600 ml-3">Meu produtos</p>
             </a>
         </div>
     </div>
@@ -79,19 +85,22 @@
         <div class="bg-gray-600 h-64">
             <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
                 <p class="text-white text-sm text-center sm:text-left">© 2020 Tailblocks —
-                    <a href="https://twitter.com/knyttneve" class="text-gray-600 ml-1" target="_blank" rel="noopener noreferrer">@knyttneve</a>
+                    <a href="https://twitter.com/knyttneve" class="text-gray-600 ml-1" target="_blank" 
+                    rel="noopener noreferrer">@knyttneve</a>
                 </p>
 
                 <span class="inline-flex lg:ml-auto lg:mt-0 mt-6 w-full justify-center text-white md:justify-start md:w-auto">
                     <span >Rafael Belchior da Silva</span>
                     <a class="ml-3 text-white mt-1" target="_blank" href="https://www.instagram.com/rafaelbelchiorsilva/">
-                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                            class="w-5 h-5" viewBox="0 0 24 24">
                             <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
                             <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
                         </svg>
                     </a>
                     <a class="ml-1 text-white mt-1" target="_blank" href="https://www.linkedin.com/in/rafael-belchior-9b03261a7/">
-                        <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+                        <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" 
+                            stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
                             <path stroke="none" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
                             <circle cx="4" cy="4" r="2" stroke="none"></circle>
                         </svg>

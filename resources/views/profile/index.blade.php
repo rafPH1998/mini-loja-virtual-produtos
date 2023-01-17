@@ -7,12 +7,12 @@
         <form method="POST" class="px-10 py-10" action="{{ route('profile.edit') }}" enctype="multipart/form-data">
 
             @if (Session::has('success'))
-                <x-alerts.success>
+                <p class="text-green-500">
                     {{ Session::get('success') }}
-                </x-alerts.success>
+                </p>
             @endif
             
-            <div class="flex flex-wrap">
+            <div class="flex flex-wrap mt-10">
                 @csrf
                 @method("PUT")
                 

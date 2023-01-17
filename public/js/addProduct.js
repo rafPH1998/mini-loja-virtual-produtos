@@ -7,13 +7,13 @@ document.getElementById("addForm").addEventListener("submit", async function(eve
     /*
     Valores do formulario
     */
-    let name = document.getElementById('name').value;
-    let price = document.getElementById('price').value;
+    let name               = document.getElementById('name').value;
+    let price              = document.getElementById('price').value;
     let quantity_inventory = document.getElementById('quantity_inventory').value;
-    let quality = document.getElementById('quality').value;
-    let type = document.getElementById('type').value;
-    let description = document.getElementById('description').value;
-    let token = document.getElementById('_token').value;
+    let quality            = document.getElementById('quality').value;
+    let type               = document.getElementById('type').value;
+    let description        = document.getElementById('description').value;
+    let token              = document.getElementById('_token').value;
 
     /*
     Dados do span para exibir o erro

@@ -97,8 +97,8 @@
                             {{ $product->name }}
                         </p>
                         @if ($product->user->id == auth()->user()->id)
-                            <p class="ml-2">
-                                ( meu produto ) 
+                            <p class="ml-2 text-green-500">
+                                (meu produto) 
                             </p>
                         @endif
                     </div> 
