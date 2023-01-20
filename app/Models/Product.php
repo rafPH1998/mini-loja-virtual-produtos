@@ -60,7 +60,10 @@ class Product extends Model
                     ->when($status == 'semi_news', fn($query) => $query->where('quality', 'semi_novo'))
                     ->when($status == 'god', fn($query) => $query->where('quality', 'bom'))
                     ->when($status == 'medium', fn($query) => $query->where('quality', 'medio'))
-                    ->with('comments')
+                    ->with([
+                        'comments',
+                        'user'
+                    ])
                     ->get()
                     ->take(5);
 

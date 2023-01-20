@@ -1,8 +1,11 @@
 <?php
 
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\{
+    AddressController,
+    ProductController,
+    CommentController,
+    ProfileController
+};
 use Illuminate\Support\Facades\Route;
  
 Route::middleware('auth')->group(function() {
@@ -11,6 +14,12 @@ Route::middleware('auth')->group(function() {
     */
     Route::resource('/products', ProductController::class);
     Route::get('myProducts', [ProductController::class, 'myProducts'])->name('products.myProducts');  
+
+     /**
+    * Route AddressController
+    */
+    Route::get('/address', AddressController::class)->name('address.create');
+    Route::post('/address', AddressController::class)->name('address.store');
 
     /**
     * Route CommentController

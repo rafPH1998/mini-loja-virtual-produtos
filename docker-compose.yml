@@ -12,8 +12,6 @@ services:
         working_dir: /var/www/
         volumes:
             - ./:/var/www
-        depends_on: 
-            - redis
         networks: 
             - laravel-9
     
@@ -45,25 +43,6 @@ services:
         ports: 
             - "3333:3306"
         networks: 
-            - laravel-9
-            
-    # queue
-    queue:
-        image: laravel9-app
-        restart: unless-stopped
-        command: "php artisan queue:work"
-        volumes:
-            - ./:/var/www
-        depends_on:
-            - redis
-            - app
-        networks:
-            - laravel-9
-
-    # redis
-    redis:
-        image: redis:latest
-        networks:
             - laravel-9
 
 networks: 

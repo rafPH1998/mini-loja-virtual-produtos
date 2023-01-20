@@ -37,6 +37,11 @@ class User extends Authenticatable
         return $this->hasMany(Product::class);
     }
 
+    public function address(): BelongsTo
+    {
+        return $this->belongsTo(Address::class);
+    }
+
     protected function name(): Attribute
     {
         return Attribute::make(

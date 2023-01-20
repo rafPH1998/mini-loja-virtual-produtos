@@ -24,7 +24,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $qualityStatus = ProductQualityEnum::cases();
-        $type = ProductTypeEnum::cases();
+        $type          = ProductTypeEnum::cases();
         
         $products = $this->product
                         ->getProducts(
@@ -54,7 +54,7 @@ class ProductController extends Controller
     public function create()
     {
         $qualityStatus = ProductQualityEnum::cases();
-        $type = ProductTypeEnum::cases();
+        $type          = ProductTypeEnum::cases();
 
         return view('products.add', [
             'qualityStatus' => $qualityStatus,
@@ -126,7 +126,6 @@ class ProductController extends Controller
 
     public function destroy($product)
     {
- 
         $myProductDelete = $this->product->findOrFail($product);
         $myProductDelete->delete();
 

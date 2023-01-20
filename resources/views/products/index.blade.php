@@ -1,5 +1,5 @@
 <x-app>
-    <div class="mb-5 ml-5">
+    <div class="ml-5">
         <a href="{{ route('products.create') }}" 
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 
             focus:ring-blue-300 font-medium rounded-lg 
@@ -10,44 +10,44 @@
         </a>
     </div>
 
-    <div class="py-12 flex">
-        <form method="GET" action="#" class="flex items-center ml-5 mt-7">   
-            <label for="simple-search" class="sr-only">Search</label>
-            <div class="relative w-full">
-                <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" 
-                        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817
-                            4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd">
-                        </path>
-                    </svg>
-                </div>
-                <input type="text" name="filter"
-                        class="bg-gray-50 border border-gray-300 
-                        text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 
-                        focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 
-                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
-                        dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Procure por um produto"
-                >
-            </div>
-            <button type="submit" 
-                class="p-2.5 text-sm font-medium text-white 
-                bg-blue-700 rounded-r-lg border border-blue-700 
-                hover:bg-blue-800 focus:ring-4 focus:outline-none 
-                focus:ring-blue-300 dark:bg-blue-600 
-                dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                <svg aria-hidden="true" class="w-5 h-5" fill="none" 
-                    stroke="currentColor" viewBox="0 0 24 24" 
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" 
-                        stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z">
+    <form method="GET" action="#" class="flex items-center ml-5 mt-5 w-64">   
+        <label for="simple-search" class="sr-only">Search</label>
+        <div class="relative w-full">
+            <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" 
+                    fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817
+                        4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd">
                     </path>
                 </svg>
-                <span class="sr-only">Search</span>
-            </button>
-        </form>
+            </div>
+            <input type="text" name="filter"
+                    class="bg-gray-50 border border-gray-300 
+                    text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 
+                    focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 
+                    dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
+                    dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Procure por um produto"
+            >
+        </div>
+        <button type="submit" 
+            class="p-2.5 text-sm font-medium text-white 
+            bg-blue-700 rounded-r-lg border border-blue-700 
+            hover:bg-blue-800 focus:ring-4 focus:outline-none 
+            focus:ring-blue-300 dark:bg-blue-600 
+            dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <svg aria-hidden="true" class="w-5 h-5" fill="none" 
+                stroke="currentColor" viewBox="0 0 24 24" 
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" 
+                    stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z">
+                </path>
+            </svg>
+            <span class="sr-only">Search</span>
+        </button>
+    </form>
 
+    <div class="py-12 flex flex-row-reverse">
         @if (count($products) > 0)
             <form action="#" method="GET" name="formSelect" class="ml-5">
                 <div class="relative">
@@ -90,7 +90,10 @@
     
     <div id="p" class="grid grid-cols-4 gap-4">
         @forelse ($products as $product)
-            <div class="bg-gray-900 shadow-lg rounded-lg dark:bg-gray-800 dark:border-gray-700 ml-4 mt-5">
+            <div class="shadow-lg 
+                transition ease-in-out delay-150 bg-gray-700 hover:-translate-y-1 
+                hover:scale-110 hover:bg-gray-900 duration-300
+                rounded-lg ml-4 mt-5">
                 <div class="p-5" >
                     <div class="flex">
                         <p class="mb-3 font-normal text-white">
@@ -119,7 +122,7 @@
                             Avaliações ({{ $product->comments->count() }})
                         </a>
                     </div>
-                   
+                    
                     <a href="{{ route('products.show', $product->id) }}" class="mt-5 text-indigo-500 inline-flex items-center">Ver mais
                         <svg fill="none" stroke="currentColor" stroke-linecap="round" 
                             stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
@@ -133,13 +136,12 @@
                 Nenhum produto encontrado.
             </p>
         @endforelse
-    </div>
+    </div>    
+
 
     <div id="posts" class="flex items-stretch drop-shadow-xl"></div>
 
     <div id="paginate">
-
-
         @if ($products->total() > 8)
             <nav class="flex justify-between items-center pt-4" aria-label="Table navigation">
                 <ul class="inline-flex items-center -space-x-px py-2.5 px-2.5">

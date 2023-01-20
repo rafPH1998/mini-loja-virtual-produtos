@@ -25,15 +25,29 @@ const showResults = (json) => {
     let html = 
     `<div class="flex items-stretch drop-shadow-xl">`;
             for (let i = 0; i < json.data.length; i++) {
-                let element = json.data[i];               
+                let element = json.data[i];       
 
                 html += `
 
-                <div class="w-96 bg-gray-900 shadow-lg rounded-lg dark:bg-gray-800 dark:border-gray-700 ml-4 mt-5">
+                <div class="w-96
+                    shadow-lg 
+                    transition ease-in-out delay-150 bg-gray-700 hover:-translate-y-1 hover:scale-110
+                    hover:bg-gray-900 duration-300
+                    rounded-lg ml-4 mt-5">
+
                     <div class="p-5">
-                        <p class="mb-3 font-normal text-white">
-                            <b> ${element.name} </b>
-                        </p>
+                        <div class="flex">
+                            <p class="mb-3 font-normal text-white">
+                                <b> ${element.name} </b>`;
+                                if (element.user.id == element.user_id) {
+                                    html += `
+                                    <p class="ml-2 text-green-500">
+                                        (meu produto) 
+                                    </p>`;
+                                }
+                            html += `
+                            </p>
+                        </div>
                         <p class="mb-3 font-normal text-white">
                             $  ${element.price.toFixed(2)}
                         </p>

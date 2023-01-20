@@ -14,8 +14,7 @@
     <title>Mini loja virtual</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-<header class="text-gray-600">
+<header class="bg-gray-700">
     <div class="container mx-auto flex justify-between items-center p-5 items-center">
         <div class="flex items-center">
             <a href="{{ route('products.index') }}" class="flex title-font font-medium items-center text-gray-900">
@@ -32,7 +31,6 @@
           
             <div class="flex items-center mr-2">
                 <img class="rounded-full w-3 h-3" src="{{ url('images/online.png') }}" />
-                <p class="text-green-500">Online</p>
             </div>
 
             <a href="{{ route('profile.index') }}">
@@ -50,36 +48,49 @@
                 @endif
             </a>
         
-            <p class="ml-3 text-white">
-                <b>Bem vindo</b>, {{ auth()->user()->name }}
-            </p>
-
-            <form action="{{route('logout')}}" method="POST" class="ml-9">
-                @csrf
-                <a href="{{route('logout')}}"
-                    onclick="event.preventDefault(); this.closest('form').submit();">
-                    <p class="text-blue-600">Sair</p>
-                </a>
-            </form>
-
-            <a href="{{ route('products.index') }}" class="ml-2">
-                <p class="text-blue-600 ml-3">Home</p>
-            </a>
-
-            <a href="{{ route('products.myProducts') }}" class="ml-2">
-                <p class="text-blue-600 ml-3">Meu produtos</p>
-            </a>
+            <div>
+                <button id="dropdownDividerButton" data-dropdown-toggle="dropdownDivider" 
+                    class="text-white
+                    focus:outline-none focus:ring-blue-300 font-medium rounded-lg 
+                    text-sm px-4 py-2.5 text-center inline-flex items-center" type="button">Olá, {{ auth()->user()->name }} <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+                <!-- Dropdown menu -->
+                <div id="dropdownDivider" 
+                    class="z-10 absolute hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                    <ul id="ul" class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDividerButton">
+                        <li class="hover:bg-blue-100 cursor-pointer">
+                            <a href="{{ route('products.myProducts') }}" class="ml-2">
+                                <p class="text-blue-600 ml-3">Meu produtos</p>
+                            </a>
+                        </li>
+                        <li class="hover:bg-blue-100 cursor-pointer">
+                            <a href="{{ route('address.create') }}" class="ml-2">
+                                <p class="text-blue-600 ml-3">Meus endereços</p>
+                            </a>
+                        </li>
+                        <li class="hover:bg-blue-100 cursor-pointer">
+                            <form action="{{route('logout')}}" method="POST" class="ml-3 mt-3">
+                                @csrf
+                                <a href="{{route('logout')}}" 
+                                    onclick="event.preventDefault(); this.closest('form').submit();">
+                                    <p class="text-blue-600">Sair</p>
+                                </a>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Dropdown menu -->
+           </div>
         </div>
     </div>
       
 </header>
-<body class="bg-gray-800">
+<body class="bg-gray-800" id="body">
     <section class="text-gray-600 overflow-hidden">
         <div class="container px-5 py-10 mx-auto">
             {{ $slot }}
         </div>
     </section>
-    <footer class="text-gray-600">
+{{--     <footer class="text-gray-600">
         <div class="border-t border-gray-200">
         </div>
         <div class="bg-gray-600 h-64">
@@ -108,7 +119,7 @@
                 </span>
             </div>
         </div>
-    </footer>
+    </footer> --}}
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="{{ url('js/addProduct.js') }}"></script>
@@ -116,4 +127,16 @@
     <script src="{{ url('js/modalDelete.js') }}"></script>
 </body>
 </html>
+
+
+<script>
+    let clicou   = document.getElementById('dropdownDividerButton');
+    let dropdown = document.getElementById("dropdownDivider")
+
+    clicou.addEventListener("click", function(){
+        dropdown.classList.toggle('hidden')
+        dropdown.classList.toggle('block')
+    })
+  
+</script>
 
