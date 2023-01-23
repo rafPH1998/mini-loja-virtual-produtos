@@ -90,7 +90,7 @@
     
     <div id="p" class="grid grid-cols-4 gap-4">
         @forelse ($products as $product)
-            <div class="shadow-lg 
+            <div class="shadow-2xl
                 transition ease-in-out delay-150 bg-gray-700 hover:-translate-y-1 
                 hover:scale-110 hover:bg-gray-900 duration-300
                 rounded-lg ml-4 mt-5">

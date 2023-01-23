@@ -56,27 +56,24 @@
                 <!-- Dropdown menu -->
                 <div id="dropdownDivider" 
                     class="z-10 absolute hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                    <ul id="ul" class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDividerButton">
-                        <li class="hover:bg-blue-100 cursor-pointer">
-                            <a href="{{ route('products.myProducts') }}" class="ml-2">
-                                <p class="text-blue-600 ml-3">Meu produtos</p>
+                    <div id="ul" class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDividerButton">
+                        <a href="{{ route('products.myProducts') }}" class="ml-2">
+                            <p class="text-blue-600 ml-3">Meu produtos</p>
+                        </a>
+                        <a href="{{ route('address.create') }}" class="ml-2">
+                            <p class="text-blue-600 ml-3">Adicionar endereços</p>
+                        </a>
+                        <a href="{{ route('address.create') }}" class="ml-2">
+                            <p class="text-blue-600 ml-3">Meus endereços</p>
+                        </a>
+                        <form action="{{route('logout')}}" method="POST" class="ml-3 mt-3">
+                            @csrf
+                            <a href="{{route('logout')}}" 
+                                onclick="event.preventDefault(); this.closest('form').submit();">
+                                <p class="text-blue-600">Sair</p>
                             </a>
-                        </li>
-                        <li class="hover:bg-blue-100 cursor-pointer">
-                            <a href="{{ route('address.create') }}" class="ml-2">
-                                <p class="text-blue-600 ml-3">Meus endereços</p>
-                            </a>
-                        </li>
-                        <li class="hover:bg-blue-100 cursor-pointer">
-                            <form action="{{route('logout')}}" method="POST" class="ml-3 mt-3">
-                                @csrf
-                                <a href="{{route('logout')}}" 
-                                    onclick="event.preventDefault(); this.closest('form').submit();">
-                                    <p class="text-blue-600">Sair</p>
-                                </a>
-                            </form>
-                        </li>
-                    </ul>
+                        </form>
+                    </div>
                 </div>
                 <!-- Dropdown menu -->
            </div>

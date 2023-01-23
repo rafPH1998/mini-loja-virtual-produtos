@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('street');
             $table->string('number');
             $table->string('district');
-            $table->string('phone');
+            $table->string('phone')->nullable();
             $table->string('cellphone');
             $table->foreignId('user_id')
                 ->constrained('users')

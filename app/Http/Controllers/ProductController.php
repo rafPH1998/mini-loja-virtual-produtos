@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\UploadFile;
 use App\Enums\ProductQualityEnum;
 use App\Enums\ProductTypeEnum;
 use App\Http\Requests\Products\StoreAndUpdateProduct;

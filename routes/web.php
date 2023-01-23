@@ -18,8 +18,8 @@ Route::middleware('auth')->group(function() {
      /**
     * Route AddressController
     */
-    Route::get('/address', AddressController::class)->name('address.create');
-    Route::post('/address', AddressController::class)->name('address.store');
+    Route::get('/address', [AddressController::class, 'create'])->name('address.create');
+    Route::post('/address', [AddressController::class, 'store'])->name('address.store');
 
     /**
     * Route CommentController

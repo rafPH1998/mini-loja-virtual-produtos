@@ -4,7 +4,7 @@
             <h1 class="text-2xl font-medium title-font mb-2 text-white">Adicionar produto</h1>
         </div>
 
-        <form method="POST" class="px-10 py-10" action="#" id="addForm" enctype="multipart/form-data">
+        <form method="POST" class="px-10 py-10" action="#" id="addForm">
             <div class="flex flex-wrap">
                 @csrf
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" id="_token">
