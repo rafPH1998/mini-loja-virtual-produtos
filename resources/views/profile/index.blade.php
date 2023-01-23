@@ -1,5 +1,5 @@
 <x-app>
-    <div id="form-container" class="mx-auto overflow-hidden shadow-lg mb-2 shadow-2xl bg-gray-900 rounded-lg  sm:w-4/6">        
+    <div id="form-container" class="mx-auto overflow-hidden shadow-lg mb-2 shadow-2xl bg-gray-900 rounded-lg sm:w-4/6">        
         <div class="flex items-center justify-between mb-2 px-5 py-5">
             <h1 class="text-2xl font-medium title-font mb-2 text-white">Editar dados do meu perfil</h1>
         </div>
