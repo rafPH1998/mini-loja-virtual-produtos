@@ -1,9 +1,9 @@
 @props([
     'qualityStatus' => $qualityStatus,
-    'id' => null,
-    'label' => null,
-    'name' => null,
-    'msgError' => null,
+    'id'            => null,
+    'label'         => null,
+    'name'          => null,
+    'msgError'      => null,
 ])
 
 <div class="p-2 w-1/2">

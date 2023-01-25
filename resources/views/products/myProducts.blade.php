@@ -1,7 +1,6 @@
 <x-app>
     <x-modal />
 
-
     @if (count($myProducts) == 0)
         <div class="w-full shadow-2xl sm:rounded-lg mt-3 bg-gray-900">
             <p class="px-8 py-8">

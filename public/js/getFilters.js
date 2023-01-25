@@ -35,7 +35,7 @@ const showResults = (json) => {
                     hover:bg-gray-900 duration-300
                     rounded-lg ml-4 mt-5">
 
-                    <div class="p-5">
+                    <div class="p-4">
                         <div class="flex">
                             <p class="mb-3 font-normal text-white">
                                 <b> ${element.name} </b>`;
@@ -60,7 +60,7 @@ const showResults = (json) => {
                                 Avaliações (${element.comments.length})
                             </a>
                         </div>
-                        <a href="${url_product}products/${element.id}" class="mt-3 text-indigo-500 inline-flex items-center">Ver mais
+                        <a href="${url_product}products/${element.id}" class="mt-2 text-indigo-500 inline-flex items-center">Ver mais
                             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 class="w-4 h-4 ml-2" viewBox="0 0 24 24">
                                 <path d="M5 12h14M12 5l7 7-7 7"></path>

@@ -8,6 +8,7 @@ use App\Http\Requests\Products\StoreAndUpdateProduct;
 use App\Models\CommentProduct;
 use App\Models\Product;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -61,7 +62,7 @@ class ProductController extends Controller
         ]);
     }
 
-    public function store(StoreAndUpdateProduct $request)
+    public function store(StoreAndUpdateProduct $request): JsonResponse
     {
         $data = $request->validated();
         $user = auth()->user();
@@ -90,7 +91,7 @@ class ProductController extends Controller
         ]);
     }
 
-    public function edit($product)
+    public function edit(string $product)
     {
         $productUpdate = $this->product->find($product);
 
@@ -118,12 +119,12 @@ class ProductController extends Controller
         return view('products.myProducts', compact('myProducts'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, string $id)
     {
 
     }
 
-    public function destroy($product)
+    public function destroy(string $product)
     {
         $myProductDelete = $this->product->findOrFail($product);
         $myProductDelete->delete();
