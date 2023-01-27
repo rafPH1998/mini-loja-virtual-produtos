@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->integer('quantity_inventory')->require();
             $table->text('description')->nullable();
+            $table->dateTime('date');
             $table->enum('type', [
                 'eletronicos', 
                 'livros', 

@@ -17,9 +17,6 @@
                         #
                     </th>
                     <th scope="col" class="py-3 px-6">
-                        Imagem
-                    </th>
-                    <th scope="col" class="py-3 px-6">
                         Nome Produto
                     </th>
                     <th scope="col" class="py-3 px-6">
@@ -28,17 +25,8 @@
                     <th scope="col" class="py-3 px-6">
                         Estoque
                     </th>
-                    <th scope="col">
-                    
-                    </th>
-                    <th scope="col">
-                        
-                    </th>
-                    <th scope="col">
-                        
-                    </th>
-                    <th scope="col">
-                        
+                    <th>
+                        Ações
                     </th>
                 </tr>
             </thead>
@@ -49,15 +37,6 @@
                             {{ $product->id }}
                         </td>
                         <td class="py-4 px-6">
-                            Sem imagem
-                            {{-- <img
-                                class="w-full h-full rounded-full"
-                                style="width: 45px;" 
-                                src="{{ url("storage/{$product->image}") }}" 
-                                alt="{{ $product->name }}"
-                            > --}}
-                        </td>
-                        <td class="py-4 px-6">
                             {{ $product->name }}
                         </td>
                         <td class="py-4 px-6">
@@ -66,40 +45,26 @@
                         <td class="py-4 px-6">
                             {{ $product->quantity_inventory > 0 ? $product->quantity_inventory : 'Sem estoque'}}
                         </td>
-                        <td>
-                             
-                            <x-links 
-                                green
-                                href="{{ route('products.comments', $product->id) }}">
-                                Comentários ({{ $product->comments->count() }})
-                            </x-links>
-
-                            <x-links 
-                                yellow
-                                href="{{ route('products.show', $product->id) }}" >
-                                Ver
-                            </x-links>
-
+                        <td class="flex mt-3">
+                            <a href="{{ route('products.comments', $product->id) }}">
+                                <img class="w-5 h-5 mt-1" src="{{url('images/comment.png')}}" alt="">
+                            </a>
+                            <a href="{{ route('products.show', $product->id) }}">
+                                <img class="w-6 h-6 ml-2" src="{{url('images/eye.png')}}" alt="">
+                            </a>
+                    
                             @can('update-product', $product)
-                                <x-links 
-                                    purple
-                                    href="{{ route('products.comments', $product->id) }}" >
-                                    Editar
-                                </x-links>
+                                <a href="{{ route('products.comments', $product->id) }}">
+                                    <img class="w-5 h-5 ml-2" src="{{url('images/pencil.png')}}" alt="">
+                                </a>
                             @endcan  
-                        </td>
-                        <td>
                             <form action="#" method="POST">
                                 @method('DELETE')
                                 @csrf
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}" id="_token">
-                                    
-                                <x-links
-                                    href="#" 
-                                    onclick="showModal({{$product->id}})"
-                                    red>
-                                    Deletar
-                                </x-links>
+                                <a href="#" onclick="showModal({{$product->id}})">
+                                    <img class="w-5 h-5 ml-2" src="{{url('images/trash.png')}}" alt="">
+                                </a>
                             </form>
                         </td>
                     </tr>

@@ -8,6 +8,8 @@ use App\Http\Requests\Products\StoreAndUpdateProduct;
 use App\Models\CommentProduct;
 use App\Models\Product;
 use App\Models\User;
+use Carbon\Carbon;
+use DateTime;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -38,11 +40,13 @@ class ProductController extends Controller
                                             status: $request->get('status') ?? ''
                                         );
 
+                                   
             return response()->json([
                 'data'  => $productsForStatus,
                 'error' => count($productsForStatus) == 0 ? 'Nenhum produto encontrado para esse filtro' : ''
             ], 200);
         }
+
 
         return view('products.index', [
             'products'      => $products,
@@ -67,7 +71,8 @@ class ProductController extends Controller
         $data = $request->validated();
         $user = auth()->user();
         
-        $data['user_id'] = $user->id;
+        $data['user_id'] = $user->id; 
+        $data['date'] = now()->format('Y-m-d H:i:s');
 
         /** @var User $user */
         $product = $user->products()->create($data);

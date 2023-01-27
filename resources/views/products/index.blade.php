@@ -1,13 +1,8 @@
 <x-app>
 
     <div class="ml-5">
-        <a href="{{ route('products.create') }}" 
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 
-            focus:ring-blue-300 font-medium rounded-lg 
-            text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600  
-            dark:hover:bg-blue-700 focus:outline-none 
-            dark:focus:ring-blue-800">
-            Adicionar
+        <a href="{{ route('products.create') }}" class="btn btn-dark">
+            <i class="fas fa-plus"></i>
         </a>
     </div>
 
@@ -40,21 +35,27 @@
                 hover:scale-110 hover:bg-gray-900 duration-300
                 rounded-lg ml-4 mt-5">
                 <div class="p-4">
-                    <div class="flex">
+                    <div class="flex justify-between">
                         <p class="mb-3 font-normal text-white">
                             {{ $product->name }}
                         </p>
-                        @if ($product->user->id == auth()->user()->id)
-                            <p class="ml-2 text-green-500">
-                                (meu produto) 
-                            </p>
-                        @endif
+                        <div>
+                            @if ($product->format_date)
+                                <img class="h-8 w-8" src="{{url('images/new.png')}}" alt="">
+                            @endif
+                        </div>
                     </div> 
-                    <p class="mb-3 font-normal text-white">
+                    @if ($product->user->id == auth()->user()->id)
+                        <p class="text-green-500 text-xs">
+                            (meu produto) 
+                        </p>
+                    @endif
+                    <p class="mt-3 font-normal text-white">
                         $ {{ number_format($product->price , 2, ',', '.') }}
                     </p>
+
                     <p style="font-size: 12px;" class="mb-1 text-sm mt-2 text-white">
-                        Criado em: {{ $product->created_at }}
+                        Criado em: {{ $product->date }}
                     </p>
                     @foreach ($qualityStatus as $status)
                         <p class="text-sm text-white">
@@ -67,14 +68,10 @@
                             Avaliações ({{ $product->comments->count() }})
                         </a>
                     </div>
-                    
-              {{--       <a 
-                        href=""
-                        wire:click.prevent="showModel"
-                        class="mt-5 text-indigo-500 inline-flex items-center">Ver mais
-                    </a> --}}
 
-                    <a href="{{ route('products.show', $product->id) }}" class="mt-2 text-indigo-500 inline-flex items-center">Ver mais
+                    <a href="#" 
+                        data-toggle="modal" data-target="#exampleModal"
+                        class="mt-2 text-indigo-500 inline-flex items-center">Ver mais
                         <svg fill="none" stroke="currentColor" stroke-linecap="round" 
                             stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
                             <path d="M5 12h14M12 5l7 7-7 7"></path>
@@ -146,3 +143,6 @@
         @endif
     </div>
 </x-app>
+
+<livewire:address.add-address-modal />
+<livewire:product.show-product-modal />

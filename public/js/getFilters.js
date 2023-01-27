@@ -36,12 +36,12 @@ const showResults = (json) => {
                     rounded-lg ml-4 mt-5">
 
                     <div class="p-4">
-                        <div class="flex">
+                        <div class="flex justify-between">
                             <p class="mb-3 font-normal text-white">
                                 <b> ${element.name} </b>`;
                                 if (element.user.id == element.user_id) {
                                     html += `
-                                    <p class="ml-2 text-green-500">
+                                    <p class="ml-2 text-green-500 mt-3">
                                         (meu produto) 
                                     </p>`;
                                 }
@@ -52,7 +52,7 @@ const showResults = (json) => {
                             $  ${element.price.toFixed(2)}
                         </p>
                         <p class="mb-3 font-normal text-white">
-                            ${element.created_at} 
+                            ${element.date} 
                         </p>
                         <div class="mt-5">
                             <a href="${url_product}comments/${element.id}" 

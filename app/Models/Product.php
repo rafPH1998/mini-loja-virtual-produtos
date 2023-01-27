@@ -17,6 +17,10 @@ class Product extends Model
 
     protected $guarded = [];
 
+    protected $appends = [
+        'format_date'
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -26,8 +30,8 @@ class Product extends Model
     {
         return $this->hasMany(CommentProduct::class);
     }
-    
-    protected function createdAt(): Attribute
+
+    protected function date(): Attribute
     {
         Carbon::setLocale('pt_BR');
 
@@ -36,16 +40,24 @@ class Product extends Model
         );
     }
 
-    public function getProducts(string|null $filter = ''): LengthAwarePaginator
+    //se a data passar de 8 dias depois do cadastro o produto não é mais recente
+    protected function formatDate(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => Carbon::make($this->created_at)->addDays(5)->format('d/m/Y') >= now()->format('d/m/Y')
+        );
+    }
+
+    public function getProducts(string|null $filter = '')
     {
         $products = $this
                     ->orderBy('created_at', 'DESC')
                     ->when(function ($query) use ($filter) {
                         $query->where('name', 'LIKE', "%{$filter}%");     
                     })
-                    ->with('comments')
-                    ->paginate(8);
-
+                    ->with('user.comments')
+                    ->paginate(8);  
+                
         return $products;
     }
 

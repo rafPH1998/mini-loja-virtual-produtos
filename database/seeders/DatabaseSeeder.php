@@ -9,15 +9,12 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
     public function run()
     {
-        Product::factory()->count(20)->create([
-            'user_id' => 1
+        Product::factory()->count(1)->create([
+            'user_id'    => 1,
+            'created_at' => now()->addDays(10),
+            'date'       => now()->addDays(10)
         ]);
     }
 }
