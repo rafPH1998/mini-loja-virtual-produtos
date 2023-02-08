@@ -56,7 +56,7 @@ const showResults = (json) => {
                         </p>
                         <div class="mt-5">
                             <a href="${url_product}comments/${element.id}" 
-                                class="font-medium text-blue-600 text-blue-500 hover:underline">
+                                class="font-medium text-blue-600 hover:underline">
                                 Avaliações (${element.comments.length})
                             </a>
                         </div>

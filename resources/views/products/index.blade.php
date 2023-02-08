@@ -38,11 +38,15 @@
                     <div class="flex justify-between">
                         <p class="mb-3 font-normal text-white">
                             {{ $product->name }}
-                        </p>
-                        <div>
                             @if ($product->format_date)
                                 <img class="h-8 w-8" src="{{url('images/new.png')}}" alt="">
                             @endif
+                        </p>
+                        <div>
+                            <span class="rounded py-1 px-3 text-xs 
+                                font-bold {{ $product->quantity_inventory > 0 ? 'bg-green-400 ' : 'bg-red-400 '}}"> 
+                                {{ $product->quantity_inventory > 0 ? 'Em estoque' : 'Sem estoque' }}
+                            </span>
                         </div>
                     </div> 
                     @if ($product->user->id == auth()->user()->id)
@@ -64,13 +68,11 @@
                     @endforeach 
                     <div class="mt-5">
                         <a href="{{ route('products.comments', $product->id) }}" 
-                            class="font-medium text-blue-600 text-blue-500 hover:underline">
+                            class="font-medium text-blue-500 hover:underline">
                             Avaliações ({{ $product->comments->count() }})
                         </a>
                     </div>
-
-                    <a href="#" 
-                        data-toggle="modal" data-target="#exampleModal"
+                    <a href="{{ route('products.show', $product->id)}}"
                         class="mt-2 text-indigo-500 inline-flex items-center">Ver mais
                         <svg fill="none" stroke="currentColor" stroke-linecap="round" 
                             stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
@@ -80,7 +82,7 @@
                 </div>
             </div>
         @empty
-            <p class="ml-5 mt-5 mt-5 text-white">
+            <p class="ml-5 mt-5 text-white">
                 Nenhum produto encontrado.
             </p>
         @endforelse

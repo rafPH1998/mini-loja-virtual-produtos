@@ -34,7 +34,7 @@ class UpdateUserRequest extends FormRequest
             'avatar' => [
                 'nullable',
                 'image',
-                'max: 1024'
+                'max: 1024',
             ]
         ];
 

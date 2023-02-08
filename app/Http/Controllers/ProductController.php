@@ -8,8 +8,6 @@ use App\Http\Requests\Products\StoreAndUpdateProduct;
 use App\Models\CommentProduct;
 use App\Models\Product;
 use App\Models\User;
-use Carbon\Carbon;
-use DateTime;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -23,11 +21,8 @@ class ProductController extends Controller
         protected CommentProduct $commentsProduct,
     ) { }
 
-    public function index(Request $request)
-    {
-        $qualityStatus = ProductQualityEnum::cases();
-        $type          = ProductTypeEnum::cases();
-        
+    protected function index(Request $request)
+    {        
         $products = $this->product
                         ->getProducts(
                             filter: $request->get('filter') ?? ''
@@ -39,34 +34,33 @@ class ProductController extends Controller
                                         ->getLastFiveProductsForStatus(
                                             status: $request->get('status') ?? ''
                                         );
-
-                                   
+                                        
+            $productNotFound = count($productsForStatus) == 0 ? 'Nenhum produto encontrado para esse filtro' : '';
+         
             return response()->json([
                 'data'  => $productsForStatus,
-                'error' => count($productsForStatus) == 0 ? 'Nenhum produto encontrado para esse filtro' : ''
+                'error' => $productNotFound
             ], 200);
         }
 
 
         return view('products.index', [
             'products'      => $products,
-            'qualityStatus' => $qualityStatus,
-            'type'          => $type,
+            'qualityStatus' => ProductQualityEnum::cases(),
+            'type'          => ProductTypeEnum::cases()
         ]);
+
     }
 
-    public function create()
+    protected function create()
     {
-        $qualityStatus = ProductQualityEnum::cases();
-        $type          = ProductTypeEnum::cases();
-
         return view('products.add', [
-            'qualityStatus' => $qualityStatus,
-            'type'  => $type,
+            'qualityStatus' => ProductQualityEnum::cases(),
+            'type'          => ProductTypeEnum::cases()
         ]);
     }
 
-    public function store(StoreAndUpdateProduct $request): JsonResponse
+    protected function store(StoreAndUpdateProduct $request)
     {
         $data = $request->validated();
         $user = auth()->user();
@@ -82,21 +76,22 @@ class ProductController extends Controller
         ], 201);
     }
 
-    public function show($id)
+    protected function show($id)
     {
-        $qualityStatus = ProductQualityEnum::cases();
-
         $product = $this->product
-                        ->with('user')
+                        ->with([
+                            'user',
+                            'shopping'
+                        ])
                         ->findOrFail($id);
 
         return view('products.show', [
             'product'       => $product,
-            'qualityStatus' => $qualityStatus
+            'qualityStatus' => ProductQualityEnum::cases()
         ]);
     }
 
-    public function edit(string $product)
+    protected function edit(string $product)
     {
         $productUpdate = $this->product->find($product);
 
@@ -109,31 +104,30 @@ class ProductController extends Controller
         ]);
     }
 
-    public function myProducts()
-    {
-        $loggedUser = auth()->user();
-        
+    protected function myProducts()
+    {        
         $myProducts = $this->product
-                    ->where('user_id', $loggedUser->id)
-                    ->with([
-                        'user',
-                        'comments',
-                    ])
-                    ->paginate(5);
+                            ->where('user_id', auth()->user()->id)
+                            ->with([
+                                'user',
+                                'comments',
+                            ])
+                            ->paginate(5);
 
         return view('products.myProducts', compact('myProducts'));
     }
 
-    public function update(Request $request, string $id)
+    protected function update(Request $request, string $id)
     {
 
     }
 
-    public function destroy(string $product)
+    protected function destroy(string $product)
     {
         $myProductDelete = $this->product->findOrFail($product);
         $myProductDelete->delete();
 
         return response()->json([], 204);
     }
+    
 }

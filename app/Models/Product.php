@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Notifications\Notifiable;
 
@@ -31,6 +32,12 @@ class Product extends Model
         return $this->hasMany(CommentProduct::class);
     }
 
+    //um produto pode ter uma compra
+    public function shopping(): HasOne
+    {
+        return $this->hasOne(PurchasedProducts::class);
+    }
+
     protected function date(): Attribute
     {
         Carbon::setLocale('pt_BR');
@@ -44,7 +51,7 @@ class Product extends Model
     protected function formatDate(): Attribute
     {
         return Attribute::make(
-            get: fn () => Carbon::make($this->created_at)->addDays(5)->format('d/m/Y') >= now()->format('d/m/Y')
+            get: fn () => Carbon::make($this->created_at)->format('d/m/Y H:i:s') <= Carbon::make($this->created_at)->addDays(3) ? true : false
         );
     }
 
@@ -63,7 +70,6 @@ class Product extends Model
 
     public function getLastFiveProductsForStatus(string|null $status = ''): object
     {
-
         return Product::query()
                     ->when($status == 'last_registered', fn($query) => $query->orderBy('created_at', 'DESC'))
                     ->when($status == 'cheap', fn($query) => $query->orderBy('price', 'ASC'))

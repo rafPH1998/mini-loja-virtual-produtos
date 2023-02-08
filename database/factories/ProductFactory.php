@@ -26,13 +26,13 @@ class ProductFactory extends Factory
         shuffle($optionsType);
 
         return [
-            'user_id'                => User::factory(),
-            'name'                   => $this->faker->name(),
-            'description'            => $this->faker->sentence(50),
-            'type'                   => $optionsType[0],
-            'image'                  => 'https://source.unsplash.com/random',
-            'price'                  => $this->faker->numberBetween(0, 500),
-            'quantity_inventory'     => $this->faker->numberBetween(0, 30),
+            'user_id'            => User::factory(),
+            'name'               => $this->faker->name(),
+            'description'        => $this->faker->sentence(50),
+            'type'               => $optionsType[0],
+            'image'              => 'https://source.unsplash.com/random',
+            'price'              => $this->faker->numberBetween(0, 500),
+            'quantity_inventory' => $this->faker->numberBetween(0, 30),
         ];
     }
 }

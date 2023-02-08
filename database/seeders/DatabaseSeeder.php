@@ -13,8 +13,8 @@ class DatabaseSeeder extends Seeder
     {
         Product::factory()->count(1)->create([
             'user_id'    => 1,
-            'created_at' => now()->addDays(10),
-            'date'       => now()->addDays(10)
+            'created_at' => now()->subDays(2),
+            'date'       => now()->subDays(2)
         ]);
     }
 }

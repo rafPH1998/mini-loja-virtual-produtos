@@ -4,11 +4,19 @@
             <h1 class="text-2xl font-medium title-font mb-2 text-white">Adicionar produto</h1>
         </div>
 
-        <form method="POST" class="px-10 py-10" action="#" id="addForm">
+        <form method="POST" class="px-10 py-10" action="#" id="addForm" enctype="multipart/form-data">
             <div class="flex flex-wrap">
                 @csrf
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" id="_token">
 
+             {{--    <div class="relative">
+                    <label for="image" class="leading-7 text-sm text-white">Foto</label>
+                    <input type="file" id="image" name="image"
+                        class="appearance-none border rounded w-full 
+                        py-2 px-3 text-gray-700 
+                        leading-tight focus:outline-none focus:shadow-outline">
+                </div> --}}
+                
                 <div class="p-2 w-full">
                     <x-inputs-product.text type="text" id="name" name="name" label="Nome do produto" msgError="nameErro" />
                 </div>

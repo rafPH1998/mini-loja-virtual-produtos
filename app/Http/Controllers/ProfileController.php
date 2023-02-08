@@ -24,7 +24,7 @@ class ProfileController extends Controller
             'password', 
             'password_confirm'
         ]);
-        
+
         $user = auth()->user();
 
         if ($request->avatar) {

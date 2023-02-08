@@ -4,7 +4,8 @@ use App\Http\Controllers\{
     AddressController,
     ProductController,
     CommentController,
-    ProfileController
+    ProfileController,
+    PurchasedController
 };
 use Illuminate\Support\Facades\Route;
  
@@ -13,6 +14,11 @@ Route::middleware('auth')->group(function() {
     * Route ProductController
     */
     Route::resource('/products', ProductController::class);
+
+
+    Route::post('/products/buy/{idProduct}', [PurchasedController::class, 'store'])->name('products.purchased');
+
+
     Route::get('myProducts', [ProductController::class, 'myProducts'])->name('products.myProducts');  
 
      /**

@@ -6,6 +6,24 @@
         <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 ml-10">
             <h1 class="text-3xl title-font font-medium mb-1 text-white">{{ $product->name }}</h1>
             <hr/>
+
+            <div class="mt-5">
+                @if (Session::has('error'))
+                    <p class="text-red-500">
+                        {{ Session::get('error') }}
+                    </p>
+                @elseif (Session::has('success'))
+                    <p class="text-green-500">
+                        {{ Session::get('success') }}
+                    </p>
+                @elseif (Session::has('warning'))
+                    <p class="text-yellow-500">
+                        {{ Session::get('warning') }}
+                    </p>
+                @endif
+            </div>
+
+
             <p class="leading-relaxed mt-5 text-white">
                 <b>Descrição do produto: </b>
                 <p class="text-gray-500">{{ $product->description }}</p>
@@ -13,11 +31,14 @@
             <div class="my-3 mt-5 text-white">
                 <b>Quantidade:</b>
                <p>
-                    <p class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
+                   <p class="inline-flex items-center
+                        px-3 py-0.5 rounded-full text-sm font-medium
+                        {{ $product->quantity_inventory > 0 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}}">
                         <b>({{ $product->quantity_inventory }}) {{ $product->quantity_inventory > 0 ? 'Em estoque' : 'Estoque vazio' }}</b>
                     </p>
                </p>
             </div>
+
             <div class="my-3 mt-5">
                 <b class="text-white">Estado do produto:</b>
                 @foreach ($qualityStatus as $status)
@@ -26,7 +47,7 @@
                     </p>
                 @endforeach    
             </div>
-            <p class="mt-7 mt-5 text-white"><b>Autor do produto postado:</b></p>
+            <p class="mt-7 text-white"><b>Autor do produto postado:</b></p>
             <div class="flex mt-3">
                 <p class="mb-1 text-sm dark:text-gray-800">
                     @if ($product->user->avatar)
@@ -39,11 +60,11 @@
                     @endif
                 </p>
                 @if ($product->user->id == auth()->user()->id)
-                    <p class="mt-3 ml-2 mt-5 text-green-500">
+                    <p class="mt-3 ml-2 text-green-500">
                         (meu produto)
                     </p>
                 @else
-                    <p class="mt-3 ml-2 mt-5 text-gray-500">
+                    <p class="mt-3 ml-2 text-gray-500">
                         {{ $product->user->name }}
                     </p>
                 @endif
@@ -53,7 +74,7 @@
                 ${{ number_format($product->price , 2, ',', '.') }}
             </span>
         </div>
-        
+
         @can('product-users', $product)
             <form action="{{route('products.create_comment') }}" method="POST" class="mt-10">
                 @csrf
@@ -77,17 +98,33 @@
                     @endforeach
                 @enderror
 
-                <div>
+                <div class="flex flex-row-reverse">
                     <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 
                         focus:ring-blue-300 font-medium rounded-lg 
-                        text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 
+                        text-sm px-5 py-2 dark:bg-blue-600 
                         dark:hover:bg-blue-700 focus:outline-none 
-                        dark:focus:ring-blue-800 mt-5">
+                        dark:focus:ring-blue-800 mt-1">
                         Criar comentário
-                    </button>
+                    </button>               
                 </div>
             </form> 
+
+            <form action="{{route('products.purchased', $product->id)}}" method="POST">
+                @csrf
+                <button class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 
+                    focus:ring-green-300 font-medium rounded-lg 
+                    text-sm px-4 py-2.5 mr-2 mb-2 dark:bg-green-600 
+                    dark:hover:bg-green-700 focus:outline-none 
+                    dark:focus:ring-green-800">
+                    @if ($product->shopping)
+                        Remover compra
+                    @else
+                        Comprar
+                    @endif
+                </button>
+            </form>
         @endcan
+
     </div>
 </x-app>
 

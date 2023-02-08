@@ -41,7 +41,7 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Address::class);
     }
-
+    
     public function comments(): BelongsTo
     {
         return $this->belongsTo(CommentProduct::class);
