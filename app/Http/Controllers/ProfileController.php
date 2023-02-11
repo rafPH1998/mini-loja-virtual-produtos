@@ -31,17 +31,18 @@ class ProfileController extends Controller
             $data['avatar'] = $uploadFile->store($request->avatar, 'users');
         }
 
-        if ($request->password !== null) {
+        if ($request->password !== NULL) {
             if ($request->password !== $request->password_confirm) {
                 return redirect()->route('profile.index')
                                  ->with('error_password', 'As senhas não são iguais!');
             }
             $data['password'] = bcrypt($request->password);
-        } 
-        
-        $data['password'] = $user->password;
+        } else {
+            $data['password'] = $user->password;
+        }
 
-        $user = User::where('id', $user->id)->first();
+
+        /** @var User $user */
         $user->update($data);
 
         return redirect()->route('profile.index')
