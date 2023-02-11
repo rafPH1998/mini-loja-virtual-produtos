@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Notifications\Notifiable;
 
 class Product extends Model
@@ -47,11 +46,11 @@ class Product extends Model
         );
     }
 
-    //se a data passar de 8 dias depois do cadastro o produto não é mais recente
+    //se a data passar de 3 dias depois do cadastro o produto não é mais recente
     protected function formatDate(): Attribute
     {
         return Attribute::make(
-            get: fn () => Carbon::make($this->created_at)->format('d/m/Y H:i:s') <= Carbon::make($this->created_at)->addDays(3) ? true : false
+            get: fn () => now()->diffInDays($this->created_at) < 3 ? true : false
         );
     }
 
@@ -68,6 +67,7 @@ class Product extends Model
         return $products;
     }
 
+    
     public function getLastFiveProductsForStatus(string|null $status = ''): object
     {
         return Product::query()
