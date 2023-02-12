@@ -23,20 +23,29 @@
                 @endif
             </div>
 
-
             <p class="leading-relaxed mt-5 text-white">
                 <b>Descrição do produto: </b>
                 <p class="text-gray-500">{{ $product->description }}</p>
             </p>
             <div class="my-3 mt-5 text-white">
                 <b>Quantidade:</b>
-               <p>
-                   <p class="inline-flex items-center
-                        px-3 py-0.5 rounded-full text-sm font-medium
-                        {{ $product->quantity_inventory > 0 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}}">
-                        <b>({{ $product->quantity_inventory }}) {{ $product->quantity_inventory > 0 ? 'Em estoque' : 'Estoque vazio' }}</b>
+                <div id="result_do_php" style="display: block;">
+                    <p>
+                        <p class="inline-flex items-center
+                             px-3 py-0.5 rounded-full text-sm font-medium
+                             {{ $product->quantity_inventory > 0 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}}">
+                             <b>({{ $product->quantity_inventory }}) {{ $product->quantity_inventory > 0 ? 'Em estoque' : 'Estoque vazio' }}</b>
+                         </p>
                     </p>
-               </p>
+                </div>
+                <div id="result_do_js" style="display: none;">
+                    <p>
+                        <p class="inline-flex items-center
+                             px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                             <b id="result"></b>
+                         </p>
+                    </p>
+                </div>
             </div>
 
             <div class="my-3 mt-5">
@@ -109,10 +118,15 @@
                 </div>
             </form> 
 
-            <form action="{{route('products.purchased', $product->id)}}" method="POST">
+            <form action="#" method="POST">
                 @csrf
-                <button class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 
-                    focus:ring-green-300 font-medium rounded-lg 
+                <input type="hidden" name="_token" value="{{ csrf_token() }}" id="_token">
+                <input type="hidden" name="id" value="{{ $product->id }}" id="id">
+
+                <button 
+                    id="submitButton"
+                    class="text-white bg-green-700 hover:bg-green-800 
+                    focus:ring-4 focus:ring-green-300 font-medium rounded-lg 
                     text-sm px-4 py-2.5 mr-2 mb-2 dark:bg-green-600 
                     dark:hover:bg-green-700 focus:outline-none 
                     dark:focus:ring-green-800">
@@ -124,9 +138,73 @@
                 </button>
             </form>
         @endcan
-
     </div>
 </x-app>
+
+
+<script>
+
+document.getElementById("submitButton").addEventListener("click", async function(event){
+
+    const submitButton  = document.getElementById('submitButton');
+    const csrfToken     = document.getElementById("_token").value;
+    const id            = document.getElementById("id").value;
+    const result_do_php = document.getElementById("result_do_php");
+    const result_do_js  = document.getElementById("result_do_js");
+    const result        = document.getElementById("result");
+    
+    submitButton.innerHTML = 'Comprando...';
+    submitButton.disabled  = true;
+
+    event.preventDefault();
+
+    const url = `http://localhost:8989/products/buy`;
+
+    try {
+        const response = await fetch(url, {
+
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'accept': 'application/json'
+            },
+            body: JSON.stringify({
+                id    : id,
+                _token: csrfToken
+            })
+        });
+
+        const { quantity, countShopping, error, warning, success } = await response.json();
+        const buttonText = countShopping || error ? 'Comprar' : 'Remover compra';
+        submitButton.innerHTML = buttonText;
+
+        if (error) {
+            swal('Erro!', error, 'error');
+        } else if (warning) {
+            swal('Aviso!', warning, 'warning');
+            showButton(quantity);
+        } else {
+            result_do_php.style.display = 'none'
+            result_do_js.style.display = 'block'
+            showButton(quantity);
+            swal('Success!', success, 'success');
+        }
+
+    } catch (error) {
+        swal("Erro!", error, 'error');
+    } finally {
+        submitButton.disabled = false;
+    }
+})
+
+const showButton = (qtd) => {
+    if (qtd > 0) {
+        result.innerHTML = `(${qtd}) Em estoque`
+    } else { 
+        result.innerHTML = `(${qtd}) Estoque vazio`
+    }
+}
+</script>
 
 
 

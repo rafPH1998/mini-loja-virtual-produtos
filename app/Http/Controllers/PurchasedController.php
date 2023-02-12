@@ -2,26 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ProductResource;
 use App\Models\Product;
+use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Support\Facades\DB;
 
 class PurchasedController extends Controller
 {
-    public function store(string $idProduct)
+    public function store(HttpRequest $request)
     {
+        $idProduct = $request->get('id');
 
         $product = Product::query()
                     ->with(['user', 'shopping'])
                     ->findOrFail($idProduct);
         
         if (!$this->checkInventory($product)) {
-            return redirect()
-                        ->route('products.show', $idProduct)
-                        ->with('error', 'Sem produto no estoque para compra!');
+            return response()->json(['error' => 'Sem produto no estoque para compra!']);
         }
 
         \DB::beginTransaction();
-    
         try {
             $result        = $this->toggleShopping($product);
             $returnMessage = $result['message'];
@@ -30,16 +30,16 @@ class PurchasedController extends Controller
             $product->update();
             \DB::commit();
             
-        } catch (\Exception $e) {
+        } catch (\Exception $exception) {
             \DB::rollBack();
-            return redirect()
-                ->route('products.show', $idProduct)
-                ->with('error', 'Ocorreu um erro ao atualizar o estoque.');
+            return response()->json(['error' => $exception->getMessage()]);
         }
 
-        return redirect()
-                    ->route('products.show', $idProduct)
-                    ->with($typeMessage, $returnMessage); 
+        return response()->json([
+            $typeMessage    => $returnMessage, 
+            'quantity'      => $product->quantity_inventory, 
+            'countShopping' => $product->shopping
+        ]);
     }
 
     protected function checkInventory(Product $product): bool

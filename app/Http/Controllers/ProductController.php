@@ -71,9 +71,7 @@ class ProductController extends Controller
         /** @var User $user */
         $product = $user->products()->create($data);
         
-        return response()->json([
-            'data' => $product
-        ], 201);
+        return response()->json(['data' => $product], 201);
     }
 
     protected function show($id)
