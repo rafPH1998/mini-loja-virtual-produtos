@@ -18,7 +18,8 @@ class Product extends Model
     protected $guarded = [];
 
     protected $appends = [
-        'format_date'
+        'format_date',
+        'product_name_format'
     ];
 
     public function user(): BelongsTo
@@ -50,10 +51,17 @@ class Product extends Model
     protected function formatDate(): Attribute
     {
         return Attribute::make(
-            get: fn () => now()->diffInDays($this->created_at) < 3 ? true : false
+            get: fn () => now()->diffInDays($this->created_at) <= 5 ? true : false
         );
     }
 
+    protected function productNameFormat(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => strlen($this->name) >= 12 ? substr($this->name, 0, 10) . '...' : $this->name
+        );
+    }
+    
     public function getProducts(string|null $filter = '')
     {
         $products = $this
@@ -67,7 +75,6 @@ class Product extends Model
         return $products;
     }
 
-    
     public function getLastFiveProductsForStatus(string|null $status = ''): object
     {
         return Product::query()

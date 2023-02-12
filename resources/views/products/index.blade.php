@@ -37,7 +37,7 @@
                 <div class="p-4">
                     <div class="flex justify-between">
                         <p class="mb-3 font-normal text-white">
-                            {{ $product->name }}
+                            {{ $product->product_name_format }}
                             @if ($product->format_date)
                                 <img class="h-8 w-8" src="{{url('images/new.png')}}" alt="">
                             @endif
@@ -145,6 +145,3 @@
         @endif
     </div>
 </x-app>
-
-<livewire:address.add-address-modal />
-<livewire:product.show-product-modal />
