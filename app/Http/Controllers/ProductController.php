@@ -5,11 +5,9 @@ namespace App\Http\Controllers;
 use App\Enums\ProductQualityEnum;
 use App\Enums\ProductTypeEnum;
 use App\Http\Requests\Products\StoreAndUpdateProduct;
-use App\Models\CommentProduct;
 use App\Models\Product;
 use App\Models\PurchasedProducts;
 use App\Models\User;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -19,7 +17,6 @@ class ProductController extends Controller
     public function __construct(
         protected User $user, 
         protected Product $product, 
-        protected CommentProduct $commentsProduct,
     ) { }
 
     protected function index(Request $request)

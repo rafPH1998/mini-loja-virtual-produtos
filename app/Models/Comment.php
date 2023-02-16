@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 
 use function PHPSTORM_META\type;
 
-class CommentProduct extends Model
+class Comment extends Model
 {
     use HasFactory, Notifiable;
 

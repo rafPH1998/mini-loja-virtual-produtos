@@ -44,7 +44,7 @@ class User extends Authenticatable
     
     public function comments(): BelongsTo
     {
-        return $this->belongsTo(CommentProduct::class);
+        return $this->belongsTo(Comment::class);
     }
 
     protected function name(): Attribute

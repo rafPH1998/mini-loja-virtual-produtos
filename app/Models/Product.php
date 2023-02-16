@@ -30,9 +30,14 @@ class Product extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function like()
+    {
+        return $this->hasMany(Like::class);
+    }
+
     public function comments(): HasMany
     {
-        return $this->hasMany(CommentProduct::class);
+        return $this->hasMany(Comment::class);
     }
 
     //um produto pode ter uma compra
@@ -83,7 +88,7 @@ class Product extends Model
     
         $productIds = $products->pluck('id')->toArray();
     
-        $comments = CommentProduct::with('user')
+        $comments = Comment::with('user')
                     ->whereHas('product', function ($query) use ($productIds) {
                         $query->whereIn('id', $productIds);
                     })
