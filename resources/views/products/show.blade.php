@@ -42,7 +42,7 @@
                     <p>
                         <p class="inline-flex items-center
                              px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                             <b id="result"></b>
+                             <b id="result">teste</b>
                          </p>
                     </p>
                 </div>
@@ -122,6 +122,7 @@
                 @csrf
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" id="_token">
                 <input type="hidden" name="id" value="{{ $product->id }}" id="id">
+                <input type="hidden" name="quantity_inventory" value="{{ $product->quantity_inventory }}" id="quantity_inventory">
 
                 <button 
                     id="submitButton"
@@ -152,6 +153,9 @@ document.getElementById("submitButton").addEventListener("click", async function
     const result_do_php = document.getElementById("result_do_php");
     const result_do_js  = document.getElementById("result_do_js");
     const result        = document.getElementById("result");
+    const qtdAtual      = document.getElementById("quantity_inventory").value;
+
+    //alert(qtdAtual)
     
     submitButton.innerHTML = 'Comprando...';
     submitButton.disabled  = true;

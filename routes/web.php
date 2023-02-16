@@ -3,6 +3,7 @@
 use App\Http\Controllers\{
     ProductController,
     CommentController,
+    LikeController,
     ProfileController,
     PurchasedController
 };
@@ -35,6 +36,12 @@ Route::middleware('auth')->group(function() {
     */
     Route::get('profile/', [ProfileController::class, 'index'])->name('profile.index');
     Route::put('profile/', [ProfileController::class, 'edit'])->name('profile.edit');
+
+
+    /**
+    * Route LikeController
+    */
+    Route::post('/products/like', LikeController::class);
 });
 
 require __DIR__.'/auth.php';

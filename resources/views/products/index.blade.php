@@ -72,13 +72,32 @@
                             Avaliações ({{ $product->comments->count() }})
                         </a>
                     </div>
-                    <a href="{{ route('products.show', $product->id)}}"
-                        class="mt-2 text-indigo-500 inline-flex items-center">Ver mais
-                        <svg fill="none" stroke="currentColor" stroke-linecap="round" 
-                            stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                            <path d="M5 12h14M12 5l7 7-7 7"></path>
-                        </svg>
-                    </a>
+                    <div class="flex justify-between">
+                        <a href="{{ route('products.show', $product->id)}}"
+                            class="mt-2 text-indigo-500 inline-flex items-center">Ver mais
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" 
+                                stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                                <path d="M5 12h14M12 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                        <form action="#" method="POST">
+                            @csrf
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}" id="_token">
+                            <input type="hidden" name="id" value="{{ $product->id }}" id="id">   
+                        
+                            <button id="likedPost" 
+                                class="border-none focus:outline-none 
+                                {{!$product->like->count() > 0 ? 'text-green-500' : 'text-red-500'}}"
+                                >
+                                @if ($product->like->count() == 0)
+                                    curtir
+                                @else
+                                    descurtir
+                                @endif  
+                            </button>          
+                        </form>
+                       
+                    </div>
                 </div>
             </div>
         @empty
@@ -145,3 +164,44 @@
         @endif
     </div>
 </x-app>
+
+
+<script>
+
+const url       = 'http://localhost:8989/products/like';
+const csrfToken = document.getElementById("_token").value;
+const id        = document.getElementById("id").value;
+const likedPost = document.getElementById("likedPost");
+
+likedPost.addEventListener("click", async function (event) {
+    event.preventDefault();
+    likedPost.disabled = true;
+
+    const config = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'accept': 'application/json'
+        },
+        body: JSON.stringify({
+            id,
+            _token: csrfToken
+        })
+    };
+
+    try {
+        const response = await fetch(url, config);
+
+        if (response.status === 201) {
+            likedPost.innerHTML = `<button class="text-red-500 border-none focus:outline-none">descurtir</button>`;
+        } else if (response.status === 204) {
+            likedPost.innerHTML = `<button class="text-green-500 border-none focus:outline-none">curtir</button>`;
+        }
+    } catch (error) {
+        swal("Erro!", error, 'error');
+    } finally {
+        likedPost.disabled = false;
+    }
+});
+
+</script>
