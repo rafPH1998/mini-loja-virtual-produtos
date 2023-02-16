@@ -23,6 +23,7 @@ class CommentController extends Controller
         $idProduct = $request->get('id');
 
         $product = $this->product
+                        ->with('comments')
                         ->find($idProduct);
 
         $data['user_id'] = auth()->user()->id;

@@ -56,7 +56,7 @@ class PurchasedController extends Controller
             $type    = 'warning';
         } else {
             $product->shopping()->create([
-                'user_id'    => $product->user->id,
+                'user_id'    => auth()->user()->id,
                 'product_id' => $product->id,
             ]);
             $product->quantity_inventory -= 1;

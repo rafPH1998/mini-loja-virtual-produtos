@@ -10,11 +10,6 @@ use Illuminate\Support\Facades\Mail;
 
 class SendMailProductCommented
 {
-    public function __construct()
-    {
-        //
-    }
-
     public function handle(ProductCommentedEvents $event)
     {
         $product = $event->getProduct();

@@ -30,8 +30,9 @@ class CommentProduct extends Model
     protected function createdAt(): Attribute
     {
         Carbon::setLocale('pt_BR');
+
         return Attribute::make(
-            get: fn ($value) => Carbon::make($value)->format('d/m/Y') . ' (' . Carbon::make($value)->diffForHumans() . ') '       
+            get: fn ($value) => Carbon::parse($value)->format('d/m/Y') . ' (' . Carbon::parse($value)->diffForHumans() . ')'     
         );
     }
     

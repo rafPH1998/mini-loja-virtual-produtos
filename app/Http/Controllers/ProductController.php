@@ -7,6 +7,7 @@ use App\Enums\ProductTypeEnum;
 use App\Http\Requests\Products\StoreAndUpdateProduct;
 use App\Models\CommentProduct;
 use App\Models\Product;
+use App\Models\PurchasedProducts;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -74,7 +75,7 @@ class ProductController extends Controller
         return response()->json(['data' => $product], 201);
     }
 
-    protected function show($id)
+    public function show($id)
     {
         $product = $this->product
                         ->with([
@@ -113,6 +114,19 @@ class ProductController extends Controller
                             ->paginate(5);
 
         return view('products.myProducts', compact('myProducts'));
+    }
+
+    protected function myShoppings()
+    {        
+        $myShoppings = PurchasedProducts::
+                            where('user_id', auth()->user()->id)
+                            ->with([
+                                'user',
+                                'product',
+                            ])
+                            ->paginate(5);
+
+        return view('products.myShoppings', compact('myShoppings'));
     }
 
     protected function update(Request $request, string $id)

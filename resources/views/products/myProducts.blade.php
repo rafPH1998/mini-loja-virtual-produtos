@@ -1,7 +1,7 @@
 <x-app>
     <x-modal />
 
-    @if (count($myProducts) == 0)
+    @if ($myProducts->isEmpty())
         <div class="w-full shadow-2xl sm:rounded-lg mt-3 bg-gray-900">
             <p class="px-8 py-8">
                 Nenhum produto seu cadastrado em nosso sistema!
@@ -43,7 +43,16 @@
                             $ {{ number_format($product->price , 2, ',', '.') }}
                         </td>
                         <td class="py-4 px-6">
-                            {{ $product->quantity_inventory > 0 ? $product->quantity_inventory : 'Sem estoque'}}
+                            @if ($product->quantity_inventory > 0)
+                               <p class="text-green-500"> {{$product->quantity_inventory}}</p>
+                            @else
+                                <p class="inline-flex items-center
+                                    px-3 py-0.5 rounded-full text-sm 
+                                    font-medium 
+                                    bg-red-100 text-red-800">
+                                    <b>Sem estoque</b>
+                                </p>
+                            @endif
                         </td>
                         <td class="flex mt-3">
                             <a href="{{ route('products.comments', $product->id) }}">

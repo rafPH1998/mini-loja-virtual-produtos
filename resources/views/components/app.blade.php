@@ -73,12 +73,11 @@
                 <div id="dropdownDivider" 
                     class="z-10 absolute hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                     <div id="ul" class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDividerButton">
-                        <a href="{{ route('products.myProducts') }}" class="ml-2">
-                            <p class="text-blue-600 ml-3">Meu produtos</p>
+                        <a href="{{ route('products.myShoppings') }}" class="ml-2">
+                            <p class="text-blue-600 ml-3">Minhas compras</p>
                         </a>
-                        <a href="" 
-                            data-toggle="modal" data-target="#exampleModal" class="ml-2">
-                            <p class="text-blue-600 ml-3">Adicionar endereços</p>
+                        <a href="{{ route('products.myProducts') }}" class="ml-2">
+                            <p class="text-blue-600 ml-3">Minhas produtos</p>
                         </a>
                         <form action="{{route('logout')}}" method="POST" class="ml-3 mt-3">
                             @csrf

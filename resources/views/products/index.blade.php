@@ -37,8 +37,8 @@
                 <div class="p-4">
                     <div class="flex justify-between">
                         <p class="mb-3 font-normal text-white">
-                            {{ $product->product_name_format }}
-                            @if ($product->format_date)
+                            {{ $product->getFormattedName() }}
+                            @if ($product->isRecent())
                                 <img class="h-8 w-8" src="{{url('images/new.png')}}" alt="">
                             @endif
                         </p>
