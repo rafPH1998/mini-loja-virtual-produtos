@@ -8,10 +8,9 @@ class LikeController extends Controller
 {
     public function __invoke()
     {
-        $id = request()->id;
         $loggedUser = auth()->user()->id;
 
-        $product = Product::with(['like', 'user'])->findOrFail($id);
+        $product = Product::with(['like', 'user'])->findOrFail(request()->id);
         $like = $product->like()
                         ->where('user_id', $loggedUser)
                         ->first();
