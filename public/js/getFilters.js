@@ -1,19 +1,23 @@
 const statusFilter = (element) => {
     showPreloader();
     
-    fetch(`http://localhost:8989/products?status=${element.value}`)
-    .then(response => {
-        return response.json()
-    })
-    .then(result => {
-        
-        if (result.error !== '') {
-            swal("Erro!", `${result.error}`, "error");
-            clearPreloader();
-        } else {
-            showResults(result)
-        }
-    })
+    try {
+        fetch(`http://localhost:8989/products?status=${element.value}`)
+        .then(response => {
+            return response.json()
+        })
+        .then(result => {
+
+            if (result.error !== '') {
+                swal("Erro!", `${result.error}`, "error");
+                clearPreloader();
+            } else {
+                showResults(result)
+            }
+        })
+    } catch (error) {
+        console.log(error)
+    }
 
     document.getElementById("p").innerHTML = '';
     document.getElementById("paginate").innerHTML = '';
@@ -21,6 +25,7 @@ const statusFilter = (element) => {
 
 const showResults = (json) => {
     let url_product = 'http://localhost:8989/';
+
 
     let html = 
     `<div class="flex items-stretch drop-shadow-xl">`;
@@ -37,8 +42,12 @@ const showResults = (json) => {
 
                     <div class="p-4">
                         <div class="flex justify-between">
-                            <p class="mb-3 font-normal text-white">
-                                <b> ${element.name} </b>`;
+                            <p class="mb-3 font-normal text-white">`;
+                                if (element.name.length > 15) {
+                                    html += `<b> ${element.name.substr(0, 15 - 3) + '...' }</b>`;
+                                } else {
+                                    html += `<b>${element.name}</b>`;
+                                }
                                 if (element.user.id == element.user_id) {
                                     html += `
                                     <p class="ml-2 text-green-500 mt-3">

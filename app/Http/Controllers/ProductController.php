@@ -19,7 +19,7 @@ class ProductController extends Controller
         protected Product $product, 
     ) { }
 
-    protected function index(Request $request)
+    public function index(Request $request)
     {        
         $products = $this->product
                         ->getProducts(
@@ -31,7 +31,7 @@ class ProductController extends Controller
             $productsForStatus = $this->product
                                         ->getLastFiveProductsForStatus(
                                             status: $request->get('status') ?? ''
-                                        );
+                                        );                         
                                         
             $productNotFound = count($productsForStatus) == 0 ? 'Nenhum produto encontrado para esse filtro' : '';
          

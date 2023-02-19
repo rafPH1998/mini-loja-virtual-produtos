@@ -17,10 +17,6 @@ class Product extends Model
 
     protected $guarded = [];
 
-    protected $appends = [
-        'product_name_format'
-    ];
-
     protected $casts = [
         'is_recent' => 'boolean',
     ];
@@ -46,7 +42,7 @@ class Product extends Model
         return $this->hasOne(PurchasedProducts::class);
     }
     
-    public const MAX_NAME_LENGTH = 12;
+    public const MAX_NAME_LENGTH = 15;
 
     public function getFormattedName(): string
     {
@@ -93,7 +89,7 @@ class Product extends Model
         return $products;
     }
 
-    public function getLastFiveProductsForStatus(string|null $status = ''): object
+    public function getLastFiveProductsForStatus(string|null $status = '')
     {
         return Product::query()
                     ->when($status == 'last_registered', fn($query) => $query->orderBy('created_at', 'DESC'))
