@@ -77,7 +77,8 @@ class ProductController extends Controller
         $product = $this->product
                         ->with([
                             'user',
-                            'shopping'
+                            'shopping',
+                            'like'
                         ])
                         ->findOrFail($id);
 

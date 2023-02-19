@@ -41,6 +41,11 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Address::class);
     }
+
+    public function like(): BelongsTo
+    {
+        return $this->belongsTo(Like::class);
+    }
     
     public function comments(): BelongsTo
     {

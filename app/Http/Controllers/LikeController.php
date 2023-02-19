@@ -9,20 +9,26 @@ class LikeController extends Controller
     public function __invoke()
     {
         $id = request()->id;
+        $loggedUser = auth()->user()->id;
 
-        $product = Product::with('like')->findOrFail($id);
-
-        //verificando se o produto ja possui like
-        if ($product->like->count() > 0) {
-            $product->like()->delete();
-            return response()->json(['success' => true], 204);
-        } else {
-            $product->like()->create([
-                'user_id'    => auth()->user()->id,
-                'product_id' => $product->id
+        $product = Product::with(['like', 'user'])->findOrFail($id);
+        $like = $product->like()
+                        ->where('user_id', $loggedUser)
+                        ->first();
+        if ($like) {
+            $like->delete();
+            return response()->json([
+                'product_id' => $like->product_id, 
+                'user_id'    => $loggedUser,
+                'deleted'    => true
             ]);
-        
-            return response()->json(['success' => true], 201);
-        }
+        } else {
+            $like = $product->like()->create(['user_id' => $loggedUser]);
+            return response()->json([
+                'product_id' => $like->product_id, 
+                'user_id'    => $loggedUser,
+                'created'    => true
+            ]);
+        }      
     }
 }

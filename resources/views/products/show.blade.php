@@ -23,11 +23,20 @@
                 @endif
             </div>
 
-            <p class="leading-relaxed mt-5 text-white">
+            <p class="leading-relaxed mt-4 text-white">
                 <b>Descrição do produto: </b>
                 <p class="text-gray-500">{{ $product->description }}</p>
             </p>
-            <div class="my-3 mt-5 text-white">
+
+            <p class="leading-relaxed mt-4 text-white flex">
+                <b>Avaliações do produto: </b>
+                <div class="flex">
+                    <p class="text-blue-400 text-sm mt-0.5 mr-1">({{ $product->like->count()}})</p>
+                    <img class="w-5 h-5" src="{{url('images/like.png')}}" alt="likes">
+                </div>    
+            </p>
+
+            <div class="my-3 mt-4 text-white">
                 <b>Quantidade:</b>
                 <div id="result_do_php" style="display: block;">
                     <p>
@@ -42,13 +51,13 @@
                     <p>
                         <p class="inline-flex items-center
                              px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                             <b id="result">teste</b>
+                             <b id="result"></b>
                          </p>
                     </p>
                 </div>
             </div>
 
-            <div class="my-3 mt-5">
+            <div class="my-3 mt-4">
                 <b class="text-white">Estado do produto:</b>
                 @foreach ($qualityStatus as $status)
                     <p class="text-gray-500">

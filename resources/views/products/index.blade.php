@@ -83,18 +83,20 @@
                         <form action="#" method="POST">
                             @csrf
                             <input type="hidden" name="_token" value="{{ csrf_token() }}" id="_token">
-                            <input type="hidden" name="id" value="{{ $product->id }}" id="id">   
-                        
-                            <button id="likedPost" 
-                                class="border-none focus:outline-none 
-                                {{!$product->like->count() > 0 ? 'text-green-500' : 'text-red-500'}}"
-                                >
-                                @if ($product->like->count() == 0)
-                                    curtir
-                                @else
-                                    descurtir
-                                @endif  
-                            </button>          
+                            @if ($product->user->id !== auth()->user()->id)
+    
+                            
+                                <button onclick="likedPost(event, {{ auth()->user()->id }}, {{ $product->id }}, this)"
+                                    class="focus:outline-none text-sm  border transition ease-in-out delay-150 hover:-translate-y-1  p-1 rounded-md 
+                                    {{ !$product->hasLikedByUser(auth()->id()) ? 'text-green-500' : 'text-red-500' }}"
+                                    >                
+                                    @if ($product->hasLikedByUser(auth()->id()))
+                                        descurtir
+                                    @else
+                                        curtir
+                                    @endif
+                                </button>         
+                            @endif 
                         </form>
                        
                     </div>
@@ -165,43 +167,3 @@
     </div>
 </x-app>
 
-
-<script>
-
-const url       = 'http://localhost:8989/products/like';
-const csrfToken = document.getElementById("_token").value;
-const id        = document.getElementById("id").value;
-const likedPost = document.getElementById("likedPost");
-
-likedPost.addEventListener("click", async function (event) {
-    event.preventDefault();
-    likedPost.disabled = true;
-
-    const config = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'accept': 'application/json'
-        },
-        body: JSON.stringify({
-            id,
-            _token: csrfToken
-        })
-    };
-
-    try {
-        const response = await fetch(url, config);
-
-        if (response.status === 201) {
-            likedPost.innerHTML = `<button class="text-red-500 border-none focus:outline-none">descurtir</button>`;
-        } else if (response.status === 204) {
-            likedPost.innerHTML = `<button class="text-green-500 border-none focus:outline-none">curtir</button>`;
-        }
-    } catch (error) {
-        swal("Erro!", error, 'error');
-    } finally {
-        likedPost.disabled = false;
-    }
-});
-
-</script>
