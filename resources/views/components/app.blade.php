@@ -105,7 +105,7 @@
     <script src="{{ url('js/addProduct.js') }}"></script>
     <script src="{{ url('js/getFilters.js') }}"></script>
     <script src="{{ url('js/modalDelete.js') }}"></script>
-    <script src="{{ url('js/LikeProduct.js') }}"></script>
+    <script src="{{ url('js/LikeProdut.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/i18n/pt-BR.js"></script>
@@ -118,13 +118,23 @@
 
 
 <script>
-    let clicou   = document.getElementById('dropdownDividerButton');
-    let dropdown = document.getElementById("dropdownDivider")
+    let clicou = document.getElementById('dropdownDividerButton');
+    let dropdown = document.getElementById('dropdownDivider');
 
+    // adiciona um ouvinte de eventos de clique ao documento inteiro
+    document.addEventListener("click", function(event) {
+        // verifica se o alvo do clique não é o botão ou o próprio dropdown
+        if (event.target !== clicou && !dropdown.contains(event.target)) {
+            dropdown.classList.add('hidden');
+            dropdown.classList.remove('block');
+        }
+    });
+
+    // adiciona um ouvinte de eventos de clique ao botão
     clicou.addEventListener("click", function(){
-        dropdown.classList.toggle('hidden')
-        dropdown.classList.toggle('block')
-    })
-  
+        dropdown.classList.toggle('hidden');
+        dropdown.classList.toggle('block');
+    });
+    
 </script>
 
