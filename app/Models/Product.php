@@ -70,34 +70,25 @@ class Product extends Model
     {
         return now()->diffInDays($this->created_at) <= 5;
     }
-    
-   /*  Ao utilizar with('user.comments'), pode haver problemas de desempenho quando o número de produtos aumentar, 
-    pois o Eloquent executará uma consulta separada para cada produto para recuperar seus comentários.
-    Se você espera ter muitos produtos e comentários, pode ser mais eficiente recuperar os produtos primeiro e, 
-    em seguida, seus comentários em uma consulta separada com whereHas; */
+
+    // verifica se o usuario logado já deu like naquele determinado produto
+    public function hasLikedByUser($userId)
+    {
+        return $this->like()->where('user_id', $userId)->exists();
+    }
 
     public function getProducts(string|null $filter = '')
     {
-        $query = $this->orderBy('created_at', 'DESC');
-
-        if ($filter) {
-            $query->where('name', 'LIKE', "%{$filter}%");
-        }
-    
-        $products = $query->paginate(8);
-    
-        $productIds = $products->pluck('id')->toArray();
-    
-        $comments = Comment::with('user')
-                    ->whereHas('product', function ($query) use ($productIds) {
-                        $query->whereIn('id', $productIds);
+            $products = $this
+                    ->orderBy('created_at', 'DESC')
+                    ->when(function ($query) use ($filter) {
+                        $query->where('name', 'LIKE', "%{$filter}%");
                     })
-                    ->get()
-                    ->groupBy('product_id');
-    
-        foreach ($products as $product) {
-            $product->setRelation('comments', $comments->get($product->id, collect()));
-        }
+                    ->with([
+                        'user.like',
+                        'comments',
+                    ])
+                    ->paginate(8);  
     
         return $products;
     }
