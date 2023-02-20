@@ -1,4 +1,9 @@
-<form method="GET" action="#" class="flex items-center ml-5 mt-5 w-64">   
+@props([
+    'placeholder' => '',
+])
+
+
+<form method="GET" action="#" class="flex items-center mt-5 w-64">   
     <label for="simple-search" class="sr-only">Search</label>
     <div class="relative w-full">
         <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -15,7 +20,7 @@
                 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 
                 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
                 dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Procure por um produto"
+                placeholder="{{ $placeholder }}"
         >
     </div>
     <button type="submit" 
