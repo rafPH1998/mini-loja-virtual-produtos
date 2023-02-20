@@ -20,4 +20,19 @@ class PurchasedProducts extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getMyPurchaseds(null|string $filter = '')
+    {
+
+        return $this->with('product')
+                    ->where('user_id', '=', auth()->user()->id)
+                    ->whereHas('product', function ($query) use ($filter) {
+                        $query->where('name', 'LIKE', "%{$filter}%");
+                    })
+                    ->paginate(5);
+
+    }
+
+    
+
 }

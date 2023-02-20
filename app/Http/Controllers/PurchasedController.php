@@ -3,11 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\PurchasedProducts;
 use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Support\Facades\DB;
 
 class PurchasedController extends Controller
 {
+
+    public function __construct(
+        protected PurchasedProducts $purchasedProducts, 
+    ) { }
+
+    protected function index(HttpRequest $request)
+    {        
+        $myShoppings = $this->purchasedProducts
+            ->getMyPurchaseds(
+                filter: $request->get('filter') ?? ''
+            );
+
+        return view('products.myShoppings', compact('myShoppings'));
+    }
+    
     public function store(HttpRequest $request)
     {
         $idProduct = $request->get('id');
