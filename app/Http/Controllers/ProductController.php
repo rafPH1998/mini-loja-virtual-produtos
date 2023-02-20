@@ -6,7 +6,6 @@ use App\Enums\ProductQualityEnum;
 use App\Enums\ProductTypeEnum;
 use App\Http\Requests\Products\StoreAndUpdateProduct;
 use App\Models\Product;
-use App\Models\PurchasedProducts;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -112,19 +111,6 @@ class ProductController extends Controller
                             ->paginate(5);
 
         return view('products.myProducts', compact('myProducts'));
-    }
-
-    protected function myShoppings()
-    {        
-        $myShoppings = PurchasedProducts::
-                            where('user_id', auth()->user()->id)
-                            ->with([
-                                'user',
-                                'product',
-                            ])
-                            ->paginate(5);
-
-        return view('products.myShoppings', compact('myShoppings'));
     }
 
     protected function update(Request $request, string $id)

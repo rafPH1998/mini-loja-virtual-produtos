@@ -1,12 +1,21 @@
 <x-app>
 
     <div class="ml-5">
-        <a href="{{ route('products.create') }}" class="btn btn-dark">
-            <i class="fas fa-plus"></i>
+        <a href="{{ route('products.create') }}" 
+            class="text-blue-700 hover:text-white border
+            border-blue-700 hover:bg-blue-800 focus:ring-4
+            focus:outline-none focus:ring-blue-300 font-medium 
+            rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 
+            dark:border-blue-500 dark:text-blue-500
+            dark:hover:text-white dark:hover:bg-blue-600
+            dark:focus:ring-blue-800">
+            Adicionar um produto
         </a>
     </div>
 
-    <x-form.search/>
+    <div class="ml-4">
+        <x-form.search placeholder="Procure por um produto" />
+    </div>
 
     @if (count($products) > 0)
         <div class="py-12 flex flex-row-reverse">
@@ -109,61 +118,14 @@
         @endforelse
     </div>    
 
-
     <div id="posts" class="flex items-stretch drop-shadow-xl"></div>
 
     <div id="paginate">
-        @if ($products->total() > 8)
-            <nav class="flex justify-between items-center pt-4" aria-label="Table navigation">
-                <ul class="inline-flex items-center -space-x-px py-2.5 px-2.5">
-                    @if ($products->currentPage() > 1)
-                        <li>
-                            <a href="?page={{ $products->currentPage() - 1 }}" class="block py-2 px-3 ml-0 
-                                leading-tight text-gray-500 bg-white 
-                                rounded-l-lg border border-gray-300 hover:bg-gray-100 
-                                hover:text-gray-700 dark:bg-gray-800 
-                                dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 
-                                dark:hover:text-white">
-                                <span class="sr-only">Previous</span>
-                                <svg class="w-5 h-5" aria-hidden="true" 
-                                    fill="currentColor" viewBox="0 0 20 20" 
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" 
-                                        d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 
-                                        1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd">
-                                    </path>
-                                </svg>
-                            </a>
-                        </li>
-                    @endif
-                    <li>
-                        <a href="#" aria-current="page" 
-                            class="py-2 px-3 text-blue-600 bg-blue-50 border 
-                            border-gray-300 hover:bg-blue-100 hover:text-blue-700 
-                            dark:border-gray-700 dark:bg-gray-700 dark:text-white">
-                            {{ $products->currentPage() }}
-                        </a>
-                    </li>
-                    @if ($products->currentPage() < $products->lastPage())
-                        <li>
-                            <a href="?page={{ $products->currentPage() + 1 }}" class="block py-2 px-3 
-                                leading-tight text-gray-500 bg-white 
-                                rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 
-                                dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 
-                                dark:hover:text-white">
-                                <span class="sr-only">Next</span>
-                                    <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" 
-                                        xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" 
-                                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 
-                                        1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd">
-                                    </path>
-                                </svg>
-                            </a>
-                        </li>
-                    @endif
-                </ul>
-            </nav>
-        @endif
+        <div class="py-4">
+            {{ $products->appends([
+                'filter' => request()->get('filter')
+              ])->links() }}
+        </div>
     </div>
 </x-app>
 

@@ -15,14 +15,14 @@ Route::middleware('auth')->group(function() {
     * Route ProductController
     */
     Route::resource('/products', ProductController::class);
+    Route::get('myProducts', [ProductController::class, 'myProducts'])->name('products.myProducts');  
 
 
     /**
     * Route PurchasedController
     */
     Route::post('/products/buy', [PurchasedController::class, 'store'])->name('products.purchased');
-    Route::get('myProducts', [ProductController::class, 'myProducts'])->name('products.myProducts');  
-    Route::get('myShoppings', [ProductController::class, 'myShoppings'])->name('products.myShoppings');  
+    Route::get('myShoppings', [PurchasedController::class, 'index'])->name('products.myShoppings');  
 
 
     /**

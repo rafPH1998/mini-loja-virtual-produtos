@@ -81,11 +81,10 @@ class Product extends Model
                         $query->where('name', 'LIKE', "%{$filter}%");
                     })
                     ->with([
-                        'user.like',
-                        'comments',
+                        'user.comments', // carrega apenas o id e o nome do usuário
                     ])
                     ->paginate(8);  
-    
+                    
         return $products;
     }
 
