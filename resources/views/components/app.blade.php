@@ -12,9 +12,6 @@
     >
 
     <title>Mini loja virtual</title>
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
@@ -71,19 +68,19 @@
                 </button>
                 <!-- Dropdown menu -->
                 <div id="dropdownDivider" 
-                    class="z-10 absolute hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                    <div id="ul" class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDividerButton">
+                    class="z-10 absolute hidden bg-gray-600 divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                    <div id="ul" class="py-1 text-xs text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDividerButton">
                         <a href="{{ route('products.myShoppings') }}" class="ml-2">
-                            <p class="text-blue-600 ml-3">Minhas compras</p>
+                            <p class="text-white ml-3">Minhas compras</p>
                         </a>
-                        <a href="{{ route('products.myProducts') }}" class="ml-2">
-                            <p class="text-blue-600 ml-3">Minhas produtos</p>
+                        <a href="{{ route('products.myProducts') }}" class="ml-2 no-underline" >
+                            <p class="text-white ml-3">Meus produtos cadastrado no sistema</p>
                         </a>
                         <form action="{{route('logout')}}" method="POST" class="ml-3 mt-3">
                             @csrf
                             <a href="{{route('logout')}}" 
                                 onclick="event.preventDefault(); this.closest('form').submit();">
-                                <p class="text-blue-600">Sair</p>
+                                <p class="text-white">Sair</p>
                             </a>
                         </form>
                     </div>
@@ -106,12 +103,6 @@
     <script src="{{ url('js/getFilters.js') }}"></script>
     <script src="{{ url('js/modalDelete.js') }}"></script>
     <script src="{{ url('js/likeProduct.js') }}"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/i18n/pt-BR.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" integrity="sha512-RXf+QSDCUQs5uwRKaDoXt55jygZZm2V++WUZduaU/Ui/9EGp3f/2KZVahFZBKGH0s774sd3HmrhUy+SgOFQLVQ==" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 </body>
 </html>
