@@ -64,7 +64,7 @@ class Product extends Model
 
     public function isRecent(): bool
     {
-        return now()->diffInDays($this->created_at) <= 5;
+        return now()->diffInDays($this->created_at) <= 3;
     }
 
     // verifica se o usuario logado já deu like naquele determinado produto
@@ -74,16 +74,17 @@ class Product extends Model
     }
 
     public function getProducts(string|null $filter = '')
-    {
-            $products = $this
-                    ->orderBy('created_at', 'DESC')
-                    ->when(function ($query) use ($filter) {
-                        $query->where('name', 'LIKE', "%{$filter}%");
+    { 
+        $products = $this
+                    ->when($filter, function ($query, $filter) {
+                        return $query->where('name', 'LIKE', "%{$filter}%");
                     })
+                    ->orderBy('created_at', 'DESC')
                     ->with([
-                        'user.comments', // carrega apenas o id e o nome do usuário
+                        'user',
+                        'comments',
                     ])
-                    ->paginate(8);  
+                    ->paginate(8);
                     
         return $products;
     }
