@@ -93,8 +93,6 @@
                             @csrf
                             <input type="hidden" name="_token" value="{{ csrf_token() }}" id="_token">
                             @if ($product->user->id !== auth()->user()->id)
-    
-                            
                                 <button onclick="likedPost(event, {{ auth()->user()->id }}, {{ $product->id }}, this)"
                                     class="focus:outline-none text-sm  border transition ease-in-out delay-150 hover:-translate-y-1  p-1 rounded-md 
                                     {{ !$product->hasLikedByUser(auth()->id()) ? 'text-green-500' : 'text-red-500' }}"
