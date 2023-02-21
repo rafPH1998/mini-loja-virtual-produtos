@@ -101,6 +101,7 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="{{ url('js/addProduct.js') }}"></script>
     <script src="{{ url('js/getFilters.js') }}"></script>
+    <script src="{{ url('js/getFiltersComments.js') }}"></script>
     <script src="{{ url('js/modalDelete.js') }}"></script>
     <script src="{{ url('js/likeProduct.js') }}"></script>
 
