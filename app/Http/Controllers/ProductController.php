@@ -35,8 +35,9 @@ class ProductController extends Controller
             $productNotFound = count($productsForStatus) == 0 ? 'Nenhum produto encontrado para esse filtro' : '';
          
             return response()->json([
-                'data'  => $productsForStatus,
-                'error' => $productNotFound
+                'data'          => $productsForStatus,
+                'error'         => $productNotFound,
+                'qualityStatus' => ProductQualityEnum::cases()
             ], 200);
         }
 
