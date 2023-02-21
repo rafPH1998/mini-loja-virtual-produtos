@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\ProductCommentedEvents;
-use App\Http\Requests\Products\CommentRequest;
+use App\Http\Requests\Products\CommentProductRequest;
 use App\Models\Comment;
 use App\Models\Product;
 use App\Mail\ProductCommented;
@@ -17,7 +17,7 @@ class CommentController extends Controller
         protected Comment $comments
     ) { }
 
-    public function __invoke(CommentRequest $request)
+    public function __invoke(CommentProductRequest $request)
     {
         $data = $request->validated();
         $idProduct = $request->get('id');
