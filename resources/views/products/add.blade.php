@@ -9,13 +9,14 @@
                 @csrf
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" id="_token">
 
-             {{--    <div class="relative">
+                <div class="relative p-2">
                     <label for="image" class="leading-7 text-sm text-white">Foto</label>
                     <input type="file" id="image" name="image"
                         class="appearance-none border rounded w-full 
                         py-2 px-3 text-gray-700 
                         leading-tight focus:outline-none focus:shadow-outline">
-                </div> --}}
+                    <span id="imgError" class="text-red-500"></span>
+                </div>
                 
                 <div class="p-2 w-full">
                     <x-inputs-product.text type="text" id="name" name="name" label="Nome do produto" msgError="nameErro" />

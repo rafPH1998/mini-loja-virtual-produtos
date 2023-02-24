@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\UploadFile;
 use App\Enums\ProductQualityEnum;
 use App\Enums\ProductTypeEnum;
 use App\Http\Requests\Products\StoreAndUpdateProduct;
@@ -58,7 +59,7 @@ class ProductController extends Controller
         ]);
     }
 
-    protected function store(StoreAndUpdateProduct $request)
+    protected function store(StoreAndUpdateProduct $request, UploadFile $uploadFile)
     {
         $data = $request->validated();
         $user = auth()->user();
@@ -66,6 +67,11 @@ class ProductController extends Controller
         $data['user_id'] = $user->id; 
         $data['date'] = now()->format('Y-m-d H:i:s');
 
+        if ($data['image']) {
+            $data['image'] = $uploadFile->store($request->image, 'products');
+        }
+
+        
         /** @var User $user */
         $product = $user->products()->create($data);
         
