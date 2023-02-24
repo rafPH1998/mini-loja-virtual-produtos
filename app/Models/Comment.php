@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Auth;
 
 use function PHPSTORM_META\type;
 
@@ -35,14 +37,13 @@ class Comment extends Model
             get: fn ($value) => Carbon::parse($value)->format('d/m/Y') . ' (' . Carbon::parse($value)->diffForHumans() . ')'     
         );
     }
-    
-    public function getComments(string|null $filter = 'allComments', $comment)
-    {
-        return $this->with('user')
-                        ->when($filter == 'myComments', fn($query) => $query->where('user_id', '=', auth()->user()->id))   
-                        ->where('product_id', '=', $comment)
-                        ->paginate(6);
 
+    public function getComments(string $filter, int $comment, string $userAuth): LengthAwarePaginator
+    {
+        return $this->when($filter == 'myComments', fn($query) => $query->where('user_id', '=', $userAuth))
+            ->where('product_id', '=', $comment)
+            ->with('user')
+            ->paginate(6);
     }
 
 }

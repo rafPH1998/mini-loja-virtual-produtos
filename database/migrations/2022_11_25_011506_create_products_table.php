@@ -27,7 +27,6 @@ return new class extends Migration
                 'jogos', 
                 'acessorios', 
                 'brinquedos', 
-                'games', 
                 'roupas', 
                 'perfumaria'
             ]);

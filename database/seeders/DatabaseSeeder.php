@@ -11,10 +11,11 @@ class DatabaseSeeder extends Seeder
 {
     public function run()
     {
-        Product::factory()->count(1)->create([
+        Product::factory()->count(201)->create([
             'user_id'    => 1,
             'created_at' => now()->subDays(2),
-            'date'       => now()->subDays(2)
+            'date'       => now()->subDays(2),
+            'type'       => 'roupas'
         ]);
     }
 }

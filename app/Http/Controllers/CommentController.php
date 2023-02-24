@@ -47,8 +47,9 @@ class CommentController extends Controller
 
         $listComments = $this->comments
                     ->getComments(
-                        filter: $request->get('filter') ?? '',
-                        comment: $comment
+                        userAuth: auth()->user()->id,
+                        filter  : $request->get('filter') ?? '',
+                        comment : $comment
                     );
 
 
