@@ -97,19 +97,31 @@ class Product extends Model
                     ->when($status == 'last_registered', fn($query) => $query->orderBy('created_at', 'DESC'))
                     ->when($status == 'cheap', fn($query) => $query->orderBy('price', 'ASC'))
                     ->when($status == 'expensive', fn($query) => $query->orderBy('price', 'DESC'))
-                    ->when($status == 'eletronicos', fn($query) => $query->where('type', 'eletronicos'))
-                    ->when($status == 'livros', fn($query) => $query->where('type', 'livros'))
-                    ->when($status == 'jogos', fn($query) => $query->where('type', 'jogos'))
-                    ->when($status == 'acessorios', fn($query) => $query->where('type', 'acessorios'))
-                    ->when($status == 'roupas', fn($query) => $query->where('type', 'roupas'))
-                    ->when($status == 'perfumaria', fn($query) => $query->where('type', 'perfumaria'))
+                    ->when(in_array($status, [
+                            'eletronicos', 
+                            'livros', 
+                            'jogos',
+                            'acessorios', 
+                            'roupas', 
+                            'perfumaria']
+                        ), 
+                        function ($query) use ($status) {
+                            return $query
+                                ->when($status == 'news', fn($query) => $query->where('quality', 'novo'))
+                                ->when($status == 'eletronicos', fn($query) => $query->where('type', 'eletronicos'))
+                                ->when($status == 'livros', fn($query) => $query->where('type', 'livros'))
+                                ->when($status == 'jogos', fn($query) => $query->where('type', 'jogos'))
+                                ->when($status == 'acessorios', fn($query) => $query->where('type', 'acessorios'))
+                                ->when($status == 'roupas', fn($query) => $query->where('type', 'roupas'))
+                                ->when($status == 'perfumaria', fn($query) => $query->where('type', 'perfumaria'));
+                        }
+                    )
                     ->with([
                         'comments',
                         'user'
                     ])
                     ->get()
                     ->take(5);
-
     }
 
     
