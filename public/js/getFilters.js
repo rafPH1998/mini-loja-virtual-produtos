@@ -9,11 +9,21 @@ const statusFilter = (element) => {
         .then(result => {
 
             if (result.error !== '') {
-                swal("Erro!", `${result.error}`, "error");
                 clearPreloader();
-            } else {
-                showResults(result)
-            }
+                swal({
+                    icon: "error",
+                    title: "Erro!",
+                    text: `${result.error}`,
+                    type: "error",
+                    confirmButtonText: "OK"
+                }).then((confirmed) => {
+                    if (confirmed) {
+                        window.location.href = "http://localhost:8989/products";
+                    }
+                });
+              } else {
+                showResults(result);
+              }
         })
     } catch (error) {
         console.log(error)
