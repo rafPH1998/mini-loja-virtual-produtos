@@ -89,16 +89,20 @@ class Product extends Model
         return $products;
     }
 
+
+
     public function getLastFiveProductsForStatus(string|null $status = '')
     {
         return Product::query()
                     ->when($status == 'last_registered', fn($query) => $query->orderBy('created_at', 'DESC'))
                     ->when($status == 'cheap', fn($query) => $query->orderBy('price', 'ASC'))
                     ->when($status == 'expensive', fn($query) => $query->orderBy('price', 'DESC'))
-                    ->when($status == 'news', fn($query) => $query->where('quality', 'novo'))
-                    ->when($status == 'semi_news', fn($query) => $query->where('quality', 'semi_novo'))
-                    ->when($status == 'god', fn($query) => $query->where('quality', 'bom'))
-                    ->when($status == 'medium', fn($query) => $query->where('quality', 'medio'))
+                    ->when($status == 'eletronicos', fn($query) => $query->where('type', 'eletronicos'))
+                    ->when($status == 'livros', fn($query) => $query->where('type', 'livros'))
+                    ->when($status == 'jogos', fn($query) => $query->where('type', 'jogos'))
+                    ->when($status == 'acessorios', fn($query) => $query->where('type', 'acessorios'))
+                    ->when($status == 'roupas', fn($query) => $query->where('type', 'roupas'))
+                    ->when($status == 'perfumaria', fn($query) => $query->where('type', 'perfumaria'))
                     ->with([
                         'comments',
                         'user'
@@ -107,5 +111,6 @@ class Product extends Model
                     ->take(5);
 
     }
+
     
 }

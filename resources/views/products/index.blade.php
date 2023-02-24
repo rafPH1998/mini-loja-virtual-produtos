@@ -13,6 +13,39 @@
         </a>
     </div>
 
+    <div class="text-gray-800 text-xl text-center pt-4">Ecommerce Product Cart</div>
+        <div class="w-full h-screen flex justify-center items-center">
+            <div>
+                <div class="w-72">  
+                    <div class="shadow hover:shadow-lg transition duration-300 ease-in-out xl:mb-0 lg:mb-0 md:mb-0 mb-6 cursor-pointer group">
+                        <div class="overflow-hidden relative">
+                        <img class="w-full transition duration-700 ease-in-out group-hover:opacity-60" src="https://klbtheme.com/shopwise/fashion/wp-content/uploads/2020/04/product_img10-1.jpg" alt="image" />
+        
+                    </div>
+                    <div class="px-4 py-3 bg-gray-900 rounded-lg">
+                        <a href="#" class=""><h1 class="text-white font-semibold text-lg hover:text-blue-500 transition duration-300 ease-in-out">White Line Dress</h1></a>
+                        <div class="flex py-2">
+                            <p class="mr-2 text-xs text-white">$45.00</p>
+                                <p class="mr-2 text-xs text-red-600 line-through">$15.00</p>
+                        </div>
+                        <div class="flex">
+                            <div class="">
+                                <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                <i class="far fa-star text-gray-400 text-xs"></i>
+                            </div>
+                            <div class="ml-2">
+                                <p class="text-gray-500 font-medium text-sm">(1)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="ml-4">
         <x-form.search placeholder="Procure por um produto" />
     </div>
@@ -26,12 +59,13 @@
                 <option @if(request('status') == 'last_registered') selected @endif value="last_registered">Trazer os 5 últimos produtos cadastrados</option>
             </x-form.options>
 
-            <x-form.options id="quality" name="quality" label="Busque por avaliação">
-                <option @if(request('status') == 'all') selected @endif value="all">Todos</option>
-                <option @if(request('status') == 'news') selected @endif value="news">Trazer os 5 últimos produtos novos</option>
-                <option @if(request('status') == 'semi_news') selected @endif value="semi_news">Trazer os 5 últimos produtos semi novos</option>
-                <option @if(request('status') == 'god') selected @endif value="god">Trazer os 5 últimos produtos bons</option>
-                <option @if(request('status') == 'medium') selected @endif value="medium">Trazer os 5 últimos produtos médios</option>
+            <x-form.options id="quality" name="quality" label="Busque por categoria">
+                <option @if(request('status') == 'eletronicos') selected @endif value="eletronicos">eletronicos</option>
+                <option @if(request('status') == 'livros') selected @endif value="livros">livros</option>
+                <option @if(request('status') == 'jogos') selected @endif value="jogos">jogos</option>
+                <option @if(request('status') == 'acessorios') selected @endif value="acessorios">acessorios</option>
+                <option @if(request('status') == 'roupas') selected @endif value="roupas">roupas</option>
+                <option @if(request('status') == 'perfumaria') selected @endif value="perfumaria">perfumaria</option>
             </x-form.options>
         </div>
     @endif
