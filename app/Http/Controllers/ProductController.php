@@ -111,7 +111,9 @@ class ProductController extends Controller
                             ])
                             ->paginate(5);
 
-        return view('products.myProducts', compact('myProducts'));
+        $totalCountProduct = $myProducts->total();
+
+        return view('products.myProducts', ['myProducts' => $myProducts, 'totalCountProduct' => $totalCountProduct]);
     }
 
     protected function update(Request $request, string $id)
