@@ -55,19 +55,31 @@
                             @endif
                         </td>
                         <td class="flex mt-3">
-                            <a href="{{ route('products.comments', $product->id) }}">
+                            <a class="transition ease-in-out 
+                                delay-150 hover:-translate-y-1 
+                                hover:scale-110 duration-300" 
+                                href="{{ route('products.comments', $product->id) }}">
                                 <img class="w-5 h-5 mt-1" src="{{url('images/comment.png')}}" alt="">
                             </a>
-                            <a href="{{ route('products.show', $product->id) }}">
+                            <a class="transition ease-in-out 
+                                delay-150 hover:-translate-y-1 
+                                hover:scale-110 duration-300" 
+                                href="{{ route('products.show', $product->id) }}">
                                 <img class="w-6 h-6 ml-2" src="{{url('images/eye.png')}}" alt="">
                             </a>
                     
                             @can('update-product', $product)
-                                <a href="{{ route('products.comments', $product->id) }}">
+                                <a class="transition ease-in-out 
+                                    delay-150 hover:-translate-y-1 
+                                    hover:scale-110 duration-300"
+                                    href="{{ route('products.comments', $product->id) }}">
                                     <img class="w-5 h-5 ml-2" src="{{url('images/pencil.png')}}" alt="">
                                 </a>
                             @endcan  
-                            <form action="#" method="POST">
+                            <form action="#" method="POST" 
+                                class="transition ease-in-out 
+                                delay-150 hover:-translate-y-1 
+                                hover:scale-110 duration-300">
                                 @method('DELETE')
                                 @csrf
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}" id="_token">
