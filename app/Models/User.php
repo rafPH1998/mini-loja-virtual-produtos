@@ -42,6 +42,11 @@ class User extends Authenticatable
         return $this->belongsTo(Address::class);
     }
 
+    public function shopping(): HasMany
+    {
+        return $this->hasMany(PurchasedProducts::class);
+    }
+
     public function like(): BelongsTo
     {
         return $this->belongsTo(Like::class);
