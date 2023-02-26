@@ -61,17 +61,19 @@ class ProductController extends Controller
 
     protected function store(StoreAndUpdateProduct $request, UploadFile $uploadFile)
     {
-        $data = $request->validated();
-        $user = auth()->user();
-        
-        $data['user_id'] = $user->id; 
-        $data['date'] = now()->format('Y-m-d H:i:s');
+        $data             = $request->validated();
+        $user             = auth()->user();
+        $data['user_id']  = $user->id; 
+        $data['date']     = now()->format('Y-m-d H:i:s');
 
-        if ($data['image']) {
+        $price            = intval($request->price);
+        $discountTotal    = $price * intval($request->discount) / 100;
+        $data['discount'] = $discountTotal > 0 ? $price - $discountTotal : null;
+       
+        if ($request->hasFile('image')) {
             $data['image'] = $uploadFile->store($request->image, 'products');
         }
 
-        
         /** @var User $user */
         $product = $user->products()->create($data);
         

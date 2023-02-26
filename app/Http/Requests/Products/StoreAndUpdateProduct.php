@@ -28,12 +28,13 @@ class StoreAndUpdateProduct extends FormRequest
 
         return [
             'name'               => ['required', 'min:3', 'max:100', Rule::unique('products')->ignore($id, 'id')],
-            'image'              => ['nullable'],
+            'image'              => ['required'],
             'type'               => [
                 'required',
                 Rule::in(['livros', 'jogos', 'roupas', 'eletronicos', 'brinquedos', 'acessorios', 'perfumaria']),
             ],
             'price'              => 'required|integer',
+            'discount'           => 'nullable',
             'description'        => 'required|min:3|max:100',
             'quantity_inventory' => 'required|integer|min:1',
             'quality'      => [
