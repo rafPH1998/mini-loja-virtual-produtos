@@ -53,6 +53,12 @@ const showResults = (json) => {
                     hover:bg-gray-900 duration-300
                     rounded-lg ml-4 mt-5">
 
+                    <div class="shadow hover:shadow-lg transition duration-300 
+                        ease-in-out xl:mb-0 lg:mb-0 md:mb-0 mb-6 cursor-pointer group">
+                        <img class="w-full h-64" 
+                            src="/storage/${element.image}" alt="image"
+                            />
+                    </div>
                     <div class="p-4">
                         <div class="flex justify-between">
                             <p class="mb-3 font-normal text-white">`;
@@ -80,9 +86,10 @@ const showResults = (json) => {
                             </p>`;
                         }
                         html += `
-                        <p class="mt-3 font-normal text-white">
-                            $  ${element.price.toFixed(2)}
-                        </p>
+                        <div class="flex">
+                            <p class="mt-3 text-xs text-white">$ ${element.price.toFixed(2)} </p>  
+                            <p class="mt-3 ml-2 text-xs text-red-600 line-through">$15.00</p>
+                        </div>   
                         <p style="font-size: 12px;" class="mb-1 text-sm mt-2 text-white">
                             Criado em: ${element.date} 
                         </p>
