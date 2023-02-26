@@ -2,6 +2,7 @@
 const imageInput = document.getElementById('image');
 const nameInput = document.getElementById('name');
 const priceInput = document.getElementById('price');
+const discountInput = document.getElementById('discount');
 const quantityInventoryInput = document.getElementById('quantity_inventory');
 const qualityInput = document.getElementById('quality');
 const typeInput = document.getElementById('type');
@@ -9,34 +10,37 @@ const descriptionInput = document.getElementById('description');
 const tokenInput = document.getElementById('_token');
 
 //campos para exibir erro
-const nameErrorSpan = document.getElementById('nameErro')
 const imgError = document.getElementById('imgError')
+const nameErrorSpan = document.getElementById('nameErro')
 const priceErrorSpan = document.getElementById('priceErro');
 const inventoryErrorSpan = document.getElementById('inventoryErro');
 const qualityErrorSpan = document.getElementById('qualityErro');
 const typeErrorSpan = document.getElementById('typeErro');
 const descErrorSpan = document.getElementById('descErro');
 
-// array de erros
-const errorSpans = [nameErrorSpan, imgError, priceErrorSpan, inventoryErrorSpan, qualityErrorSpan, typeErrorSpan, descErrorSpan];
-
 const form = document.getElementById("addForm");
 const submitButton = document.getElementById("button");
 
 form.addEventListener("submit", async function(event) {
     event.preventDefault();
-
+    
     submitButton.innerHTML = 'Enviando...';
     submitButton.disabled = true;
 
     const url = 'http://localhost:8989/products';
     
     try {
-        const formData = new FormData();
 
-        formData.append('name', nameInput.value);
+        if (!validateImage()) {
+            return;
+        }
+
+        const formData = new FormData();
+        
         formData.append('image', imageInput.files[0]);
+        formData.append('name', nameInput.value);
         formData.append('price', priceInput.value);
+        formData.append('discount', discountInput.value);
         formData.append('quantity_inventory', quantityInventoryInput.value);
         formData.append('quality', qualityInput.value);
         formData.append('type', typeInput.value);
@@ -52,10 +56,9 @@ form.addEventListener("submit", async function(event) {
         });
 
         const result = await response.json();
-
         if (!result.errors) {
-            clearInputs();
             clearErrors();
+            clearInputs();
             swal("Success!", 'Produto cadastrado com sucesso!', "success");
         } else {
             showErrors(result.errors);
@@ -77,21 +80,67 @@ const clearErrors = () => {
 };
 
 const clearInputs = () => {
-  nameInput.value              = '';
-  priceInput.value             = '';
-  quantityInventoryInput.value = '';
-  qualityInput.value           = '';
-  typeInput.value              = '';
-  descriptionInput.value       = '';
-  imageInput.value             = ''
+    imageInput.value             = '';
+    nameInput.value              = '';
+    priceInput.value             = '';
+    discountInput.value          = '';
+    quantityInventoryInput.value = '';
+    qualityInput.value           = '';
+    typeInput.value              = '';
+    descriptionInput.value       = '';
 };
 
-const showErrors = (errors) => {
-  const errorKeys = ['name', 'image', 'price', 'quantity_inventory', 'quality', 'type', 'description'];
+
+const fileTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+
+const validateImage = () => {
+    const file = imageInput.files[0];
   
-  errorKeys.forEach((errorKey, index) => {
-    if (errors[errorKey]) {
-        errorSpans[index].innerHTML = errors[errorKey];
+    if (!file) {
+        imgError.innerHTML = 'Selecione uma imagem do produto.';
+        return false;
     }
-  });
-};
+  
+    if (!fileTypes.includes(file.type)) {
+        imgError.innerHTML = 'O tipo da imagem não é suportado.';
+        return false;
+    }
+    
+    imgError.innerHTML = '';
+    return true;
+}
+
+// array de erros
+const errorSpans = [nameErrorSpan, priceErrorSpan, inventoryErrorSpan, qualityErrorSpan, typeErrorSpan, descErrorSpan];
+
+const showErrors = (errors) => {
+    
+    const errorKeys = ['name', 'price', 'quantity_inventory', 'quality', 'type', 'description'];
+
+    errorKeys.forEach((errorKey, index) => {
+        if (errors[errorKey]) {
+            errorSpans[index].innerHTML = errors[errorKey];
+        } else {
+            switch(errorKey) {
+                case 'name':
+                    nameErrorSpan.innerHTML = '';
+                    break;
+                case 'price':
+                    priceErrorSpan.innerHTML = '';
+                    break;
+                case 'quantity_inventory':
+                    inventoryErrorSpan.innerHTML = '';
+                    break;
+                case 'quality':
+                    qualityErrorSpan.innerHTML = '';
+                    break;
+                case 'type':
+                    typeErrorSpan.innerHTML = '';
+                    break;
+                case 'description':
+                    descErrorSpan.innerHTML = '';
+                    break;
+            }
+        }
+    });
+}
