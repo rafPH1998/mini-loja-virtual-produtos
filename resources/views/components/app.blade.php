@@ -30,29 +30,27 @@
                 <span class="ml-3 text-white text-xl">Minha loja</span>
             </a>
         </div>
- 
+
         <div class="flex items-center">
             <div class="relative h-10 w-10">
-                <a href="{{ route('profile.index') }}">
-                    @php
-                        $avatar = auth()->user()->avatar;
-                    @endphp
-                    @if ($avatar)
-                        <img
-                            style="width:35px;"
-                            class="rounded-full mt-2"
-                            src="{{ url("storage/{$avatar}") }}" 
-                        >
-                        <span class="absolute right-0 bottom-0 h-2 w-2 rounded-full bg-green-400 ring ring-white"></span>
-                    @else
-                        <img
-                            class="h-full w-full rounded-full object-cover object-center"
-                            src="{{ url('images/user01.svg') }}"
-                            alt=""
-                        />
-                        <span class="absolute right-0 bottom-0 h-2 w-2 rounded-full bg-green-400 ring ring-white"></span>
-                    @endif
-                </a>
+                @php
+                    $avatar = auth()->user()->avatar;
+                @endphp
+                @if ($avatar)
+                    <img
+                        style="width:35px;"
+                        class="rounded-full mt-2"
+                        src="{{ url("storage/{$avatar}") }}" 
+                    >
+                    <span class="absolute right-0 bottom-0 h-2 w-2 rounded-full bg-green-400 ring ring-white"></span>
+                @else
+                    <img
+                        class="h-full w-full rounded-full object-cover object-center"
+                        src="{{ url('images/user01.svg') }}"
+                        alt=""
+                    />
+                    <span class="absolute right-0 bottom-0 h-2 w-2 rounded-full bg-green-400 ring ring-white"></span>
+                @endif
             </div>
         
             <div>
@@ -70,19 +68,50 @@
                 </button>
                 <!-- Dropdown menu -->
                 <div id="dropdownDivider" 
-                    class="z-10 absolute hidden bg-gray-600 divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                    class="z-10 absolute hidden bg-gray-900 divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                     <div id="ul" class="py-1 text-xs text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDividerButton">
+                        <a href="{{ route('profile.index') }}" class="ml-2">
+                            <p class="text-white ml-3 flex">
+                                <img
+                                    class="h-6 w-6 rounded-full mr-1"
+                                    src="{{ url('images/user01.svg') }}"
+                                    alt=""
+                                />
+                                Minha conta
+                            </p>
+                        </a>
                         <a href="{{ route('products.myShoppings') }}" class="ml-2">
-                            <p class="text-white ml-3">Minhas compras</p>
+                            <p class="text-white ml-3 flex">
+                                <img
+                                    class="h-6 w-6 rounded-full mr-1"
+                                    src="{{ url('images/cart.png') }}"
+                                    alt=""
+                                />
+                                Minhas compras ({{auth()->user()->shopping->count()}})
+                            </p>
                         </a>
                         <a href="{{ route('products.myProducts') }}" class="ml-2 no-underline" >
-                            <p class="text-white ml-3">Meus produtos cadastrado no sistema</p>
+                            <p class="text-white ml-3 flex">
+                                <img
+                                    class="h-6 w-6 rounded-full mr-1"
+                                    src="{{ url('images/shopping-cart.png') }}"
+                                    alt=""
+                                />
+                                Meus produtos cadastrado no sistema
+                            </p>
                         </a>
-                        <form action="{{route('logout')}}" method="POST" class="ml-3 mt-3">
+                        <form action="{{route('logout')}}" method="POST" class="ml-4 mt-3">
                             @csrf
                             <a href="{{route('logout')}}" 
                                 onclick="event.preventDefault(); this.closest('form').submit();">
-                                <p class="text-white">Sair</p>
+                                <p class="text-white flex">
+                                    <img
+                                        class="h-6 w-6 rounded-png mr-1 "
+                                        src="{{ url('images/logout.png') }}"
+                                        alt=""
+                                    />
+                                    Sair
+                                </p>
                             </a>
                         </form>
                     </div>
