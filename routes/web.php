@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function() {
     /**
     * Route CommentController
     */
-    Route::post('/comment', CommentController::class)->name('products.create_comment');
+    Route::post('/comment', CommentController::class);
     Route::get('comments/{comment}', [CommentController::class, 'comments'])->name('products.comments');
 
     /**

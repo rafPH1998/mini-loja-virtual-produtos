@@ -135,6 +135,8 @@
     <script src="{{ url('js/getFiltersComments.js') }}"></script>
     <script src="{{ url('js/modalDelete.js') }}"></script>
     <script src="{{ url('js/likeProduct.js') }}"></script>
+    <script src="{{ url('js/buyProduct.js') }}"></script>
+    <script src="{{ url('js/commentProduct.js') }}"></script>
 
 </body>
 </html>

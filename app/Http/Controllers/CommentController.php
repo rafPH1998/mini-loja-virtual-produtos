@@ -19,22 +19,24 @@ class CommentController extends Controller
 
     public function __invoke(CommentProductRequest $request)
     {
-        $data = $request->validated();
-        $idProduct = $request->get('id');
+        try {
+            $data = $request->validated();
+            $idProduct = $request->get('id');
 
-        $product = $this->product
-                        ->with('comments')
-                        ->find($idProduct);
+            $product = $this->product
+                            ->with('comments')
+                            ->find($idProduct);
 
-        $data['user_id'] = auth()->user()->id;
-        $product->comments()->create($data);
-        
-        event(new ProductCommentedEvents($product));
+            $data['user_id'] = auth()->user()->id;
+            $product->comments()->create($data);
+            
+            event(new ProductCommentedEvents($product));
 
-        return redirect()->route('products.show', [$idProduct])
-                        ->with(
-                            'comment_success', "Comentário inserido no para produto {$product->name} criado!"
-                        );
+            return response()->json(['data' => $product], 201);
+
+        } catch (\Exception $exception) {
+            return response()->json(['error' => 'Falha ao enviar email', 'product' => $product]);
+        }
     }
 
     public function comments(Request $request, $comment)
