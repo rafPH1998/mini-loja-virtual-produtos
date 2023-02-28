@@ -68,9 +68,49 @@ class Product extends Model
     }
 
     // verifica se o usuario logado já deu like naquele determinado produto
-    public function hasLikedByUser($userId)
+    public function hasLikedByUser($userId): bool
     {
         return $this->like()->where('user_id', $userId)->exists();
+    }
+
+    public function takeOneLike(): int
+    {
+        return $this->like()
+                    ->selectRaw('COUNT(*) as total_likes')
+                    ->havingRaw('total_likes = 1')
+                    ->count();
+    }
+
+    public function takeTwoLike(): int
+    {
+        return $this->like()
+                    ->selectRaw('COUNT(*) as total_likes')
+                    ->havingRaw('total_likes = 2')
+                    ->count();
+    }
+
+    public function takeThreeLike(): int
+    {
+        return $this->like()
+                    ->selectRaw('COUNT(*) as total_likes')
+                    ->havingRaw('total_likes = 3')
+                    ->count();
+    }
+
+    public function takeFourLike(): int
+    {
+        return $this->like()
+                    ->selectRaw('COUNT(*) as total_likes')
+                    ->havingRaw('total_likes = 4')
+                    ->count();
+    }
+
+    public function takeFiveLikeAbove()
+    {
+        return $this->like()
+                    ->selectRaw('COUNT(*) as total_likes')
+                    ->havingRaw('total_likes >= 5')
+                    ->count();
     }
 
     public function getProducts(string|null $filter = '')
@@ -88,8 +128,6 @@ class Product extends Model
                     
         return $products;
     }
-
-
 
     public function getLastFiveProductsForStatus(string|null $status = '')
     {

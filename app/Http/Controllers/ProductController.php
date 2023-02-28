@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Gate;
 
 class ProductController extends Controller
 {
-
     public function __construct(
         protected User $user, 
         protected Product $product, 
@@ -42,13 +41,11 @@ class ProductController extends Controller
             ], 200);
         }
 
-
         return view('products.index', [
             'products'      => $products,
             'qualityStatus' => ProductQualityEnum::cases(),
             'type'          => ProductTypeEnum::cases()
         ]);
-
     }
 
     protected function create()

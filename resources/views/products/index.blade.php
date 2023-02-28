@@ -13,39 +13,7 @@
             Adicionar um produto
         </a>
     </div>
-
-{{--     <div class="text-gray-800 text-xl text-center pt-4">Ecommerce Product Cart</div>
-        <div class="w-full h-screen flex justify-center items-center">
-            <div>
-                <div class="w-72">  
-                    <div class="shadow hover:shadow-lg transition duration-300 ease-in-out xl:mb-0 lg:mb-0 md:mb-0 mb-6 cursor-pointer group">
-                        <div class="overflow-hidden relative">
-                        <img class="w-full transition duration-700 ease-in-out group-hover:opacity-60" src="https://klbtheme.com/shopwise/fashion/wp-content/uploads/2020/04/product_img10-1.jpg" alt="image" />
-                    </div>
-                    <div class="px-4 py-3 bg-gray-900 rounded-lg">
-                        <a href="#" class=""><h1 class="text-white font-semibold text-lg hover:text-blue-500 transition duration-300 ease-in-out">White Line Dress</h1></a>
-                        <div class="flex py-2">
-                            <p class="mr-2 text-xs text-white">$45.00</p>
-                                <p class="mr-2 text-xs text-red-600 line-through">$15.00</p>
-                        </div>
-                        <div class="flex">
-                            <div class="">
-                                <i class="fas fa-star text-yellow-400 text-xs"></i>
-                                <i class="fas fa-star text-yellow-400 text-xs"></i>
-                                <i class="fas fa-star text-yellow-400 text-xs"></i>
-                                <i class="fas fa-star text-yellow-400 text-xs"></i>
-                                <i class="far fa-star text-gray-400 text-xs"></i>
-                            </div>
-                            <div class="ml-2">
-                                <p class="text-gray-500 font-medium text-sm">(1)</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
+    
     <div class="ml-4">
         <x-form.search placeholder="Procure por um produto" />
     </div>
@@ -80,7 +48,7 @@
                 <div class="shadow hover:shadow-lg transition duration-300 
                     ease-in-out xl:mb-0 lg:mb-0 md:mb-0 mb-6 cursor-pointer group">
                     <img class="w-full h-64" 
-                        src="https://klbtheme.com/shopwise/fashion/wp-content/uploads/2020/04/product_img10-1.jpg" alt="image"
+                        src="{{url("storage/{$product->image}")}}" alt="image"
                         />
                 </div>
 
@@ -153,11 +121,50 @@
                                     @else
                                         curtir
                                     @endif
-                                </button>         
+                                </button>      
                             @endif 
                         </form>
-                       
                     </div>
+                    <div class="flex">
+                        <div class="">
+                            @if ($product->like->count() > 0)
+                                @if ($product->takeOneLike())
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="far fa-star text-gray-400 text-xs"></i>
+                                @endif
+                                @if ($product->takeTwoLike())
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="far fa-star text-gray-400 text-xs"></i>
+                                @endif
+                                @if ($product->takeThreeLike())
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="far fa-star text-gray-400 text-xs"></i>
+                                @endif
+                                @if ($product->takeFourLike())
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="far fa-star text-gray-400 text-xs"></i>
+                                @endif
+                                @if ($product->takeFiveLikeAbove())
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                @endif
+                            @else 
+                                <i class="far fa-star text-gray-400 text-xs"></i>
+                            @endif
+                        </div>
+                        <div class="ml-2 mt-1">
+                            <p class="text-gray-400 font-medium text-sm">({{$product->like->count()}})</p>
+                        </div>
+                    </div>  
                 </div>
             </div>
         @empty
