@@ -21,6 +21,30 @@ const descErrorSpan = document.getElementById('descErro');
 const form = document.getElementById("addForm");
 const submitButton = document.getElementById("button");
 
+const imagePreview = document.getElementById('imagePreview');
+const showPreloader = document.getElementById('showPreloader');
+imageInput.addEventListener('change', () => {
+    // verificando se um arquivo de imagem foi selecionado
+    if (imageInput.files && imageInput.files[0]) {
+
+        showPreloader.style.display = 'block';
+        
+        const reader = new FileReader();
+
+        setTimeout(() => {
+            reader.onload = (event) => {
+                // definindo o src da imagem de pré-visualização para o URL da imagem carregada
+                imagePreview.src = event.target.result;
+                // exibindo a imagem de pré-visualização
+                imagePreview.style.display = 'block';
+                showPreloader.style.display = 'none';
+            };
+            // lendo o arquivo de imagem como uma URL de dados
+            reader.readAsDataURL(imageInput.files[0]);  
+        }, 1000);
+    }
+});
+
 form.addEventListener("submit", async function(event) {
     event.preventDefault();
     
@@ -88,6 +112,7 @@ const clearInputs = () => {
     qualityInput.value           = '';
     typeInput.value              = '';
     descriptionInput.value       = '';
+    imagePreview.style.display   = 'none';
 };
 
 
@@ -98,6 +123,11 @@ const validateImage = () => {
   
     if (!file) {
         imgError.innerHTML = 'Selecione uma imagem do produto.';
+        return false;
+    }
+
+    if (!file.size > 1024 * 1024) {
+        imgError.innerHTML = `Tamanho da imagem não permitido. Adicione uma imagem com tamanho máximo de ${file.size}.`;
         return false;
     }
   

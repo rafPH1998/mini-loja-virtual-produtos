@@ -16,7 +16,11 @@
                         py-2 px-3 text-gray-700 
                         leading-tight focus:outline-none focus:shadow-outline">
                     <span id="imgError" class="text-red-500"></span>
+                    <div id="showPreloader" class="mt-2" style="display: none;">
+                        <img src="{{url('images/spinner.svg')}}" style="width:45px;">
+                    </div>
                 </div>
+                <img id="imagePreview" src="#" alt="Preview da imagem" style="display: none;">
                 
                 <div class="p-2 w-full">
                     <x-inputs-product.text type="text" id="name" 

@@ -64,7 +64,7 @@ class Product extends Model
 
     public function isRecent(): bool
     {
-        return now()->diffInDays($this->created_at) <= 3;
+        return now()->diffInDays($this->created_at) <= 2;
     }
 
     // verifica se o usuario logado já deu like naquele determinado produto
