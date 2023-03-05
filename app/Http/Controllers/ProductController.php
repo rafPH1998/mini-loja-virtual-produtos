@@ -19,11 +19,15 @@ class ProductController extends Controller
     ) { }
 
     public function index(Request $request)
-    {        
+    {       
         $products = $this->product
-                        ->getProducts(
-                            filter: $request->get('filter') ?? ''
-                        );
+                            ->getProducts(
+                                filter: $request->get('filter') ?? ''
+                            ); 
+
+        if ($request->input('page')) {
+            return response()->json(['data' => $products]);
+        }
 
         if ($request->get('status') !== null) {
 
@@ -32,7 +36,7 @@ class ProductController extends Controller
                                             status: $request->get('status') ?? ''
                                         );                         
                                         
-            $productNotFound = count($productsForStatus) == 0 ? 'Nenhum produto encontrado para esse filtro' : '';
+            $productNotFound = $productsForStatus->isEmpty() ? 'Nenhum produto encontrado para esse filtro' : '';
          
             return response()->json([
                 'data'          => $productsForStatus,
@@ -42,9 +46,7 @@ class ProductController extends Controller
         }
 
         return view('products.index', [
-            'products'      => $products,
-            'qualityStatus' => ProductQualityEnum::cases(),
-            'type'          => ProductTypeEnum::cases()
+            'products' => $products,
         ]);
     }
 
