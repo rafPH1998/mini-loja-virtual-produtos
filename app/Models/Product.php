@@ -123,8 +123,9 @@ class Product extends Model
                     ->with([
                         'user',
                         'comments',
+                        'like'
                     ])
-                    ->paginate(8);
+                    ->paginate(4);
                     
         return $products;
     }
@@ -158,8 +159,7 @@ class Product extends Model
                         'comments',
                         'user'
                     ])
-                    ->get()
-                    ->take(5);
+                    ->paginate(5);
     }
 
     
