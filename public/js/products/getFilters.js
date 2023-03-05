@@ -1,4 +1,5 @@
 const statusFilter = (element) => {
+    document.body.classList.add('loading');
     showPreloader();
     
     try {
@@ -21,9 +22,15 @@ const statusFilter = (element) => {
                         window.location.href = "http://localhost:8989/products";
                     }
                 });
-              } else {
+                const swalOverlay = document.querySelector('.swal-overlay');
+                swalOverlay.addEventListener('click', () => {
+                    window.location.href = "http://localhost:8989/products";
+                });
+                
+            } else {    
+                document.body.classList.remove('loading');
                 showResults(result);
-              }
+            }
         })
     } catch (error) {
         console.log(error)
@@ -129,7 +136,7 @@ const showResults = (json) => {
 
 
 const showPreloader = () => {
-    document.getElementById("posts").innerHTML = '<div class="h-64 mt-3 ml-5"><img src="images/spinner.svg" style="width:45px;"></div>';
+    document.getElementById("posts").innerHTML = '<div class="loader flex"><img src="images/spinner.svg" style="width:75px;"><p class="mt-6 ml-3">Carregando..</p></div>';
 }
 
 const clearPreloader = () => {
