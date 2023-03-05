@@ -130,16 +130,16 @@
     </section> 
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="{{ url('js/addProduct.js') }}"></script>
-    <script src="{{ url('js/getFilters.js') }}"></script>
-    <script src="{{ url('js/getFiltersComments.js') }}"></script>
-    <script src="{{ url('js/modalDelete.js') }}"></script>
-    <script src="{{ url('js/likeProduct.js') }}"></script>
-    <script src="{{ url('js/buyProduct.js') }}"></script>
-    <script src="{{ url('js/commentProduct.js') }}"></script>
+    <script src="{{ url('js/products/addProduct.js') }}"></script>
+    <script src="{{ url('js/products/buyProduct.js') }}"></script>
+    <script src="{{ url('js/comments/commentProduct.js') }}"></script>
+    <script src="{{ url('js/products/getFilters.js') }}"></script>
+    <script src="{{ url('js/products/getFiltersComments.js') }}"></script>
+    <script src="{{ url('js/products/likeProduct.js') }}"></script>
+    <script src="{{ url('js/products/modalDelete.js') }}"></script>
 
 </body>
-</html>
+</html> 
 
 
 <script>
