@@ -38,8 +38,9 @@ const showResults = (json) => {
 
     let html = 
     `<div class="flex items-stretch drop-shadow-xl">`;
-            for (let i = 0; i < json.data.length; i++) {
-                let element = json.data[i];    
+            for (let i = 0; i < json.data.data.length; i++) {
+
+                let element = json.data.data[i];                
 
                 var createdAt = new Date(element.created_at);
                 var now = new Date();
@@ -105,6 +106,19 @@ const showResults = (json) => {
                                 <path d="M5 12h14M12 5l7 7-7 7"></path>
                             </svg>
                         </a>
+                        <form action="#" method="POST">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}" id="_token">`;
+                                if (element.user_id !== element.user.id) {
+                                    html += 
+                                    `<button onclick="likedPost(event, ${element.user_id}, ${element.id}, this)"
+                                        class="focus:outline-none text-sm border transition 
+                                        ease-in-out delay-150 hover:-translate-y-1 p-1 rounded-md 
+                                        ${!element.hasLikedByUser(element.user_id) ? 'text-green-500' : 'text-red-500'}">                
+                                        ${element.hasLikedByUser(element.user_id) ? 'descurtir' : 'curtir'}
+                                    </button>`
+                                }
+                        html += `
+                        </form>
                     </div>
                 </div>
         </div>`

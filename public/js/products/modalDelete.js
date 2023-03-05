@@ -37,7 +37,4 @@ const showModal = (id) => {
             })
         }
     })
-    .catch(error => {
-        swal("Error!", error);
-    });
 }

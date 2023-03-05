@@ -8,8 +8,6 @@ document.getElementById("submitButton").addEventListener("click", async function
     const result        = document.getElementById("result");
     const qtdAtual      = document.getElementById("quantity_inventory").value;
 
-    //alert(qtdAtual)
-    
     submitButton.innerHTML = 'Comprando...';
     submitButton.disabled  = true;
 

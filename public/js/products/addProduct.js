@@ -22,12 +22,12 @@ const form = document.getElementById("addForm");
 const submitButton = document.getElementById("button");
 
 const imagePreview = document.getElementById('imagePreview');
-const showPreloader = document.getElementById('showPreloader');
+const preloader = document.getElementById('preloader');
 imageInput.addEventListener('change', () => {
     // verificando se um arquivo de imagem foi selecionado
     if (imageInput.files && imageInput.files[0]) {
 
-        showPreloader.style.display = 'block';
+        preloader.style.display = 'block';
         
         const reader = new FileReader();
 
@@ -37,7 +37,7 @@ imageInput.addEventListener('change', () => {
                 imagePreview.src = event.target.result;
                 // exibindo a imagem de pré-visualização
                 imagePreview.style.display = 'block';
-                showPreloader.style.display = 'none';
+                preloader.style.display = 'none';
             };
             // lendo o arquivo de imagem como uma URL de dados
             reader.readAsDataURL(imageInput.files[0]);  
