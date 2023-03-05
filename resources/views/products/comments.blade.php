@@ -6,7 +6,7 @@
         </h1>
         <hr class="mt-5">
 
-        <div id="preloader" class="ml-5 mt-2" style="display: none;">
+        <div id="preloaderComments" class="ml-5 mt-2" style="display: none;">
             <img src="{{ url('images/spinner.svg') }}" style="width: 40px;">
         </div>
 
@@ -36,7 +36,7 @@
 
        <div id="result">
             @forelse ($listComments as $comments)
-                <div class="w-2/3 flex bg-gray-900 rounded-lg inline-block rounded-bl-none p-4 mt-10 shadow-2xl">
+                <div class="w-2/3 bg-gray-900 rounded-lg inline-block rounded-bl-none p-4 mt-10 shadow-2xl">
                     <div class="pl-3 text-center">
                         <div class="pl-3 text-center flex">
                             @if ($comments->user->avatar)
@@ -84,9 +84,6 @@
         <div class="pb-20"></div>
     </div>
 </x-app>
-
-
-
 
 
 

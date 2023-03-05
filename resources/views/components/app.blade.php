@@ -134,9 +134,10 @@
     <script src="{{ url('js/products/buyProduct.js') }}"></script>
     <script src="{{ url('js/comments/commentProduct.js') }}"></script>
     <script src="{{ url('js/products/getFilters.js') }}"></script>
-    <script src="{{ url('js/products/getFiltersComments.js') }}"></script>
     <script src="{{ url('js/products/likeProduct.js') }}"></script>
     <script src="{{ url('js/products/modalDelete.js') }}"></script>
+    <script src="{{ url('js/products/index.js') }}"></script>
+    <script src="{{ url('js/products/getFiltersComments.js') }}"></script>
 
 </body>
 </html> 

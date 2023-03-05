@@ -2,13 +2,13 @@ let checkboxAll = document.getElementById("checkbox-all");
 let checkboxMy = document.getElementById("checkbox-my");
 let clickCheck = document.getElementById("clickCheck");
 
-const preloader = document.getElementById("preloader");
+const preloaderComments = document.getElementById("preloaderComments");
 const formCheck = document.getElementById("formCheck");
 const result = document.getElementById("result");
 const resultError = document.getElementById("resultError");
 
 const fetchComments = (id, filter) => {
-    preloader.style.display = 'block';
+    preloaderComments.style.display = 'block';
     formCheck.style.display = 'none';
 
     return fetch(`http://localhost:8989/comments/${id}/?filter=${filter}`)
@@ -25,7 +25,7 @@ const allComments = (id) => {
         })
         .finally(() => {
             resultError.innerHTML = '';
-            preloader.style.display = 'none';
+            preloaderComments.style.display = 'none';
             formCheck.style.display = 'block';
         });
 };
@@ -43,7 +43,7 @@ const myComments = (id) => {
             showComments(result);
         })
         .finally(() => {
-            preloader.style.display = 'none';
+            preloaderComments.style.display = 'none';
             formCheck.style.display = 'block';
         });
 };
