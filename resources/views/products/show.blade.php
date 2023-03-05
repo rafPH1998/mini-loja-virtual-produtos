@@ -35,7 +35,40 @@
                 <div class="flex">
                     <p class="text-blue-400 text-sm mt-0.5 mr-1">({{ $product->like->count()}})</p>
                     <img class="w-5 h-5" src="{{url('images/like.png')}}" alt="likes">
-                </div>    
+                </div> 
+                @if ($product->like->count() > 0)
+                    @if ($product->takeOneLike())
+                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                        <i class="far fa-star text-gray-400 text-xs"></i>
+                    @endif
+                    @if ($product->takeTwoLike())
+                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                        <i class="far fa-star text-gray-400 text-xs"></i>
+                    @endif
+                    @if ($product->takeThreeLike())
+                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                        <i class="far fa-star text-gray-400 text-xs"></i>
+                    @endif
+                    @if ($product->takeFourLike())
+                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                        <i class="far fa-star text-gray-400 text-xs"></i>
+                    @endif
+                    @if ($product->takeFiveLikeAbove())
+                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                    @endif
+                @else 
+                    <i class="far fa-star text-gray-400 text-xs"></i>
+                @endif   
             </p>
 
             <div class="my-3 mt-4 text-white">
