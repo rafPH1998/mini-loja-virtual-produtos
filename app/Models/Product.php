@@ -141,6 +141,7 @@ class Product extends Model
                             'livros', 
                             'jogos',
                             'acessorios', 
+                            'brinquedos', 
                             'roupas', 
                             'perfumaria']
                         ), 
@@ -151,6 +152,7 @@ class Product extends Model
                                 ->when($status == 'livros', fn($query) => $query->where('type', 'livros'))
                                 ->when($status == 'jogos', fn($query) => $query->where('type', 'jogos'))
                                 ->when($status == 'acessorios', fn($query) => $query->where('type', 'acessorios'))
+                                ->when($status == 'brinquedos', fn($query) => $query->where('type', 'brinquedos'))
                                 ->when($status == 'roupas', fn($query) => $query->where('type', 'roupas'))
                                 ->when($status == 'perfumaria', fn($query) => $query->where('type', 'perfumaria'));
                         }

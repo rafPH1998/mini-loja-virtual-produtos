@@ -23,7 +23,7 @@ const getPageData = async (page) => {
             document.getElementById('next-page').style.display = 'inline';
         }
         
-        showResults(result);
+        showResults(result, result.loggedUser.id);
     } catch (error) {
         alert('caiu no erro' + error);
     }
@@ -48,3 +48,4 @@ document.getElementById('next-page').addEventListener('click', (event) => {
 
 // Carrega os dados da primeira página ao carregar a página
 getPageData(currentPage);
+

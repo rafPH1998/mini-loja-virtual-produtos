@@ -25,8 +25,10 @@ class ProductController extends Controller
                                 filter: $request->get('filter') ?? ''
                             ); 
 
+        $loggedUser = auth()->user();
+
         if ($request->input('page')) {
-            return response()->json(['data' => $products]);
+            return response()->json(['data' => $products, 'loggedUser' =>  $loggedUser]);
         }
 
         if ($request->get('status') !== null) {
@@ -40,6 +42,7 @@ class ProductController extends Controller
          
             return response()->json([
                 'data'          => $productsForStatus,
+                'loggedUser'    => $loggedUser,
                 'error'         => $productNotFound,
                 'qualityStatus' => ProductQualityEnum::cases()
             ], 200);

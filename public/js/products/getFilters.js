@@ -29,7 +29,8 @@ const statusFilter = (element) => {
                 
             } else {    
                 document.body.classList.remove('loading');
-                showResults(result);
+
+                showResults(result, result.loggedUser.id);
             }
         })
     } catch (error) {
@@ -40,15 +41,16 @@ const statusFilter = (element) => {
     document.getElementById("paginate").innerHTML = '';
 }
 
-const showResults = (json) => {
+const showResults = (json, user) => {
+
     let url_product = 'http://localhost:8989/';
 
     let html = 
     `<div class="flex items-stretch drop-shadow-xl">`;
             for (let i = 0; i < json.data.data.length; i++) {
 
-                let element = json.data.data[i];                
-
+                let element = json.data.data[i];     
+                
                 var createdAt = new Date(element.created_at);
                 var now = new Date();
                 var diffInMs = now - createdAt;
@@ -87,7 +89,7 @@ const showResults = (json) => {
                                 </span>
                             </div>
                         </div>`;
-                        if (element.user.id == element.user_id) {
+                        if (element.user.id === user) {
                             html += `
                             <p class="text-green-500 text-xs">
                                 (meu produto) 
