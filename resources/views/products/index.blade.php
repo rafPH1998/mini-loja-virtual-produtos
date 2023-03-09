@@ -59,7 +59,7 @@
 
     <div id="posts" class="flex items-stretch drop-shadow-xl"></div>
 
-    <div id="pagination" class="mt-5 ml-7">
+    <div id="pagination" class="mt-5 ml-7" style="display: block;">
         <a href="#" id="previous-page" 
             class="py-2 px-2 ml-0 leading-tight text-gray-500
             bg-white rounded-l-lg border border-gray-300 

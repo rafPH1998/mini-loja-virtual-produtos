@@ -20,14 +20,15 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {       
+ 
         $products = $this->product
                             ->getProducts(
                                 filter: $request->get('filter') ?? ''
                             ); 
-
+                            
         $loggedUser = auth()->user();
 
-        if ($request->input('page')) {
+        if ($request->input('page') || $request->has('filter')) {
             return response()->json(['data' => $products, 'loggedUser' => $loggedUser]);
         }
 

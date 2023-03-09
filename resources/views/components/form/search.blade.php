@@ -3,7 +3,7 @@
 ])
 
 
-<form method="GET" action="#" class="flex items-center mt-5 w-64">   
+<form method="GET" action="#" class="flex items-center mt-5 w-64" id="searchProduct">   
     <label for="simple-search" class="sr-only">Search</label>
     <div class="relative w-full">
         <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -14,7 +14,7 @@
                 </path>
             </svg>
         </div>
-        <input type="text" name="filter"
+        <input type="text" name="filter" id="filter"
                 class="bg-gray-50 border border-gray-300 
                 text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 
                 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 

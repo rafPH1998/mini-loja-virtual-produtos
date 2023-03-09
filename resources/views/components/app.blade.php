@@ -159,6 +159,7 @@
     <script src="{{ url('js/products/modalDelete.js') }}"></script>
     <script src="{{ url('js/products/index.js') }}"></script>
     <script src="{{ url('js/products/getFiltersComments.js') }}"></script>
+    <script src="{{ url('js/products/searchProduct.js') }}"></script>
 
 </body>
 </html> 

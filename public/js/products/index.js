@@ -10,6 +10,12 @@ const getPageData = async (page) => {
         const url = `http://localhost:8989/products?page=${page}`;
         const response = await fetch(url);
         const result = await response.json();
+
+        if (result.data.data.length > 0) {  
+            showResults(result, result.loggedUser.id);
+        } else {
+            productNotFound()
+        }
       
         if (result.data.prev_page_url == null) {
             document.getElementById('previous-page').style.display = 'none';
@@ -22,8 +28,7 @@ const getPageData = async (page) => {
         } else {
             document.getElementById('next-page').style.display = 'inline';
         }
-        
-        showResults(result, result.loggedUser.id);
+
     } catch (error) {
         alert('caiu no erro' + error);
     } finally {
