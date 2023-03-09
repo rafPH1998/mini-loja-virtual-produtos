@@ -59,8 +59,9 @@ const showResults = (json, user) => {
                 html += `
                 <div class="w-96
                     shadow-lg 
-                    transition ease-in-out delay-150 bg-gray-700 hover:-translate-y-1 hover:scale-110
-                    hover:bg-gray-900 duration-300
+                    transition ease-in-out delay-150
+                    bg-gray-700 hover:-translate-y-1 
+                    hover:scale-110 duration-300
                     rounded-lg ml-4 mt-5">
 
                     <div class="shadow hover:shadow-lg transition duration-300 

@@ -32,6 +32,7 @@
                 <option @if(request('status') == 'livros') selected @endif value="livros">livros</option>
                 <option @if(request('status') == 'jogos') selected @endif value="jogos">jogos</option>
                 <option @if(request('status') == 'acessorios') selected @endif value="acessorios">acessorios</option>
+                <option @if(request('status') == 'brinquedos') selected @endif value="brinquedos">brinquedos</option>
                 <option @if(request('status') == 'roupas') selected @endif value="roupas">roupas</option>
                 <option @if(request('status') == 'perfumaria') selected @endif value="perfumaria">perfumaria</option>
             </x-form.options>
@@ -76,58 +77,3 @@
     </div>
 
 </x-app>
-
-
-<script>
-
-    showPreloader();
-
-    let currentPage = 1;
-
-    // Função para buscar os dados de uma página usando AJAX
-    const getPageData = async (page) => {
-
-        try {
-            const url = `http://localhost:8989/products?page=${page}`;
-            const response = await fetch(url);
-            const result = await response.json();
-
-            if (result.data.prev_page_url == null) {
-                document.getElementById('previous-page').style.display = 'none';
-            } else {
-                document.getElementById('previous-page').style.display = 'inline';
-            }
-            
-            if (result.data.next_page_url == null) {
-                document.getElementById('next-page').style.display = 'none';
-            } else {
-                document.getElementById('next-page').style.display = 'inline';
-            }
-            
-            showResults(result);
-        } catch (error) {
-            alert('caiu no erro' + error);
-        }
-    };
-
-    // Funções para navegar para a próxima e anterior páginas
-    document.getElementById('previous-page').addEventListener('click', (event) => {
-        showPreloader();
-        event.preventDefault();
-        if (currentPage > 1) {
-            currentPage--;
-            getPageData(currentPage);
-        }
-    });
-
-    document.getElementById('next-page').addEventListener('click', () => {
-        showPreloader();
-        event.preventDefault();
-        currentPage++;
-        getPageData(currentPage);
-    });
-
-    // Carrega os dados da primeira página ao carregar a página
-    getPageData(currentPage);
-
-</script>

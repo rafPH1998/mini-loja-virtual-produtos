@@ -10,7 +10,7 @@ const getPageData = async (page) => {
         const url = `http://localhost:8989/products?page=${page}`;
         const response = await fetch(url);
         const result = await response.json();
-
+      
         if (result.data.prev_page_url == null) {
             document.getElementById('previous-page').style.display = 'none';
         } else {
@@ -26,11 +26,15 @@ const getPageData = async (page) => {
         showResults(result, result.loggedUser.id);
     } catch (error) {
         alert('caiu no erro' + error);
+    } finally {
+        document.body.classList.remove('loading');
     }
+   
 };
 
 // Funções para navegar para a próxima e anterior páginas
 document.getElementById('previous-page').addEventListener('click', (event) => {
+    document.body.classList.add('loading');
     showPreloader();
     event.preventDefault();
     if (currentPage > 1) {
@@ -40,6 +44,7 @@ document.getElementById('previous-page').addEventListener('click', (event) => {
 });
 
 document.getElementById('next-page').addEventListener('click', (event) => {
+    document.body.classList.add('loading');
     showPreloader();
     event.preventDefault();
     currentPage++;

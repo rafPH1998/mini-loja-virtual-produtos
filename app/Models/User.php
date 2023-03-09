@@ -47,9 +47,9 @@ class User extends Authenticatable
         return $this->hasMany(PurchasedProducts::class);
     }
 
-    public function like(): BelongsTo
+    public function like(): HasMany
     {
-        return $this->belongsTo(Like::class);
+        return $this->hasMany(Like::class);
     }
     
     public function comments(): BelongsTo

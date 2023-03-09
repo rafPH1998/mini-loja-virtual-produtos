@@ -30,8 +30,27 @@
                 <span class="ml-3 text-white text-xl">Minha loja</span>
             </a>
         </div>
+        
 
         <div class="flex items-center">
+
+            <a href="" class="cursor-pointer">
+                <div class="relative inline-flex w-fit mr-6 mt-1">
+                    <div class="absolute top-0 right-0 bottom-auto left-auto 
+                        z-10 inline-block translate-x-2/4 -translate-y-1/2 
+                        rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 
+                        whitespace-nowrap rounded-full bg-red-700 py-1 
+                        px-2.5 text-center align-baseline text-xs font-bold 
+                        leading-none text-white"> 
+                        {{auth()->user()->like->count()}}
+                    </div>
+                    <img
+                        style="width:30px;"
+                        src="{{ url('images/favorite.png') }}"
+                        >
+                </div>
+            </a>
+            
             <div class="relative h-10 w-10">
                 @php
                     $avatar = auth()->user()->avatar;
@@ -123,6 +142,8 @@
       
 </header>
 <body class="bg-gray-800" id="body">
+    <div class="overlay"></div>
+    
     <section class="text-gray-600 overflow-hidden">
         <div class="container px-5 py-10 mx-auto">
             {{ $slot }}

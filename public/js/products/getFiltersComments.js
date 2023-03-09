@@ -8,11 +8,15 @@ const result = document.getElementById("result");
 const resultError = document.getElementById("resultError");
 
 const fetchComments = (id, filter) => {
+    document.body.classList.add('loading');
     preloaderComments.style.display = 'block';
     formCheck.style.display = 'none';
 
     return fetch(`http://localhost:8989/comments/${id}/?filter=${filter}`)
-        .then(response => response.json());
+        .then(response => response.json())
+        .finally(() => {
+            document.body.classList.remove('loading');
+        });
 };
 
 const allComments = (id) => {
@@ -78,7 +82,7 @@ const showComments = (res) => {
                     <div class="flex">`;
                         if (res.userAuth == json.user.id)
                             resultHtml += `
-                            <p class="ml-2 mt-2 text-white">
+                            <p class="ml-2 mt-2 text-green-500">
                                 Meu usuário
                             </p>`;
                         else {

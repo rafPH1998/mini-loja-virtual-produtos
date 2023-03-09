@@ -46,8 +46,8 @@
                             <form action="#" method="POST">
                                 @method('DELETE')
                                 @csrf
-                                <a href="#" onclick="showModal({{$shopping->id}})">
-                                    <img class="w-5 h-5 ml-2" src="{{url('images/trash.png')}}" alt="">
+                                <a href="#" class="text-red-600" onclick="showModal({{$shopping->id}})">
+                                    Deixar de comprar
                                 </a>
                             </form>
                         </td>

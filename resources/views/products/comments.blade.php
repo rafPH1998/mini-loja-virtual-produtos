@@ -6,8 +6,9 @@
         </h1>
         <hr class="mt-5">
 
-        <div id="preloaderComments" class="ml-5 mt-2" style="display: none;">
-            <img src="{{ url('images/spinner.svg') }}" style="width: 40px;">
+        <div id="preloaderComments" class="loader" style="display: none;">
+            <img src="{{ url('images/spinner.svg') }}" style="width: 75px;">
+            <p>Carregando..</p>
         </div>
 
         <div id="formCheck" style="display: block;">
@@ -18,16 +19,21 @@
                             checked
                             onclick="allComments({{ $product->id }})"
                             type="checkbox" value="allComments" 
-                            class="w-4 h-4 rounded-full text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 
-                            dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            class="w-4 h-4 rounded-full text-blue-600 
+                            bg-gray-100 border-gray-300 focus:ring-blue-500 
+                            dark:focus:ring-blue-600 dark:ring-offset-gray-800 
+                            focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="checked-checkbox" class="ml-2 text-sm font-medium text-white">Todos os comentários</label>
 
-                        <input id="checkbox-my" name="filter" type="checkbox" 
+                        <input id="checkbox-my" name="filter" 
+                            type="checkbox" 
                             @if(request('filter') == 'myComments') checked @endif
                             onclick="myComments({{ $product->id }})"
                             value="myComments" 
-                            class="w-4 h-4 ml-3 rounded-full text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 
-                            dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            class="w-4 h-4 ml-3 rounded-full text-blue-600
+                            bg-gray-100 border-gray-300 focus:ring-blue-500 
+                            dark:focus:ring-blue-600 dark:ring-offset-gray-800 
+                            focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="checked-checkbox" class="ml-2 text-sm font-medium text-white">Meus comentários</label>
                     </div>
                 </form>

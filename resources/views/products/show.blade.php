@@ -1,5 +1,5 @@
 <x-app>
-    <div class="lg:w-4/5 mx-auto flex flex-wrap shadow-2xl">
+    <div class="lg:w-4/5 mx-auto flex flex-wrap shadow-2xl bg-gray-700 rounded-lg">
         <div class="xl:w-1/4 md:w-1/2">
             <img class="h-full" 
                 src="{{ url("storage/{$product->image}") }}" alt="image"

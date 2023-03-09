@@ -28,17 +28,13 @@ class ProductController extends Controller
         $loggedUser = auth()->user();
 
         if ($request->input('page')) {
-            return response()->json(['data' => $products, 'loggedUser' =>  $loggedUser]);
+            return response()->json(['data' => $products, 'loggedUser' => $loggedUser]);
         }
 
         if ($request->get('status') !== null) {
 
-            $productsForStatus = $this->product
-                                        ->getLastFiveProductsForStatus(
-                                            status: $request->get('status') ?? ''
-                                        );                         
-                                        
-            $productNotFound = $productsForStatus->isEmpty() ? 'Nenhum produto encontrado para esse filtro' : '';
+            $productsForStatus = $this->product->getLastFiveProductsForStatus(status: $request->get('status') ?? '');                            
+            $productNotFound   = $productsForStatus->isEmpty() ? 'Nenhum produto encontrado para esse filtro' : '';
          
             return response()->json([
                 'data'          => $productsForStatus,
