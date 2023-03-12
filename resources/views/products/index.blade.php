@@ -60,20 +60,31 @@
     <div id="posts" class="flex items-stretch drop-shadow-xl"></div>
 
     <div id="pagination" class="mt-5 ml-7" style="display: block;">
-        <a href="#" id="previous-page" 
-            class="py-2 px-2 ml-0 leading-tight text-gray-500
-            bg-white rounded-l-lg border border-gray-300 
-            hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800
-            dark:border-gray-700 dark:text-gray-400 text-xs
-            dark:hover:bg-gray-700 dark:hover:text-white">Anterior
-        </a>
-        <a href="#" id="next-page" 
-            class="py-2 px-2 ml-0 leading-tight text-gray-500 
-            bg-white rounded-r-lg border border-gray-300 
-            hover:bg-gray-100 hover:text-gray-700 text-xs
-            dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 
-            dark:hover:bg-gray-700 dark:hover:text-white">Próximo
-        </a>
+        <nav aria-label="Page navigation example">
+            <ul class="inline-flex items-center -space-x-px">
+                <li>
+                    <a href="#" id="previous-page" 
+                        class="py-2 px-2 ml-0 leading-tight text-gray-500
+                        bg-white rounded-l-lg border border-gray-300 
+                        hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800
+                        dark:border-gray-700 dark:text-gray-400 text-xs
+                        dark:hover:bg-gray-700 dark:hover:text-white">Anterior
+                    </a>
+                </li>
+                <li id="resultLinks">
+                  
+                </li>            
+                <li>
+                    <a href="#" id="next-page" 
+                        class="py-2 px-2 ml-0 leading-tight text-gray-500 
+                        bg-white rounded-r-lg border border-gray-300 
+                        hover:bg-gray-100 hover:text-gray-700 text-xs
+                        dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 
+                        dark:hover:bg-gray-700 dark:hover:text-white">Próximo
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
 
 </x-app>
