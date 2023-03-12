@@ -125,7 +125,7 @@ class Product extends Model
                         'comments',
                         'like'
                     ])
-                    ->paginate(4);
+                    ->paginate(5);
                     
         return $products;
     }

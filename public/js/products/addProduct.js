@@ -23,6 +23,7 @@ const submitButton = document.getElementById("button");
 
 const imagePreview = document.getElementById('imagePreview');
 const preloader = document.getElementById('preloader');
+
 imageInput.addEventListener('change', () => {
     // verificando se um arquivo de imagem foi selecionado
     if (imageInput.files && imageInput.files[0]) {
@@ -41,7 +42,7 @@ imageInput.addEventListener('change', () => {
             };
             // lendo o arquivo de imagem como uma URL de dados
             reader.readAsDataURL(imageInput.files[0]);  
-        }, 1000);
+        }, 500);
     }
 });
 

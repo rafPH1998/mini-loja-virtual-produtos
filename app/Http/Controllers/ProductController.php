@@ -28,7 +28,7 @@ class ProductController extends Controller
                             
         $loggedUser = auth()->user();
 
-        if ($request->input('page') || $request->has('filter')) {
+        if ($request->has('page') || $request->has('filter')) {
             return response()->json(['data' => $products, 'loggedUser' => $loggedUser]);
         }
 

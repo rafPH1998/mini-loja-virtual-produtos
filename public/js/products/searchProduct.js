@@ -1,3 +1,4 @@
+
 searchProduct.addEventListener("submit", async (event) => {
     document.body.classList.add('loading');
     showPreloader();
