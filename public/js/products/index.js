@@ -56,6 +56,7 @@ const showLinks = (links) => {
     for (let i = 0; i < links.length; i++) {
         
         const link = links[i];
+
         const id = i; // Define um ID exclusivo para cada link
         const linkClass = link.active === true ? 'text-blue-700' : 'text-gray-500';
         const bgClass   = link.active === true ? 'bg-blue-200' : 'bg-white';
@@ -83,7 +84,10 @@ const showLinks = (links) => {
 
             const url = new URL(event.target.getAttribute('href')); // Obtém a URL do link clicado
             const page = url.searchParams.get('page');
-            getPageData(page)
+
+            currentPage = page
+
+            getPageData(currentPage)
         });
     }
 };
