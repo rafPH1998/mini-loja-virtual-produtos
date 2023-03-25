@@ -12,22 +12,23 @@ const getPageData = async (page) => {
         const response = await fetch(url);
         const result = await response.json();
 
-        if (result.data.data.length > 0) {  
-            showResults(result, result.loggedUser.id);
+        if (result.data.length > 0) {  
+            showResults(result, result.user_id);
         } else {
             productNotFound()
         }
 
-        const cleanedLinks = cleanLinks(result.data.links);
+        const cleanedLinks = cleanLinks(result.meta.links);
+        
         showLinks(cleanedLinks)
       
-        if (result.data.prev_page_url == null) {
+        if (result.links.prev == null) {
             document.getElementById('previous-page').style.display = 'none';
         } else {
             document.getElementById('previous-page').style.display = 'inline';
         }
         
-        if (result.data.next_page_url == null) {
+        if (result.links.next == null) {
             document.getElementById('next-page').style.display = 'none';
         } else {
             document.getElementById('next-page').style.display = 'inline';

@@ -6,7 +6,7 @@ const likedPost = async (event, user, id, button) => {
     button.disabled  = true;
 
     const url       = 'http://localhost:8989/products/like';
-    const csrfToken = document.getElementById("_token").value;
+    const csrfToken = document.querySelector('input[name="_token"]').value;
 
     const config = {
         method: 'POST',

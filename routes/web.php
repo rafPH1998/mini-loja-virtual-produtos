@@ -8,7 +8,7 @@ use App\Http\Controllers\{
     PurchasedController
 };
 use Illuminate\Support\Facades\Route;
- 
+
 Route::middleware('auth')->group(function() {
     
     /**
