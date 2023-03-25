@@ -9,12 +9,12 @@ const statusFilter = (element) => {
         })
         .then(result => {
 
-            if (result.error !== '') {
+            if (result.productNotFound) {
                 clearPreloader();
                 swal({
                     icon: "error",
                     title: "Erro!",
-                    text: `${result.error}`,
+                    text: `${result.productNotFound}`,
                     type: "error",
                     confirmButtonText: "OK"
                 }).then((confirmed) => {
@@ -30,7 +30,7 @@ const statusFilter = (element) => {
             } else {    
                 document.body.classList.remove('loading');
 
-                showResults(result, result.loggedUser.id);
+                showResults(result, result.user_id);
             }
         })
     } catch (error) {
@@ -47,9 +47,9 @@ const showResults = (json, user) => {
 
     let html = 
     `<div class="flex items-stretch drop-shadow-xl">`;
-            for (let i = 0; i < json.data.data.length; i++) {
+            for (let i = 0; i < json.data.length; i++) {
 
-                let element = json.data.data[i];     
+                let element = json.data[i];   
                 
                 var createdAt = new Date(element.created_at);
                 var now = new Date();
@@ -85,8 +85,8 @@ const showResults = (json, user) => {
                             </p>
                             <div>
                                 <span class="rounded py-1 px-3 text-xs 
-                                    font-bold ${element.quantity_inventory > 0 ? 'bg-green-400 ' : 'bg-red-400 '}"> 
-                                    ${element.quantity_inventory > 0 ? 'Em estoque' : 'Sem estoque'}
+                                    font-bold ${element.inventory > 0 ? 'bg-green-400 ' : 'bg-red-400 '}"> 
+                                    ${element.inventory > 0 ? 'Em estoque' : 'Sem estoque'}
                                 </span>
                             </div>
                         </div>`;
@@ -94,12 +94,15 @@ const showResults = (json, user) => {
                             html += `
                             <p class="text-green-500 text-xs">
                                 (meu produto) 
-                            </p>`;
+                            </p>`
                         }
                         html += `
                         <div class="flex">
-                            <p class="mt-3 text-xs text-white">$ ${element.price.toFixed(2)} </p>  
-                            <p class="mt-3 ml-2 text-xs text-red-600 line-through">$15.00</p>
+                            <p class="mt-3 text-xs text-white">$ ${element.price.toFixed(2)} </p>`;
+                            if (element.discount !== null) {
+                                html += `<p class="mt-3 ml-2 text-xs text-red-600 line-through">$ ${element.discount}</p>`;
+                            }
+                        html += `
                         </div>   
                         <p style="font-size: 12px;" class="mb-1 text-sm mt-2 text-white">
                             Criado em: ${element.date} 
@@ -110,25 +113,28 @@ const showResults = (json, user) => {
                                 Avaliações (${element.comments.length})
                             </a>
                         </div>
-                        <a href="${url_product}products/${element.id}" class="mt-2 text-indigo-500 inline-flex items-center">Ver mais
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                                <path d="M5 12h14M12 5l7 7-7 7"></path>
-                            </svg>
-                        </a>
-                        <form action="#" method="POST">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}" id="_token">`;
-                                if (element.user_id !== element.user.id) {
-                                    html += 
-                                    `<button onclick="likedPost(event, ${element.user_id}, ${element.id}, this)"
-                                        class="focus:outline-none text-sm border transition 
-                                        ease-in-out delay-150 hover:-translate-y-1 p-1 rounded-md 
-                                        ${!element.hasLikedByUser(element.user_id) ? 'text-green-500' : 'text-red-500'}">                
-                                        ${element.hasLikedByUser(element.user_id) ? 'descurtir' : 'curtir'}
-                                    </button>`
-                                }
-                        html += `
-                        </form>
+                        <div class="flex justify-between">
+                            <a href="${url_product}products/${element.id}" class="mt-2 text-indigo-500 inline-flex items-center">Ver mais
+                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                            
+                            <form action="#" method="POST" class="mt-5">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}" id="_token">`;
+                                    if (user !== element.user.id) {
+                                        html += 
+                                        `<button onclick="likedPost(event, ${user}, ${element.id}, this)"
+                                            class="focus:outline-none text-sm border transition 
+                                            ease-in-out delay-150 hover:-translate-y-1 p-1 rounded-md 
+                                            ${!element.likedByUser ? 'text-green-500' : 'text-red-500'}">                
+                                            ${element.likedByUser ? 'descurtir' : 'curtir'}
+                                        </button>`
+                                    }
+                            html += `
+                            </form>
+                        </div>
                     </div>
                 </div>
         </div>`
@@ -136,7 +142,6 @@ const showResults = (json, user) => {
 
     document.getElementById("posts").innerHTML = html;
 }
-
 
 const showPreloader = () => {
     document.getElementById("posts").innerHTML = '<div class="loader flex"><img src="images/spinner.svg" style="width:75px;"><p class="mt-6 ml-3">Carregando..</p></div>';

@@ -6,6 +6,7 @@ use App\Actions\UploadFile;
 use App\Enums\ProductQualityEnum;
 use App\Enums\ProductTypeEnum;
 use App\Http\Requests\Products\StoreAndUpdateProduct;
+use App\Http\Resources\ProductCollection;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -25,24 +26,19 @@ class ProductController extends Controller
                             ->getProducts(
                                 filter: $request->get('filter') ?? ''
                             ); 
-                            
-        $loggedUser = auth()->user();
-
+        
         if ($request->has('page') || $request->has('filter')) {
-            return response()->json(['data' => $products, 'loggedUser' => $loggedUser]);
+           return new ProductCollection($products);
         }
 
         if ($request->get('status') !== null) {
-
             $productsForStatus = $this->product->getLastFiveProductsForStatus(status: $request->get('status') ?? '');                            
-            $productNotFound   = $productsForStatus->isEmpty() ? 'Nenhum produto encontrado para esse filtro' : '';
          
-            return response()->json([
-                'data'          => $productsForStatus,
-                'loggedUser'    => $loggedUser,
-                'error'         => $productNotFound,
-                'qualityStatus' => ProductQualityEnum::cases()
-            ], 200);
+            if ($productsForStatus->isEmpty()) {
+                return response()->json(['productNotFound' => 'Nenhum produto encontrado para esse filtro']);
+            } else {
+                return new ProductCollection($productsForStatus);
+            }
         }
 
         return view('products.index', [

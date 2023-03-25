@@ -39,24 +39,6 @@
         </div>
     @endif
 
-  {{--   <form action="#" method="POST">
-        @csrf
-        <input type="hidden" name="_token" value="{{ csrf_token() }}" id="_token">
-        @if ($product->user->id !== auth()->user()->id)
-            <button onclick="likedPost(event, {{ auth()->user()->id }}, {{ $product->id }}, this)"
-                class="focus:outline-none text-sm  border transition ease-in-out delay-150 hover:-translate-y-1  p-1 rounded-md 
-                {{ !$product->hasLikedByUser(auth()->id()) ? 'text-green-500' : 'text-red-500' }}"
-                >                
-                @if ($product->hasLikedByUser(auth()->id()))
-                    descurtir
-                @else
-                    curtir
-                @endif
-            </button>      
-        @endif 
-    </form> --}}
-
-
     <div id="posts" class="flex items-stretch drop-shadow-xl"></div>
 
     <div id="pagination" class="mt-5 ml-7" style="display: block;">
@@ -71,9 +53,7 @@
                         dark:hover:bg-gray-700 dark:hover:text-white">Anterior
                     </a>
                 </li>
-                <li id="resultLinks">
-                  
-                </li>            
+                <li id="resultLinks"></li>            
                 <li>
                     <a href="#" id="next-page" 
                         class="py-2 px-2 ml-0 leading-tight text-gray-500 
@@ -86,5 +66,4 @@
             </ul>
         </nav>
     </div>
-
 </x-app>

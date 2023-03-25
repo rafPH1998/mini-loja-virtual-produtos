@@ -12,8 +12,8 @@ searchProduct.addEventListener("submit", async (event) => {
         const response = await fetch(url);
         const result = await response.json();
 
-        if (result.data.data.length > 0) {  
-            showResults(result, result.loggedUser.id);
+        if (result.data.length > 0) {  
+            showResults(result, result.user_id);
         } else {
             productNotFound()
         }
