@@ -91,19 +91,6 @@ class ProductController extends Controller
         ]);
     }
 
-    protected function edit(string $product)
-    {
-        $productUpdate = $this->product->find($product);
-
-        if (!Gate::authorize('update-product', $productUpdate)) {
-            return false;
-        }
-
-        return view('products.show', [
-            'product' => $product
-        ]);
-    }
-
     protected function myProducts()
     {        
         $myProducts = $this->product

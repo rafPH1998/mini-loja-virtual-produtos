@@ -60,7 +60,7 @@ const showComments = (res) => {
         
         resultHtml += 
         `
-        <div class="w-2/3 flex bg-gray-900 rounded-lg rounded-bl-none p-4 mt-10 shadow-2xl">
+        <div class="w-2/3 flex bg-gray-800 rounded-lg rounded-bl-none p-4 mt-10 shadow-2xl">
             <div class="pl-3 text-center">
                 <div class="pl-3 text-center flex">`;
                     if (json.user.avatar) {

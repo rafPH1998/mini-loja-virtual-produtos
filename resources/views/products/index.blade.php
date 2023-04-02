@@ -13,7 +13,7 @@
             Adicionar um produto
         </a>
     </div>
-    
+
     <div class="ml-4">
         <x-form.search placeholder="Procure por um produto" />
     </div>
@@ -47,7 +47,7 @@
                 <li>
                     <a href="#" id="previous-page" 
                         class="py-2 px-2 ml-0 leading-tight text-gray-500
-                        bg-white rounded-l-lg border border-gray-300 
+                        bg-gray-300 rounded-l-lg border border-gray-300 
                         hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800
                         dark:border-gray-700 dark:text-gray-400 text-xs
                         dark:hover:bg-gray-700 dark:hover:text-white">Anterior
@@ -57,7 +57,7 @@
                 <li>
                     <a href="#" id="next-page" 
                         class="py-2 px-2 ml-0 leading-tight text-gray-500 
-                        bg-white rounded-r-lg border border-gray-300 
+                        bg-gray-300 rounded-r-lg border border-gray-300 
                         hover:bg-gray-100 hover:text-gray-700 text-xs
                         dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 
                         dark:hover:bg-gray-700 dark:hover:text-white">Próximo

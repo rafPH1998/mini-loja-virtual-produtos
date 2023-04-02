@@ -161,7 +161,7 @@ class Product extends Model
                         'comments',
                         'user'
                     ])
-                    ->paginate(5);
+                    ->paginate(1);
     }
 
     

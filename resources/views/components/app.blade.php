@@ -87,7 +87,7 @@
                 </button>
                 <!-- Dropdown menu -->
                 <div id="dropdownDivider" 
-                    class="z-10 absolute hidden bg-gray-900 divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                    class="z-10 absolute hidden bg-gray-800 divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                     <div id="ul" class="py-1 text-xs text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDividerButton">
                         <a href="{{ route('profile.index') }}" class="ml-2">
                             <p class="text-white ml-3 flex">
@@ -141,7 +141,7 @@
     </div>
       
 </header>
-<body class="bg-gray-800" id="body">
+<body class="bg-gray-900" id="body">
     <div class="overlay"></div>
     
     <section class="text-gray-600 overflow-hidden">

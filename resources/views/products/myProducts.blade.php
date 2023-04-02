@@ -68,14 +68,6 @@
                                 <img class="w-6 h-6 ml-2" src="{{url('images/eye.png')}}" alt="">
                             </a>
                     
-                            @can('update-product', $product)
-                                <a class="transition ease-in-out 
-                                    delay-150 hover:-translate-y-1 
-                                    hover:scale-110 duration-300"
-                                    href="{{ route('products.comments', $product->id) }}">
-                                    <img class="w-5 h-5 ml-2" src="{{url('images/pencil.png')}}" alt="">
-                                </a>
-                            @endcan  
                             <form action="#" method="POST" 
                                 class="transition ease-in-out 
                                 delay-150 hover:-translate-y-1 

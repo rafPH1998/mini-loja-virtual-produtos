@@ -42,7 +42,7 @@
 
        <div id="result">
             @forelse ($listComments as $comments)
-                <div class="w-2/3 bg-gray-900 rounded-lg inline-block rounded-bl-none p-4 mt-10 shadow-2xl">
+                <div class="w-2/3 bg-gray-800 rounded-lg inline-block rounded-bl-none p-4 mt-10 shadow-2xl">
                     <div class="pl-3 text-center">
                         <div class="pl-3 text-center flex">
                             @if ($comments->user->avatar)
@@ -78,8 +78,8 @@
                     </div>
                 </div>
             @empty
-                <div class="w-full shadow-2xl sm:rounded-lg mt-3 bg-gray-900">
-                    <p class="px-8 py-8">
+                <div class="w-full shadow-2xl sm:rounded-lg mt-3 bg-gray-800">
+                    <p class="px-8 py-8 text-gray-300">
                         Nenhuma avaliação ou comentário para esse produto!
                     </p>
                 </div>

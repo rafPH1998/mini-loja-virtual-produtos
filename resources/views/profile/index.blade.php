@@ -1,5 +1,5 @@
 <x-app>
-    <div id="form-container" class="mx-auto overflow-hidden shadow-lg mb-2 shadow-2xl bg-gray-900 rounded-lg sm:w-4/6">        
+    <div id="form-container" class="mx-auto overflow-hidden shadow-lg mb-2 bg-gray-800 rounded-lg sm:w-4/6">        
         <div class="flex items-center justify-between mb-2 px-5 py-5">
             <h1 class="text-2xl font-medium title-font mb-2 text-white">Editar dados do meu perfil</h1>
         </div>
@@ -45,7 +45,7 @@
                         <label for="name" class="leading-7 text-sm text-white">Nome</label>
                         <input type="text" id="name" name="name" 
                             value="{{$authUser->name}}"
-                            class="bg-gray-800 appearance-none rounded w-full py-2 px-3 text-white
+                            class="bg-gray-700 appearance-none rounded w-full py-2 px-3 text-white
                             leading-tight focus:outline-none focus:shadow-outline"
                         >
                     </div>
@@ -61,7 +61,7 @@
                         <label for="email" class="leading-7 text-sm text-white">E-mail</label>
                         <input type="email" id="email" name="email"
                             value="{{$authUser->email}}"
-                            class="bg-gray-800 appearance-none rounded w-full py-2 px-3 text-white
+                            class="bg-gray-700 appearance-none rounded w-full py-2 px-3 text-white
                             leading-tight focus:outline-none focus:shadow-outline" >
                     </div>
                     @error('email')
@@ -75,7 +75,7 @@
                     <div class="relative">
                         <label for="password" class="leading-7 text-sm text-white">Alterar senha</label>
                         <input type="password" id="password" name="password"
-                            class="bg-gray-800 appearance-none rounded w-full 
+                            class="bg-gray-700 appearance-none rounded w-full 
                             py-2 px-3 text-white
                             leading-tight focus:outline-none focus:shadow-outline">
                     </div>
@@ -90,7 +90,7 @@
                     <div class="relative">
                         <label for="password_confirm" class="leading-7 text-sm text-white">Confirmar senha</label>
                         <input type="password" id="password_confirm" name="password_confirm"
-                            class="bg-gray-800 appearance-none rounded w-full 
+                            class="bg-gray-700 appearance-none rounded w-full 
                             py-2 px-3 text-white
                             leading-tight focus:outline-none focus:shadow-outline">
                     </div>
